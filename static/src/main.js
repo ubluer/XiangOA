@@ -39,10 +39,21 @@ const app = new Vue({
     data: {
         isBlur: false
     },
+    mounted(){
+      if(!location.href.endsWith('#/')){
+          //确保页面浏览器刷新时，如果不是首页，不显示菜单
+          this.isBlur = true;
+      }else{
+          this.isBlur = false;
+      }
+    },
     watch: {
         '$route' (to, from) {
+            // 跳转时控制菜单显示和隐藏
             if(to.path!='/'){
                 this.isBlur = true;
+            }else{
+                this.isBlur = false;
             }
         }
     },
