@@ -16,12 +16,12 @@ import com.thinkgem.jeesite.common.persistence.DataEntity;
 public class CrmCustomerFollow extends DataEntity<CrmCustomerFollow> {
 	
 	private static final long serialVersionUID = 1L;
-	private Custom crmCustomer;		// 客户id
-	private Custom crmChance;		// 机会id
-	private Custom crmContract;		// 合同id
+	private CrmCustomer crmCustomer;		// 客户id
+	private CrmChance crmChance;		// 机会id
+	private CrmContract crmContract;		// 合同id
 	private User sysUser;		// 发布人编号
 	private String content;		// 发布内容
-	private String pitures;		// 图片
+	private String pictures;		// 图片
 	private String files;		// 附件
 	
 	public CrmCustomerFollow() {
@@ -32,30 +32,30 @@ public class CrmCustomerFollow extends DataEntity<CrmCustomerFollow> {
 		super(id);
 	}
 
-	public Custom getCrmCustomer() {
+	public CrmCustomer getCrmCustomer() {
 		return crmCustomer;
 	}
 
-	public void setCrmCustomer(Custom crmCustomer) {
+	public void setCrmCustomer(CrmCustomer crmCustomer) {
 		this.crmCustomer = crmCustomer;
 	}
-	
-	public Custom getCrmChance() {
+
+	public CrmChance getCrmChance() {
 		return crmChance;
 	}
 
-	public void setCrmChance(Custom crmChance) {
+	public void setCrmChance(CrmChance crmChance) {
 		this.crmChance = crmChance;
 	}
-	
-	public Custom getCrmContract() {
+
+	public CrmContract getCrmContract() {
 		return crmContract;
 	}
 
-	public void setCrmContract(Custom crmContract) {
+	public void setCrmContract(CrmContract crmContract) {
 		this.crmContract = crmContract;
 	}
-	
+
 	public User getSysUser() {
 		return sysUser;
 	}
@@ -74,12 +74,12 @@ public class CrmCustomerFollow extends DataEntity<CrmCustomerFollow> {
 	}
 	
 	@Length(min=0, max=200, message="图片长度必须介于 0 和 200 之间")
-	public String getPitures() {
-		return pitures;
+	public String getPictures() {
+		return pictures;
 	}
 
-	public void setPitures(String pitures) {
-		this.pitures = pitures;
+	public void setPictures(String pictures) {
+		this.pictures = pictures;
 	}
 	
 	@Length(min=0, max=200, message="附件长度必须介于 0 和 200 之间")

@@ -5,16 +5,18 @@ package com.xiang.modules.crm.service;
 
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.thinkgem.jeesite.common.persistence.Page;
 import com.thinkgem.jeesite.common.service.CrudService;
+import com.thinkgem.jeesite.common.utils.StringUtils;
 import com.xiang.modules.crm.entity.CrmChance;
 import com.xiang.modules.crm.dao.CrmChanceDao;
 
 /**
- * 机会管理Service
+ * 联系人管理Service
  * @author Xiang
  * @version 2017-02-28
  */
@@ -22,8 +24,10 @@ import com.xiang.modules.crm.dao.CrmChanceDao;
 @Transactional(readOnly = true)
 public class CrmChanceService extends CrudService<CrmChanceDao, CrmChance> {
 
+	
 	public CrmChance get(String id) {
-		return super.get(id);
+		CrmChance crmChance = super.get(id);
+		return crmChance;
 	}
 	
 	public List<CrmChance> findList(CrmChance crmChance) {

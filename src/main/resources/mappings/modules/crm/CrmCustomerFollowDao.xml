@@ -9,7 +9,7 @@
 		a.crm_contract_id AS "crmContract.id",
 		a.sys_user_id AS "sysUser.id",
 		a.content AS "content",
-		a.pitures AS "pitures",
+		a.pictures AS "pictures",
 		a.files AS "files",
 		a.create_by AS "createBy.id",
 		a.create_date AS "createDate",
@@ -45,6 +45,18 @@
 		<include refid="crmCustomerFollowJoins"/>
 		<where>
 			a.del_flag = #{DEL_FLAG_NORMAL}
+			<if test="crmCustomer != null and crmCustomer.id != null and crmCustomer.id != ''">
+				AND a.crm_customer_id = #{crmCustomer.id}
+			</if>
+			<if test="crmChance != null and crmChance.id != null and crmChance.id != ''">
+				AND a.crm_chance_id = #{crmChance.id}
+			</if>
+			<if test="crmContract != null and crmContract.id != null and crmContract.id != ''">
+				AND a.crm_contract_id = #{crmContract.id}
+			</if>
+			<if test="sysUser != null and sysUser.id != null and sysUser.id != ''">
+				AND a.sys_user_id = #{sysUser.id}
+			</if>
 		</where>
 		<choose>
 			<when test="page !=null and page.orderBy != null and page.orderBy != ''">
@@ -82,7 +94,7 @@
 			crm_contract_id,
 			sys_user_id,
 			content,
-			pitures,
+			pictures,
 			files,
 			create_by,
 			create_date,
@@ -97,7 +109,7 @@
 			#{crmContract.id},
 			#{sysUser.id},
 			#{content},
-			#{pitures},
+			#{pictures},
 			#{files},
 			#{createBy.id},
 			#{createDate},
@@ -115,7 +127,7 @@
 			crm_contract_id = #{crmContract.id},
 			sys_user_id = #{sysUser.id},
 			content = #{content},
-			pitures = #{pitures},
+			pictures = #{pictures},
 			files = #{files},
 			update_by = #{updateBy.id},
 			update_date = #{updateDate},

@@ -28,11 +28,23 @@
 			<li><label>标题：</label>
 				<form:input path="name" htmlEscape="false" maxlength="200" class="input-medium"/>
 			</li>
+			<li><label>客户id：</label>
+				<sys:treeselect id="crmCustomer" name="crmCustomer.id" value="${crmContract.crmCustomer.id}" labelName="crmCustomer.name" labelValue="${crmContract.crmCustomer.name}"
+					title="用户" url="/sys/office/treeData?type=3" cssClass="input-small" allowClear="true" notAllowSelectParent="true"/>
+			</li>
+			<li><label>机会id：</label>
+				<sys:treeselect id="crmChance" name="crmChance.id" value="${crmContract.crmChance.id}" labelName="crmChance.name" labelValue="${crmContract.crmChance.name}"
+					title="用户" url="/sys/office/treeData?type=3" cssClass="input-small" allowClear="true" notAllowSelectParent="true"/>
+			</li>
 			<li><label>付款方式：</label>
 				<form:select path="paymentMethod" class="input-medium">
 					<form:option value="" label=""/>
 					<form:options items="${fns:getDictList('crm_contract_payment_method')}" itemLabel="label" itemValue="value" htmlEscape="false"/>
 				</form:select>
+			</li>
+			<li><label>我方签约人：</label>
+				<sys:treeselect id="sysUser" name="sysUser.id" value="${crmContract.sysUser.id}" labelName="sysUser.name" labelValue="${crmContract.sysUser.name}"
+					title="用户" url="/sys/office/treeData?type=3" cssClass="input-small" allowClear="true" notAllowSelectParent="true"/>
 			</li>
 			<li class="btns"><input id="btnSubmit" class="btn btn-primary" type="submit" value="查询"/></li>
 			<li class="clearfix"></li>
@@ -51,6 +63,8 @@
 				<th>付款方式</th>
 				<th>我方签约人</th>
 				<th>客户签约人</th>
+				<th>开始日期</th>
+				<th>结束日期</th>
 				<th>更新时间</th>
 				<th>备注信息</th>
 				<shiro:hasPermission name="crm:crmContract:edit"><th>操作</th></shiro:hasPermission>
@@ -75,7 +89,7 @@
 					${crmContract.discount}
 				</td>
 				<td>
-					<fmt:formatDate value="${crmContract.contarctDate}" pattern="yyyy-MM-dd HH:mm:ss"/>
+					<fmt:formatDate value="${crmContract.contractDate}" pattern="yyyy-MM-dd HH:mm:ss"/>
 				</td>
 				<td>
 					${fns:getDictLabel(crmContract.paymentMethod, 'crm_contract_payment_method', '')}
@@ -85,6 +99,12 @@
 				</td>
 				<td>
 					${crmContract.parties}
+				</td>
+				<td>
+					<fmt:formatDate value="${crmContract.startTime}" pattern="yyyy-MM-dd HH:mm:ss"/>
+				</td>
+				<td>
+					<fmt:formatDate value="${crmContract.endTime}" pattern="yyyy-MM-dd HH:mm:ss"/>
 				</td>
 				<td>
 					<fmt:formatDate value="${crmContract.updateDate}" pattern="yyyy-MM-dd HH:mm:ss"/>

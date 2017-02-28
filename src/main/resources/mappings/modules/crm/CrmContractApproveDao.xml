@@ -12,7 +12,7 @@
 		a.approve_date AS "approveDate",
 		a.status AS "status",
 		a.reason AS "reason",
-		a.pitures AS "pitures",
+		a.pictures AS "pictures",
 		a.files AS "files",
 		a.create_by AS "createBy.id",
 		a.create_date AS "createDate",
@@ -57,14 +57,14 @@
 			<if test="submitter != null and submitter.id != null and submitter.id != ''">
 				AND a.submitter_id = #{submitter.id}
 			</if>
-			<if test="submitDate != null and submitDate != ''">
-				AND a.submit_date = #{submitDate}
+			<if test="beginSubmitDate != null and endSubmitDate != null and beginSubmitDate != '' and endSubmitDate != ''">
+				AND a.submit_date BETWEEN #{beginSubmitDate} AND #{endSubmitDate}
 			</if>
 			<if test="approver != null and approver.id != null and approver.id != ''">
 				AND a.approver_id = #{approver.id}
 			</if>
-			<if test="approveDate != null and approveDate != ''">
-				AND a.approve_date = #{approveDate}
+			<if test="beginApproveDate != null and endApproveDate != null and beginApproveDate != '' and endApproveDate != ''">
+				AND a.approve_date BETWEEN #{beginApproveDate} AND #{endApproveDate}
 			</if>
 			<if test="status != null and status != ''">
 				AND a.status = #{status}
@@ -109,7 +109,7 @@
 			approve_date,
 			status,
 			reason,
-			pitures,
+			pictures,
 			files,
 			create_by,
 			create_date,
@@ -127,7 +127,7 @@
 			#{approveDate},
 			#{status},
 			#{reason},
-			#{pitures},
+			#{pictures},
 			#{files},
 			#{createBy.id},
 			#{createDate},
@@ -148,7 +148,7 @@
 			approve_date = #{approveDate},
 			status = #{status},
 			reason = #{reason},
-			pitures = #{pitures},
+			pictures = #{pictures},
 			files = #{files},
 			update_by = #{updateBy.id},
 			update_date = #{updateDate},

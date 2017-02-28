@@ -3,14 +3,14 @@
  */
 package com.xiang.modules.crm.entity;
 
-import org.hibernate.validator.constraints.Length;
-import java.util.Date;
 import com.fasterxml.jackson.annotation.JsonFormat;
-
 import com.thinkgem.jeesite.common.persistence.DataEntity;
+import org.hibernate.validator.constraints.Length;
+
+import java.util.Date;
 
 /**
- * 机会管理Entity
+ * 联系人管理Entity
  * @author Xiang
  * @version 2017-02-28
  */
@@ -18,13 +18,15 @@ public class CrmChance extends DataEntity<CrmChance> {
 	
 	private static final long serialVersionUID = 1L;
 	private String name;		// 机会名称
-	private String crmCustomer;		// 客户id
+	private CrmCustomer crmCustomer;		// 客户
 	private Double amount;		// 预计成交金额
 	private Date executionTime;		// 预计成交时间
 	private String progress;		// 销售进度
 	private String degree;		// 机会级别
-	private String pitures;		// 图片
+	private String pictures;		// 图片
 	private String files;		// 附件
+	private Double beginAmount;		// 开始 预计成交金额
+	private Double endAmount;		// 结束 预计成交金额
 	private Date beginExecutionTime;		// 开始 预计成交时间
 	private Date endExecutionTime;		// 结束 预计成交时间
 	
@@ -45,12 +47,11 @@ public class CrmChance extends DataEntity<CrmChance> {
 		this.name = name;
 	}
 	
-	@Length(min=0, max=64, message="客户id长度必须介于 0 和 64 之间")
-	public String getCrmCustomer() {
+	public CrmCustomer getCrmCustomer() {
 		return crmCustomer;
 	}
 
-	public void setCrmCustomer(String crmCustomer) {
+	public void setCrmCustomer(CrmCustomer crmCustomer) {
 		this.crmCustomer = crmCustomer;
 	}
 	
@@ -90,12 +91,12 @@ public class CrmChance extends DataEntity<CrmChance> {
 	}
 	
 	@Length(min=0, max=200, message="图片长度必须介于 0 和 200 之间")
-	public String getPitures() {
-		return pitures;
+	public String getPictures() {
+		return pictures;
 	}
 
-	public void setPitures(String pitures) {
-		this.pitures = pitures;
+	public void setPictures(String pictures) {
+		this.pictures = pictures;
 	}
 	
 	@Length(min=0, max=200, message="附件长度必须介于 0 和 200 之间")
@@ -107,6 +108,22 @@ public class CrmChance extends DataEntity<CrmChance> {
 		this.files = files;
 	}
 	
+	public Double getBeginAmount() {
+		return beginAmount;
+	}
+
+	public void setBeginAmount(Double beginAmount) {
+		this.beginAmount = beginAmount;
+	}
+	
+	public Double getEndAmount() {
+		return endAmount;
+	}
+
+	public void setEndAmount(Double endAmount) {
+		this.endAmount = endAmount;
+	}
+		
 	public Date getBeginExecutionTime() {
 		return beginExecutionTime;
 	}

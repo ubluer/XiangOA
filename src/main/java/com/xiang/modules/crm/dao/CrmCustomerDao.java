@@ -10,7 +10,7 @@ import com.xiang.modules.crm.entity.CrmCustomer;
 /**
  * 客户管理DAO接口
  * @author Xiang
- * @version 2017-02-21
+ * @version 2017-02-28
  */
 @MyBatisDao
 public interface CrmCustomerDao extends CrudDao<CrmCustomer> {

@@ -28,6 +28,17 @@
 			<li><label>期数：</label>
 				<form:input path="period" htmlEscape="false" maxlength="11" class="input-medium"/>
 			</li>
+			<li><label>合同id：</label>
+				<sys:treeselect id="crmContract" name="crmContract.id" value="${crmContractPayback.crmContract.id}" labelName="crmContract.name" labelValue="${crmContractPayback.crmContract.name}"
+					title="用户" url="/sys/office/treeData?type=3" cssClass="input-small" allowClear="true" notAllowSelectParent="true"/>
+			</li>
+			<li><label>负责人id：</label>
+				<sys:treeselect id="crmChance" name="crmChance.id" value="${crmContractPayback.crmChance.id}" labelName="crmChance.name" labelValue="${crmContractPayback.crmChance.name}"
+					title="用户" url="/sys/office/treeData?type=3" cssClass="input-small" allowClear="true" notAllowSelectParent="true"/>
+			</li>
+			<li><label>实收金额：</label>
+				<form:input path="amount" htmlEscape="false" class="input-medium"/>
+			</li>
 			<li><label>实际日期：</label>
 				<input name="beginExecutionTime" type="text" readonly="readonly" maxlength="20" class="input-medium Wdate"
 					value="<fmt:formatDate value="${crmContractPayback.beginExecutionTime}" pattern="yyyy-MM-dd HH:mm:ss"/>"
@@ -38,6 +49,12 @@
 			</li>
 			<li><label>是否开票：</label>
 				<form:radiobuttons path="billing" items="${fns:getDictList('yes_no')}" itemLabel="label" itemValue="value" htmlEscape="false"/>
+			</li>
+			<li><label>付款方式：</label>
+				<form:select path="paymentMethod" class="input-medium">
+					<form:option value="" label=""/>
+					<form:options items="${fns:getDictList('crm_contract_payment_method')}" itemLabel="label" itemValue="value" htmlEscape="false"/>
+				</form:select>
 			</li>
 			<li class="btns"><input id="btnSubmit" class="btn btn-primary" type="submit" value="查询"/></li>
 			<li class="clearfix"></li>
@@ -53,6 +70,7 @@
 				<th>实收金额</th>
 				<th>实际日期</th>
 				<th>是否开票</th>
+				<th>付款方式</th>
 				<th>更新时间</th>
 				<th>备注信息</th>
 				<shiro:hasPermission name="crm:crmContractPayback:edit"><th>操作</th></shiro:hasPermission>
@@ -78,6 +96,9 @@
 				</td>
 				<td>
 					${fns:getDictLabel(crmContractPayback.billing, 'yes_no', '')}
+				</td>
+				<td>
+					${fns:getDictLabel(crmContractPayback.paymentMethod, 'crm_contract_payment_method', '')}
 				</td>
 				<td>
 					<fmt:formatDate value="${crmContractPayback.updateDate}" pattern="yyyy-MM-dd HH:mm:ss"/>

@@ -70,8 +70,8 @@
 		<div class="control-group">
 			<label class="control-label">图片：</label>
 			<div class="controls">
-				<form:hidden id="pitures" path="pitures" htmlEscape="false" maxlength="200" class="input-xlarge"/>
-				<sys:ckfinder input="pitures" type="files" uploadPath="/crm/crmContractPaybackPlan" selectMultiple="true"/>
+				<form:hidden id="pictures" path="pictures" htmlEscape="false" maxlength="200" class="input-xlarge"/>
+				<sys:ckfinder input="pictures" type="files" uploadPath="/crm/crmContractPaybackPlan" selectMultiple="true"/>
 			</div>
 		</div>
 		<div class="control-group">

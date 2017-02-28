@@ -25,6 +25,14 @@
 		<input id="pageNo" name="pageNo" type="hidden" value="${page.pageNo}"/>
 		<input id="pageSize" name="pageSize" type="hidden" value="${page.pageSize}"/>
 		<ul class="ul-form">
+			<li><label>客户id：</label>
+				<sys:treeselect id="crmCustomer" name="crmCustomer.id" value="${crmCustomerFollower.crmCustomer.id}" labelName="crmCustomer.name" labelValue="${crmCustomerFollower.crmCustomer.name}"
+					title="用户" url="/sys/office/treeData?type=3" cssClass="input-small" allowClear="true" notAllowSelectParent="true"/>
+			</li>
+			<li><label>跟进人编号：</label>
+				<sys:treeselect id="sysUser" name="sysUser.id" value="${crmCustomerFollower.sysUser.id}" labelName="sysUser.name" labelValue="${crmCustomerFollower.sysUser.name}"
+					title="用户" url="/sys/office/treeData?type=3" cssClass="input-small" allowClear="true" notAllowSelectParent="true"/>
+			</li>
 			<li class="btns"><input id="btnSubmit" class="btn btn-primary" type="submit" value="查询"/></li>
 			<li class="clearfix"></li>
 		</ul>

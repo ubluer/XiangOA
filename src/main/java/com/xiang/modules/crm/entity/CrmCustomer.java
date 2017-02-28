@@ -11,7 +11,7 @@ import com.thinkgem.jeesite.common.persistence.DataEntity;
 /**
  * 客户管理Entity
  * @author Xiang
- * @version 2017-02-21
+ * @version 2017-02-28
  */
 public class CrmCustomer extends DataEntity<CrmCustomer> {
 	
@@ -29,7 +29,7 @@ public class CrmCustomer extends DataEntity<CrmCustomer> {
 	private String place;		// 地址
 	private Double longitude;		// 标记位置经度
 	private Double latitude;		// 标记位置纬度
-	private String pitures;		// 图片
+	private String pictures;		// 图片
 	private String files;		// 附件
 	
 	public CrmCustomer() {
@@ -155,12 +155,12 @@ public class CrmCustomer extends DataEntity<CrmCustomer> {
 	}
 	
 	@Length(min=0, max=200, message="图片长度必须介于 0 和 200 之间")
-	public String getPitures() {
-		return pitures;
+	public String getPictures() {
+		return pictures;
 	}
 
-	public void setPitures(String pitures) {
-		this.pitures = pitures;
+	public void setPictures(String pictures) {
+		this.pictures = pictures;
 	}
 	
 	@Length(min=0, max=200, message="附件长度必须介于 0 和 200 之间")

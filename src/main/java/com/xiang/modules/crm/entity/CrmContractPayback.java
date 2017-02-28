@@ -3,12 +3,12 @@
  */
 package com.xiang.modules.crm.entity;
 
-import com.thinkgem.jeesite.modules.sys.entity.User;
-import java.util.Date;
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.thinkgem.jeesite.common.persistence.DataEntity;
+import com.thinkgem.jeesite.modules.sys.entity.User;
 import org.hibernate.validator.constraints.Length;
 
-import com.thinkgem.jeesite.common.persistence.DataEntity;
+import java.util.Date;
 
 /**
  * 合同回款记录管理Entity
@@ -19,14 +19,16 @@ public class CrmContractPayback extends DataEntity<CrmContractPayback> {
 	
 	private static final long serialVersionUID = 1L;
 	private Integer period;		// 期数
-	private Custom crmContract;		// 合同id
+	private CrmContract crmContract;		// 合同id
 	private User crmChance;		// 负责人id
 	private Double amount;		// 实收金额
 	private Date executionTime;		// 实际日期
 	private Integer billing;		// 是否开票
 	private String paymentMethod;		// 付款方式
-	private String pitures;		// 图片
+	private String pictures;		// 图片
 	private String files;		// 附件
+	private Double beginAmount;		// 开始 实收金额
+	private Double endAmount;		// 结束 实收金额
 	private Date beginExecutionTime;		// 开始 实际日期
 	private Date endExecutionTime;		// 结束 实际日期
 	
@@ -46,11 +48,11 @@ public class CrmContractPayback extends DataEntity<CrmContractPayback> {
 		this.period = period;
 	}
 	
-	public Custom getCrmContract() {
+	public CrmContract getCrmContract() {
 		return crmContract;
 	}
 
-	public void setCrmContract(Custom crmContract) {
+	public void setCrmContract(CrmContract crmContract) {
 		this.crmContract = crmContract;
 	}
 	
@@ -97,12 +99,12 @@ public class CrmContractPayback extends DataEntity<CrmContractPayback> {
 	}
 	
 	@Length(min=0, max=200, message="图片长度必须介于 0 和 200 之间")
-	public String getPitures() {
-		return pitures;
+	public String getPictures() {
+		return pictures;
 	}
 
-	public void setPitures(String pitures) {
-		this.pitures = pitures;
+	public void setPictures(String pictures) {
+		this.pictures = pictures;
 	}
 	
 	@Length(min=0, max=200, message="附件长度必须介于 0 和 200 之间")
@@ -114,6 +116,22 @@ public class CrmContractPayback extends DataEntity<CrmContractPayback> {
 		this.files = files;
 	}
 	
+	public Double getBeginAmount() {
+		return beginAmount;
+	}
+
+	public void setBeginAmount(Double beginAmount) {
+		this.beginAmount = beginAmount;
+	}
+	
+	public Double getEndAmount() {
+		return endAmount;
+	}
+
+	public void setEndAmount(Double endAmount) {
+		this.endAmount = endAmount;
+	}
+		
 	public Date getBeginExecutionTime() {
 		return beginExecutionTime;
 	}

@@ -15,7 +15,7 @@ import com.thinkgem.jeesite.common.persistence.DataEntity;
 public class CrmCustomerFollower extends DataEntity<CrmCustomerFollower> {
 	
 	private static final long serialVersionUID = 1L;
-	private Custom crmCustomer;		// 客户id
+	private CrmCustomer crmCustomer;		// 客户id
 	private User sysUser;		// 跟进人编号
 	
 	public CrmCustomerFollower() {
@@ -26,11 +26,11 @@ public class CrmCustomerFollower extends DataEntity<CrmCustomerFollower> {
 		super(id);
 	}
 
-	public Custom getCrmCustomer() {
+	public CrmCustomer getCrmCustomer() {
 		return crmCustomer;
 	}
 
-	public void setCrmCustomer(Custom crmCustomer) {
+	public void setCrmCustomer(CrmCustomer crmCustomer) {
 		this.crmCustomer = crmCustomer;
 	}
 	

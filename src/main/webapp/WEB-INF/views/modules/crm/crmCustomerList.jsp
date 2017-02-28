@@ -70,6 +70,8 @@
 				<th>客户来源</th>
 				<th>客户分类</th>
 				<th>客户状态</th>
+				<th>电话</th>
+				<th>网址</th>
 				<th>更新时间</th>
 				<th>备注信息</th>
 				<shiro:hasPermission name="crm:crmCustomer:edit"><th>操作</th></shiro:hasPermission>
@@ -95,6 +97,12 @@
 				</td>
 				<td>
 					${fns:getDictLabel(crmCustomer.status, 'crm_customer_status', '')}
+				</td>
+				<td>
+					${crmCustomer.phone}
+				</td>
+				<td>
+					${crmCustomer.website}
 				</td>
 				<td>
 					<fmt:formatDate value="${crmCustomer.updateDate}" pattern="yyyy-MM-dd HH:mm:ss"/>

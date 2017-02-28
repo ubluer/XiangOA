@@ -71,7 +71,7 @@
 			</div>
 		</div>
 		<div class="control-group">
-			<label class="control-label">负责人：</label>
+			<label class="control-label">负责人编号：</label>
 			<div class="controls">
 				<sys:treeselect id="sysUser" name="sysUser.id" value="${crmContact.sysUser.id}" labelName="sysUser.name" labelValue="${crmContact.sysUser.name}"
 					title="用户" url="/sys/office/treeData?type=3" cssClass="" allowClear="true" notAllowSelectParent="true"/>
@@ -99,7 +99,7 @@
 		<div class="control-group">
 			<label class="control-label">邮箱：</label>
 			<div class="controls">
-				<form:input path="mail" htmlEscape="false" maxlength="200" class="input-xlarge "/>
+				<form:input path="email" htmlEscape="false" maxlength="200" class="input-xlarge "/>
 			</div>
 		</div>
 		<div class="control-group">
@@ -111,8 +111,8 @@
 		<div class="control-group">
 			<label class="control-label">图片：</label>
 			<div class="controls">
-				<form:hidden id="pitures" path="pitures" htmlEscape="false" maxlength="200" class="input-xlarge"/>
-				<sys:ckfinder input="pitures" type="files" uploadPath="/crm/crmContact" selectMultiple="true"/>
+				<form:hidden id="pictures" path="pictures" htmlEscape="false" maxlength="200" class="input-xlarge"/>
+				<sys:ckfinder input="pictures" type="files" uploadPath="/crm/crmContact" selectMultiple="true"/>
 			</div>
 		</div>
 		<div class="control-group">

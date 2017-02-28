@@ -10,7 +10,7 @@
 		a.execution_time AS "executionTime",
 		a.progress AS "progress",
 		a.degree AS "degree",
-		a.pitures AS "pitures",
+		a.pictures AS "pictures",
 		a.files AS "files",
 		a.create_by AS "createBy.id",
 		a.create_date AS "createDate",
@@ -48,6 +48,9 @@
 			</if>
 			<if test="crmCustomer != null and crmCustomer.id != null and crmCustomer.id != ''">
 				AND a.crm_customer_id = #{crmCustomer.id}
+			</if>
+			<if test="beginAmount != null and endAmount != null and beginAmount != '' and endAmount != ''">
+				AND a.amount BETWEEN #{beginAmount} AND #{endAmount}
 			</if>
 			<if test="beginExecutionTime != null and endExecutionTime != null and beginExecutionTime != '' and endExecutionTime != ''">
 				AND a.execution_time BETWEEN #{beginExecutionTime} AND #{endExecutionTime}
@@ -96,7 +99,7 @@
 			execution_time,
 			progress,
 			degree,
-			pitures,
+			pictures,
 			files,
 			create_by,
 			create_date,
@@ -112,7 +115,7 @@
 			#{executionTime},
 			#{progress},
 			#{degree},
-			#{pitures},
+			#{pictures},
 			#{files},
 			#{createBy.id},
 			#{createDate},
@@ -131,7 +134,7 @@
 			execution_time = #{executionTime},
 			progress = #{progress},
 			degree = #{degree},
-			pitures = #{pitures},
+			pictures = #{pictures},
 			files = #{files},
 			update_by = #{updateBy.id},
 			update_date = #{updateDate},

@@ -3,12 +3,12 @@
  */
 package com.xiang.modules.crm.entity;
 
-import com.google.common.collect.Lists;
-import com.thinkgem.jeesite.common.persistence.DataEntity;
-import com.thinkgem.jeesite.modules.sys.entity.User;
 import org.hibernate.validator.constraints.Length;
-
+import com.thinkgem.jeesite.modules.sys.entity.User;
 import java.util.List;
+import com.google.common.collect.Lists;
+
+import com.thinkgem.jeesite.common.persistence.DataEntity;
 
 /**
  * 联系人管理Entity
@@ -19,13 +19,13 @@ public class CrmContact extends DataEntity<CrmContact> {
 	
 	private static final long serialVersionUID = 1L;
 	private String name;		// 姓名
-	private User sysUser;		// 负责人
-	private CrmCustomer crmCustomer;		// 客户
+	private User sysUser;		// 负责人编号
+	private String crmCustomer;		// 客户
 	private String department;		// 部门
 	private String position;		// 职位
-	private String mail;		// 邮箱
+	private String email;		// 邮箱
 	private String place;		// 地址
-	private String pitures;		// 图片
+	private String pictures;		// 图片
 	private String files;		// 附件
 	private List<CrmContactPhone> crmContactPhoneList = Lists.newArrayList();		// 子表列表
 	
@@ -54,11 +54,12 @@ public class CrmContact extends DataEntity<CrmContact> {
 		this.sysUser = sysUser;
 	}
 	
-	public CrmCustomer getCrmCustomer() {
+	@Length(min=0, max=64, message="客户长度必须介于 0 和 64 之间")
+	public String getCrmCustomer() {
 		return crmCustomer;
 	}
 
-	public void setCrmCustomer(CrmCustomer crmCustomer) {
+	public void setCrmCustomer(String crmCustomer) {
 		this.crmCustomer = crmCustomer;
 	}
 	
@@ -81,12 +82,12 @@ public class CrmContact extends DataEntity<CrmContact> {
 	}
 	
 	@Length(min=0, max=200, message="邮箱长度必须介于 0 和 200 之间")
-	public String getMail() {
-		return mail;
+	public String getEmail() {
+		return email;
 	}
 
-	public void setMail(String mail) {
-		this.mail = mail;
+	public void setEmail(String email) {
+		this.email = email;
 	}
 	
 	@Length(min=0, max=200, message="地址长度必须介于 0 和 200 之间")
@@ -99,12 +100,12 @@ public class CrmContact extends DataEntity<CrmContact> {
 	}
 	
 	@Length(min=0, max=200, message="图片长度必须介于 0 和 200 之间")
-	public String getPitures() {
-		return pitures;
+	public String getPictures() {
+		return pictures;
 	}
 
-	public void setPitures(String pitures) {
-		this.pitures = pitures;
+	public void setPictures(String pictures) {
+		this.pictures = pictures;
 	}
 	
 	@Length(min=0, max=200, message="附件长度必须介于 0 和 200 之间")

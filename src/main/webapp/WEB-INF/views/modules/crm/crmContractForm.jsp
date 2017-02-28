@@ -68,8 +68,8 @@
 		<div class="control-group">
 			<label class="control-label">签约日期：</label>
 			<div class="controls">
-				<input name="contarctDate" type="text" readonly="readonly" maxlength="20" class="input-medium Wdate "
-					value="<fmt:formatDate value="${crmContract.contarctDate}" pattern="yyyy-MM-dd HH:mm:ss"/>"
+				<input name="contractDate" type="text" readonly="readonly" maxlength="20" class="input-medium Wdate "
+					value="<fmt:formatDate value="${crmContract.contractDate}" pattern="yyyy-MM-dd HH:mm:ss"/>"
 					onclick="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss',isShowClear:false});"/>
 			</div>
 		</div>
@@ -114,8 +114,7 @@
 		<div class="control-group">
 			<label class="control-label">图片：</label>
 			<div class="controls">
-				<form:hidden id="pitures" path="pitures" htmlEscape="false" maxlength="200" class="input-xlarge"/>
-				<sys:ckfinder input="pitures" type="files" uploadPath="/crm/crmContract" selectMultiple="true"/>
+				<form:input path="pictures" htmlEscape="false" maxlength="200" class="input-xlarge "/>
 			</div>
 		</div>
 		<div class="control-group">

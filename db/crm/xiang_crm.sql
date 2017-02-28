@@ -16,7 +16,7 @@ CREATE TABLE crm_customer
   place       VARCHAR(200) COMMENT '地址',
   longitude   DOUBLE COMMENT '标记位置经度',
   latitude    DOUBLE COMMENT '标记位置纬度',
-  pitures     VARCHAR(200) COMMENT '图片',
+  pictures     VARCHAR(200) COMMENT '图片',
   files       VARCHAR(200) COMMENT '附件',
   create_by   VARCHAR(64)             NOT NULL
   COMMENT '创建者',
@@ -65,7 +65,7 @@ CREATE TABLE crm_customer_follow
   crm_contract_id VARCHAR(64) COMMENT '合同id',
   sys_user_id     VARCHAR(64) COMMENT '发布人编号',
   content         VARCHAR(500) COMMENT '发布内容',
-  pitures         VARCHAR(200) COMMENT '图片',
+  pictures         VARCHAR(200) COMMENT '图片',
   files           VARCHAR(200) COMMENT '附件',
   create_by       VARCHAR(64)             NOT NULL
   COMMENT '创建者',
@@ -93,7 +93,7 @@ CREATE TABLE crm_chance
   execution_time  DATETIME COMMENT '预计成交时间',
   progress        VARCHAR(20) COMMENT '销售进度[尚未联系，初步接触，意向过滤，商务跟进，基本谈妥，签单成功，未能签单]',
   degree          VARCHAR(20) COMMENT '机会级别[普通机会，重点机会]',
-  pitures         VARCHAR(200) COMMENT '图片',
+  pictures         VARCHAR(200) COMMENT '图片',
   files           VARCHAR(200) COMMENT '附件',
   create_by       VARCHAR(64)             NOT NULL
   COMMENT '创建者',
@@ -120,13 +120,13 @@ CREATE TABLE crm_contract
   crm_chance_id   VARCHAR(64) COMMENT '机会id',
   amount          DOUBLE COMMENT '合同金额',
   discount        DOUBLE COMMENT '折扣后金额',
-  contarct_date   DATETIME COMMENT '签约日期',
+  contract_date   DATETIME COMMENT '签约日期',
   payment_method  VARCHAR(20) COMMENT '付款方式[现金，汇款，电汇，支付宝，支票，抵押]',
   sys_user_id     VARCHAR(64) COMMENT '我方签约人',
   parties         VARCHAR(200) COMMENT '客户签约人',
   start_time      DATETIME COMMENT '开始日期',
   end_time        DATETIME COMMENT '结束日期',
-  pitures         VARCHAR(200) COMMENT '图片',
+  pictures         VARCHAR(200) COMMENT '图片',
   files           VARCHAR(200) COMMENT '附件',
   create_by       VARCHAR(64)             NOT NULL
   COMMENT '创建者',
@@ -153,7 +153,7 @@ CREATE TABLE crm_contract_payback_plan
   crm_chance_id   VARCHAR(64) COMMENT '负责人id',
   amount          DOUBLE COMMENT '应收金额',
   execution_time  DATETIME COMMENT '计划日期',
-  pitures         VARCHAR(200) COMMENT '图片',
+  pictures         VARCHAR(200) COMMENT '图片',
   files           VARCHAR(200) COMMENT '附件',
   create_by       VARCHAR(64)             NOT NULL
   COMMENT '创建者',
@@ -182,7 +182,7 @@ CREATE TABLE crm_contract_payback
   execution_time  DATETIME COMMENT '实际日期',
   billing         INT COMMENT '是否开票',
   payment_method  VARCHAR(20) COMMENT '付款方式[现金，汇款，电汇，支付宝，支票，抵押]',
-  pitures         VARCHAR(200) COMMENT '图片',
+  pictures         VARCHAR(200) COMMENT '图片',
   files           VARCHAR(200) COMMENT '附件',
   create_by       VARCHAR(64)             NOT NULL
   COMMENT '创建者',
@@ -212,7 +212,7 @@ CREATE TABLE crm_contract_approve
   approve_date    DATETIME COMMENT '审批日期',
   status          VARCHAR(20) COMMENT '审批状态[审批中，驳回，通过]',
   reason          VARCHAR(200) COMMENT '驳回理由',
-  pitures         VARCHAR(200) COMMENT '图片',
+  pictures         VARCHAR(200) COMMENT '图片',
   files           VARCHAR(200) COMMENT '附件',
   create_by       VARCHAR(64)             NOT NULL
   COMMENT '创建者',
@@ -239,9 +239,9 @@ CREATE TABLE crm_contact
   crm_customer_id VARCHAR(64) COMMENT '客户',
   department             VARCHAR(200) COMMENT '部门',
   position          VARCHAR(200) COMMENT '职位',
-  meail        VARCHAR(200) COMMENT '邮箱',
+  email        VARCHAR(200) COMMENT '邮箱',
   place           VARCHAR(200) COMMENT '地址',
-  pitures         VARCHAR(200) COMMENT '图片',
+  pictures         VARCHAR(200) COMMENT '图片',
   files           VARCHAR(200) COMMENT '附件',
   create_by       VARCHAR(64)             NOT NULL
   COMMENT '创建者',

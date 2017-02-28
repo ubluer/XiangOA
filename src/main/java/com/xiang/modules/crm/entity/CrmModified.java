@@ -16,7 +16,7 @@ import com.thinkgem.jeesite.common.persistence.DataEntity;
 public class CrmModified extends DataEntity<CrmModified> {
 	
 	private static final long serialVersionUID = 1L;
-	private Custom crmCustomer;		// 客户id
+	private CrmCustomer crmCustomer;		// 客户id
 	private User sysUser;		// 修改人id
 	private String modifiedTable;		// 修改表名
 	private String modifiedField;		// 修改字段
@@ -32,11 +32,11 @@ public class CrmModified extends DataEntity<CrmModified> {
 		super(id);
 	}
 
-	public Custom getCrmCustomer() {
+	public CrmCustomer getCrmCustomer() {
 		return crmCustomer;
 	}
 
-	public void setCrmCustomer(Custom crmCustomer) {
+	public void setCrmCustomer(CrmCustomer crmCustomer) {
 		this.crmCustomer = crmCustomer;
 	}
 	

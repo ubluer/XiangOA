@@ -36,6 +36,12 @@
 		<include refid="crmCustomerFollowerJoins"/>
 		<where>
 			a.del_flag = #{DEL_FLAG_NORMAL}
+			<if test="crmCustomer != null and crmCustomer.id != null and crmCustomer.id != ''">
+				AND a.crm_customer_id = #{crmCustomer.id}
+			</if>
+			<if test="sysUser != null and sysUser.id != null and sysUser.id != ''">
+				AND a.sys_user_id = #{sysUser.id}
+			</if>
 		</where>
 		<choose>
 			<when test="page !=null and page.orderBy != null and page.orderBy != ''">

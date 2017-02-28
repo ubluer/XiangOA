@@ -23,7 +23,7 @@ import com.xiang.modules.crm.entity.CrmChance;
 import com.xiang.modules.crm.service.CrmChanceService;
 
 /**
- * 机会管理Controller
+ * 联系人管理Controller
  * @author Xiang
  * @version 2017-02-28
  */
@@ -68,7 +68,7 @@ public class CrmChanceController extends BaseController {
 			return form(crmChance, model);
 		}
 		crmChanceService.save(crmChance);
-		addMessage(redirectAttributes, "保存机会成功");
+		addMessage(redirectAttributes, "保存联系人成功");
 		return "redirect:"+Global.getAdminPath()+"/crm/crmChance/?repage";
 	}
 	
@@ -76,7 +76,7 @@ public class CrmChanceController extends BaseController {
 	@RequestMapping(value = "delete")
 	public String delete(CrmChance crmChance, RedirectAttributes redirectAttributes) {
 		crmChanceService.delete(crmChance);
-		addMessage(redirectAttributes, "删除机会成功");
+		addMessage(redirectAttributes, "删除联系人成功");
 		return "redirect:"+Global.getAdminPath()+"/crm/crmChance/?repage";
 	}
 

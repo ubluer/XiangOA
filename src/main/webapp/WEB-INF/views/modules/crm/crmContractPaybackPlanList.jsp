@@ -45,6 +45,9 @@
 		<thead>
 			<tr>
 				<th>期数</th>
+				<th>合同id</th>
+				<th>负责人id</th>
+				<th>应收金额</th>
 				<th>计划日期</th>
 				<th>更新时间</th>
 				<th>备注信息</th>
@@ -57,6 +60,15 @@
 				<td><a href="${ctx}/crm/crmContractPaybackPlan/form?id=${crmContractPaybackPlan.id}">
 					${crmContractPaybackPlan.period}
 				</a></td>
+				<td>
+					${crmContractPaybackPlan.crmContract.name}
+				</td>
+				<td>
+					${crmContractPaybackPlan.crmChance.name}
+				</td>
+				<td>
+					${crmContractPaybackPlan.amount}
+				</td>
 				<td>
 					<fmt:formatDate value="${crmContractPaybackPlan.executionTime}" pattern="yyyy-MM-dd HH:mm:ss"/>
 				</td>

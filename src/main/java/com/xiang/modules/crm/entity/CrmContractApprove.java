@@ -3,12 +3,12 @@
  */
 package com.xiang.modules.crm.entity;
 
-import com.thinkgem.jeesite.modules.sys.entity.User;
-import java.util.Date;
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.thinkgem.jeesite.common.persistence.DataEntity;
+import com.thinkgem.jeesite.modules.sys.entity.User;
 import org.hibernate.validator.constraints.Length;
 
-import com.thinkgem.jeesite.common.persistence.DataEntity;
+import java.util.Date;
 
 /**
  * 成交记录管理Entity
@@ -18,16 +18,20 @@ import com.thinkgem.jeesite.common.persistence.DataEntity;
 public class CrmContractApprove extends DataEntity<CrmContractApprove> {
 	
 	private static final long serialVersionUID = 1L;
-	private Custom crmContract;		// 合同id
-	private Custom crmCustomer;		// 客户id
+	private CrmContract crmContract;		// 合同id
+	private CrmCustomer crmCustomer;		// 客户id
 	private User submitter;		// 创建人id
 	private Date submitDate;		// 提交日期
 	private User approver;		// 审批人
 	private Date approveDate;		// 审批日期
 	private String status;		// 审批状态
 	private String reason;		// 驳回理由
-	private String pitures;		// 图片
+	private String pictures;		// 图片
 	private String files;		// 附件
+	private Date beginSubmitDate;		// 开始 提交日期
+	private Date endSubmitDate;		// 结束 提交日期
+	private Date beginApproveDate;		// 开始 审批日期
+	private Date endApproveDate;		// 结束 审批日期
 	
 	public CrmContractApprove() {
 		super();
@@ -37,19 +41,19 @@ public class CrmContractApprove extends DataEntity<CrmContractApprove> {
 		super(id);
 	}
 
-	public Custom getCrmContract() {
+	public CrmContract getCrmContract() {
 		return crmContract;
 	}
 
-	public void setCrmContract(Custom crmContract) {
+	public void setCrmContract(CrmContract crmContract) {
 		this.crmContract = crmContract;
 	}
 	
-	public Custom getCrmCustomer() {
+	public CrmCustomer getCrmCustomer() {
 		return crmCustomer;
 	}
 
-	public void setCrmCustomer(Custom crmCustomer) {
+	public void setCrmCustomer(CrmCustomer crmCustomer) {
 		this.crmCustomer = crmCustomer;
 	}
 	
@@ -106,12 +110,12 @@ public class CrmContractApprove extends DataEntity<CrmContractApprove> {
 	}
 	
 	@Length(min=0, max=200, message="图片长度必须介于 0 和 200 之间")
-	public String getPitures() {
-		return pitures;
+	public String getPictures() {
+		return pictures;
 	}
 
-	public void setPitures(String pitures) {
-		this.pitures = pitures;
+	public void setPictures(String pictures) {
+		this.pictures = pictures;
 	}
 	
 	@Length(min=0, max=200, message="附件长度必须介于 0 和 200 之间")
@@ -123,4 +127,36 @@ public class CrmContractApprove extends DataEntity<CrmContractApprove> {
 		this.files = files;
 	}
 	
+	public Date getBeginSubmitDate() {
+		return beginSubmitDate;
+	}
+
+	public void setBeginSubmitDate(Date beginSubmitDate) {
+		this.beginSubmitDate = beginSubmitDate;
+	}
+	
+	public Date getEndSubmitDate() {
+		return endSubmitDate;
+	}
+
+	public void setEndSubmitDate(Date endSubmitDate) {
+		this.endSubmitDate = endSubmitDate;
+	}
+		
+	public Date getBeginApproveDate() {
+		return beginApproveDate;
+	}
+
+	public void setBeginApproveDate(Date beginApproveDate) {
+		this.beginApproveDate = beginApproveDate;
+	}
+	
+	public Date getEndApproveDate() {
+		return endApproveDate;
+	}
+
+	public void setEndApproveDate(Date endApproveDate) {
+		this.endApproveDate = endApproveDate;
+	}
+		
 }

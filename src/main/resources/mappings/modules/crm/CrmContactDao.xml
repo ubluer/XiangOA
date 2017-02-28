@@ -9,9 +9,9 @@
 		a.crm_customer_id AS "crmCustomer.id",
 		a.department AS "department",
 		a.position AS "position",
-		a.mail AS "mail",
+		a.email AS "email",
 		a.place AS "place",
-		a.pitures AS "pitures",
+		a.pictures AS "pictures",
 		a.files AS "files",
 		a.create_by AS "createBy.id",
 		a.create_date AS "createDate",
@@ -55,6 +55,18 @@
 			<if test="crmCustomer != null and crmCustomer.id != null and crmCustomer.id != ''">
 				AND a.crm_customer_id = #{crmCustomer.id}
 			</if>
+			<if test="department != null and department != ''">
+				AND a.department = #{department}
+			</if>
+			<if test="position != null and position != ''">
+				AND a.position = #{position}
+			</if>
+			<if test="email != null and email != ''">
+				AND a.email = #{email}
+			</if>
+			<if test="place != null and place != ''">
+				AND a.place = #{place}
+			</if>
 		</where>
 		<choose>
 			<when test="page !=null and page.orderBy != null and page.orderBy != ''">
@@ -92,9 +104,9 @@
 			crm_customer_id,
 			department,
 			position,
-			mail,
+			email,
 			place,
-			pitures,
+			pictures,
 			files,
 			create_by,
 			create_date,
@@ -109,9 +121,9 @@
 			#{crmCustomer.id},
 			#{department},
 			#{position},
-			#{mail},
+			#{email},
 			#{place},
-			#{pitures},
+			#{pictures},
 			#{files},
 			#{createBy.id},
 			#{createDate},
@@ -129,9 +141,9 @@
 			crm_customer_id = #{crmCustomer.id},
 			department = #{department},
 			position = #{position},
-			mail = #{mail},
+			email = #{email},
 			place = #{place},
-			pitures = #{pitures},
+			pictures = #{pictures},
 			files = #{files},
 			update_by = #{updateBy.id},
 			update_date = #{updateDate},

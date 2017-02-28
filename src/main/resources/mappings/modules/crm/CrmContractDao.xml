@@ -9,13 +9,13 @@
 		a.crm_chance_id AS "crmChance.id",
 		a.amount AS "amount",
 		a.discount AS "discount",
-		a.contarct_date AS "contarctDate",
+		a.contract_date AS "contractDate",
 		a.payment_method AS "paymentMethod",
 		a.sys_user_id AS "sysUser.id",
 		a.parties AS "parties",
 		a.start_time AS "startTime",
 		a.end_time AS "endTime",
-		a.pitures AS "pitures",
+		a.pictures AS "pictures",
 		a.files AS "files",
 		a.create_by AS "createBy.id",
 		a.create_date AS "createDate",
@@ -55,8 +55,17 @@
 					<if test="dbName == 'mssql'">'%'+#{name}+'%'</if>
 					<if test="dbName == 'mysql'">concat('%',#{name},'%')</if>
 			</if>
+			<if test="crmCustomer != null and crmCustomer.id != null and crmCustomer.id != ''">
+				AND a.crm_customer_id = #{crmCustomer.id}
+			</if>
+			<if test="crmChance != null and crmChance.id != null and crmChance.id != ''">
+				AND a.crm_chance_id = #{crmChance.id}
+			</if>
 			<if test="paymentMethod != null and paymentMethod != ''">
 				AND a.payment_method = #{paymentMethod}
+			</if>
+			<if test="sysUser != null and sysUser.id != null and sysUser.id != ''">
+				AND a.sys_user_id = #{sysUser.id}
 			</if>
 		</where>
 		<choose>
@@ -95,13 +104,13 @@
 			crm_chance_id,
 			amount,
 			discount,
-			contarct_date,
+			contract_date,
 			payment_method,
 			sys_user_id,
 			parties,
 			start_time,
 			end_time,
-			pitures,
+			pictures,
 			files,
 			create_by,
 			create_date,
@@ -116,13 +125,13 @@
 			#{crmChance.id},
 			#{amount},
 			#{discount},
-			#{contarctDate},
+			#{contractDate},
 			#{paymentMethod},
 			#{sysUser.id},
 			#{parties},
 			#{startTime},
 			#{endTime},
-			#{pitures},
+			#{pictures},
 			#{files},
 			#{createBy.id},
 			#{createDate},
@@ -140,13 +149,13 @@
 			crm_chance_id = #{crmChance.id},
 			amount = #{amount},
 			discount = #{discount},
-			contarct_date = #{contarctDate},
+			contract_date = #{contractDate},
 			payment_method = #{paymentMethod},
 			sys_user_id = #{sysUser.id},
 			parties = #{parties},
 			start_time = #{startTime},
 			end_time = #{endTime},
-			pitures = #{pitures},
+			pictures = #{pictures},
 			files = #{files},
 			update_by = #{updateBy.id},
 			update_date = #{updateDate},

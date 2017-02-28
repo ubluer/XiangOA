@@ -8,7 +8,7 @@ import com.thinkgem.jeesite.common.persistence.annotation.MyBatisDao;
 import com.xiang.modules.crm.entity.CrmChance;
 
 /**
- * 机会管理DAO接口
+ * 联系人管理DAO接口
  * @author Xiang
  * @version 2017-02-28
  */

@@ -3,12 +3,12 @@
  */
 package com.xiang.modules.crm.entity;
 
-import org.hibernate.validator.constraints.Length;
-import java.util.Date;
 import com.fasterxml.jackson.annotation.JsonFormat;
-import com.thinkgem.jeesite.modules.sys.entity.User;
-
 import com.thinkgem.jeesite.common.persistence.DataEntity;
+import com.thinkgem.jeesite.modules.sys.entity.User;
+import org.hibernate.validator.constraints.Length;
+
+import java.util.Date;
 
 /**
  * 合同管理Entity
@@ -19,17 +19,17 @@ public class CrmContract extends DataEntity<CrmContract> {
 	
 	private static final long serialVersionUID = 1L;
 	private String name;		// 标题
-	private Custom crmCustomer;		// 客户id
-	private Custom crmChance;		// 机会id
+	private CrmCustomer crmCustomer;		// 客户id
+	private CrmChance crmChance;		// 机会id
 	private Double amount;		// 合同金额
 	private Double discount;		// 折扣后金额
-	private Date contarctDate;		// 签约日期
+	private Date contractDate;		// 签约日期
 	private String paymentMethod;		// 付款方式
 	private User sysUser;		// 我方签约人
 	private String parties;		// 客户签约人
 	private Date startTime;		// 开始日期
 	private Date endTime;		// 结束日期
-	private String pitures;		// 图片
+	private String pictures;		// 图片
 	private String files;		// 附件
 	
 	public CrmContract() {
@@ -49,19 +49,19 @@ public class CrmContract extends DataEntity<CrmContract> {
 		this.name = name;
 	}
 	
-	public Custom getCrmCustomer() {
+	public CrmCustomer getCrmCustomer() {
 		return crmCustomer;
 	}
 
-	public void setCrmCustomer(Custom crmCustomer) {
+	public void setCrmCustomer(CrmCustomer crmCustomer) {
 		this.crmCustomer = crmCustomer;
 	}
 	
-	public Custom getCrmChance() {
+	public CrmChance getCrmChance() {
 		return crmChance;
 	}
 
-	public void setCrmChance(Custom crmChance) {
+	public void setCrmChance(CrmChance crmChance) {
 		this.crmChance = crmChance;
 	}
 	
@@ -82,12 +82,12 @@ public class CrmContract extends DataEntity<CrmContract> {
 	}
 	
 	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
-	public Date getContarctDate() {
-		return contarctDate;
+	public Date getContractDate() {
+		return contractDate;
 	}
 
-	public void setContarctDate(Date contarctDate) {
-		this.contarctDate = contarctDate;
+	public void setContractDate(Date contractDate) {
+		this.contractDate = contractDate;
 	}
 	
 	@Length(min=0, max=20, message="付款方式长度必须介于 0 和 20 之间")
@@ -135,12 +135,12 @@ public class CrmContract extends DataEntity<CrmContract> {
 	}
 	
 	@Length(min=0, max=200, message="图片长度必须介于 0 和 200 之间")
-	public String getPitures() {
-		return pitures;
+	public String getPictures() {
+		return pictures;
 	}
 
-	public void setPitures(String pitures) {
-		this.pitures = pitures;
+	public void setPictures(String pictures) {
+		this.pictures = pictures;
 	}
 	
 	@Length(min=0, max=200, message="附件长度必须介于 0 和 200 之间")

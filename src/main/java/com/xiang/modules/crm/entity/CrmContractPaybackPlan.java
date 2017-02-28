@@ -3,11 +3,11 @@
  */
 package com.xiang.modules.crm.entity;
 
-import java.util.Date;
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.thinkgem.jeesite.common.persistence.DataEntity;
 import org.hibernate.validator.constraints.Length;
 
-import com.thinkgem.jeesite.common.persistence.DataEntity;
+import java.util.Date;
 
 /**
  * 合同回款计划管理Entity
@@ -18,11 +18,11 @@ public class CrmContractPaybackPlan extends DataEntity<CrmContractPaybackPlan> {
 	
 	private static final long serialVersionUID = 1L;
 	private Integer period;		// 期数
-	private Custom crmContract;		// 合同id
-	private Custom crmChance;		// 负责人id
+	private CrmContract crmContract;		// 合同id
+	private CrmChance crmChance;		// 负责人id
 	private Double amount;		// 应收金额
 	private Date executionTime;		// 计划日期
-	private String pitures;		// 图片
+	private String pictures;		// 图片
 	private String files;		// 附件
 	private Date beginExecutionTime;		// 开始 计划日期
 	private Date endExecutionTime;		// 结束 计划日期
@@ -43,19 +43,19 @@ public class CrmContractPaybackPlan extends DataEntity<CrmContractPaybackPlan> {
 		this.period = period;
 	}
 	
-	public Custom getCrmContract() {
+	public CrmContract getCrmContract() {
 		return crmContract;
 	}
 
-	public void setCrmContract(Custom crmContract) {
+	public void setCrmContract(CrmContract crmContract) {
 		this.crmContract = crmContract;
 	}
 	
-	public Custom getCrmChance() {
+	public CrmChance getCrmChance() {
 		return crmChance;
 	}
 
-	public void setCrmChance(Custom crmChance) {
+	public void setCrmChance(CrmChance crmChance) {
 		this.crmChance = crmChance;
 	}
 	
@@ -77,12 +77,12 @@ public class CrmContractPaybackPlan extends DataEntity<CrmContractPaybackPlan> {
 	}
 	
 	@Length(min=0, max=200, message="图片长度必须介于 0 和 200 之间")
-	public String getPitures() {
-		return pitures;
+	public String getPictures() {
+		return pictures;
 	}
 
-	public void setPitures(String pitures) {
-		this.pitures = pitures;
+	public void setPictures(String pictures) {
+		this.pictures = pictures;
 	}
 	
 	@Length(min=0, max=200, message="附件长度必须介于 0 和 200 之间")

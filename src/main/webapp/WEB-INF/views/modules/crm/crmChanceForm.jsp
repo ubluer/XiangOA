@@ -2,7 +2,7 @@
 <%@ include file="/WEB-INF/views/include/taglib.jsp"%>
 <html>
 <head>
-	<title>机会管理</title>
+	<title>联系人管理</title>
 	<meta name="decorator" content="default"/>
 	<script type="text/javascript">
 		$(document).ready(function() {
@@ -27,8 +27,8 @@
 </head>
 <body>
 	<ul class="nav nav-tabs">
-		<li><a href="${ctx}/crm/crmChance/">机会列表</a></li>
-		<li class="active"><a href="${ctx}/crm/crmChance/form?id=${crmChance.id}">机会<shiro:hasPermission name="crm:crmChance:edit">${not empty crmChance.id?'修改':'添加'}</shiro:hasPermission><shiro:lacksPermission name="crm:crmChance:edit">查看</shiro:lacksPermission></a></li>
+		<li><a href="${ctx}/crm/crmChance/">联系人列表</a></li>
+		<li class="active"><a href="${ctx}/crm/crmChance/form?id=${crmChance.id}">联系人<shiro:hasPermission name="crm:crmChance:edit">${not empty crmChance.id?'修改':'添加'}</shiro:hasPermission><shiro:lacksPermission name="crm:crmChance:edit">查看</shiro:lacksPermission></a></li>
 	</ul><br/>
 	<form:form id="inputForm" modelAttribute="crmChance" action="${ctx}/crm/crmChance/save" method="post" class="form-horizontal">
 		<form:hidden path="id"/>
@@ -40,7 +40,7 @@
 			</div>
 		</div>
 		<div class="control-group">
-			<label class="control-label">客户id：</label>
+			<label class="control-label">客户：</label>
 			<div class="controls">
 				<sys:treeselect id="crmCustomer" name="crmCustomer.id" value="${crmChance.crmCustomer.id}" labelName="crmCustomer.name" labelValue="${crmChance.crmCustomer.name}"
 					title="用户" url="/sys/office/treeData?type=3" cssClass="" allowClear="true" notAllowSelectParent="true"/>
@@ -81,8 +81,8 @@
 		<div class="control-group">
 			<label class="control-label">图片：</label>
 			<div class="controls">
-				<form:hidden id="pitures" path="pitures" htmlEscape="false" maxlength="200" class="input-xlarge"/>
-				<sys:ckfinder input="pitures" type="files" uploadPath="/crm/crmChance" selectMultiple="true"/>
+				<form:hidden id="pictures" path="pictures" htmlEscape="false" maxlength="200" class="input-xlarge"/>
+				<sys:ckfinder input="pictures" type="files" uploadPath="/crm/crmChance" selectMultiple="true"/>
 			</div>
 		</div>
 		<div class="control-group">
