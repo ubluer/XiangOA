@@ -3,7 +3,8 @@ import VueRouter from 'vue-router'
 import ElementUi from 'element-ui'
 import 'element-ui/lib/theme-default/index.css'
 
-import CustomerIndex from './crm/customer-index.vue'
+import CrmIndex from './crm/crm-index.vue'
+import Customer from './crm/customer/customer.vue'
 
 // 0. 如果使用模块化机制编程，導入Vue和VueRouter，要调用 Vue.use(VueRouter)
 Vue.use(VueRouter);
@@ -22,7 +23,10 @@ const Bar = {template: '<div>bar</div>'};
 const routes = [
     {path: '/foo', component: Foo},
     {path: '/bar', component: Bar},
-    {path: '/customer-index', component: CustomerIndex}
+    {
+        path: '/crm', component: CrmIndex,
+        children: [{path:'customer',component:Customer}]
+    }
 ];
 
 // 3. 创建 router 实例，然后传 `routes` 配置
@@ -40,24 +44,14 @@ const app = new Vue({
         isBlur: false
     },
     mounted(){
-      if(!location.href.endsWith('#/')){
-          //确保页面浏览器刷新时，如果不是首页，不显示菜单
-          this.isBlur = true;
-      }else{
-          this.isBlur = false;
-      }
+        //确保页面浏览器刷新时，如果不是首页，不显示菜单
+        this.isBlur = !location.href.endsWith('#/');
     },
     watch: {
         '$route' (to, from) {
             // 跳转时控制菜单显示和隐藏
-            if(to.path!='/'){
-                this.isBlur = true;
-            }else{
-                this.isBlur = false;
-            }
+            this.isBlur = to.path != '/';
         }
     },
     method: {}
 }).$mount('#app');
-
-// 现在，应用已经启动了！
