@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xiang.modules.crm.dao.CrmContactPhoneDao">
+    
+	<sql id="crmContactPhoneColumns">
+		a.id AS "id",
+		a.crm_contact_id AS "crmContact.id",
+		a.phone AS "phone",
+		a.create_by AS "createBy.id",
+		a.create_date AS "createDate",
+		a.update_by AS "updateBy.id",
+		a.update_date AS "updateDate",
+		a.remarks AS "remarks",
+		a.del_flag AS "delFlag",
+		u2.name AS "crmContact.name",
+		b.name AS "crmContact.name"
+	</sql>
+	
+	<sql id="crmContactPhoneJoins">
+		LEFT JOIN crm_contact b ON b.id = a.crm_contact_id
+		LEFT JOIN sys_user u2 ON u2.id = a.crm_contact_id
+	</sql>
+    
+	<select id="get" resultType="CrmContactPhone">
+		SELECT 
+			<include refid="crmContactPhoneColumns"/>
+		FROM crm_contact_phone a
+		<include refid="crmContactPhoneJoins"/>
+		WHERE a.id = #{id}
+	</select>
+	
+	<select id="findList" resultType="CrmContactPhone">
+		SELECT 
+			<include refid="crmContactPhoneColumns"/>
+		FROM crm_contact_phone a
+		<include refid="crmContactPhoneJoins"/>
+		<where>
+			a.del_flag = #{DEL_FLAG_NORMAL}
+			<if test="crmContact != null and crmContact.id != null and crmContact.id != ''">
+				AND a.crm_contact_id = #{crmContact.id}
+			</if>
+		</where>
+		<choose>
+			<when test="page !=null and page.orderBy != null and page.orderBy != ''">
+				ORDER BY ${page.orderBy}
+			</when>
+			<otherwise>
+				ORDER BY a.create_date ASC
+			</otherwise>
+		</choose>
+	</select>
+	
+	<select id="findAllList" resultType="CrmContactPhone">
+		SELECT 
+			<include refid="crmContactPhoneColumns"/>
+		FROM crm_contact_phone a
+		<include refid="crmContactPhoneJoins"/>
+		<where>
+			a.del_flag = #{DEL_FLAG_NORMAL}
+		</where>		
+		<choose>
+			<when test="page !=null and page.orderBy != null and page.orderBy != ''">
+				ORDER BY ${page.orderBy}
+			</when>
+			<otherwise>
+				ORDER BY a.create_date ASC
+			</otherwise>
+		</choose>
+	</select>
+	
+	<insert id="insert">
+		INSERT INTO crm_contact_phone(
+			id,
+			crm_contact_id,
+			phone,
+			create_by,
+			create_date,
+			update_by,
+			update_date,
+			remarks,
+			del_flag
+		) VALUES (
+			#{id},
+			#{crmContact.id},
+			#{phone},
+			#{createBy.id},
+			#{createDate},
+			#{updateBy.id},
+			#{updateDate},
+			#{remarks},
+			#{delFlag}
+		)
+	</insert>
+	
+	<update id="update">
+		UPDATE crm_contact_phone SET 	
+			crm_contact_id = #{crmContact.id},
+			phone = #{phone},
+			update_by = #{updateBy.id},
+			update_date = #{updateDate},
+			remarks = #{remarks}
+		WHERE id = #{id}
+	</update>
+	
+	<update id="delete">
+		UPDATE crm_contact_phone SET 
+			del_flag = #{DEL_FLAG_DELETE}
+		<choose>
+			<when test="id !=null and id != ''">
+				WHERE id = #{id}
+			</when>
+			<otherwise>
+				WHERE crm_contact_id = #{crmContact.id}
+			</otherwise>
+		</choose>
+	</update>
+	
+</mapper>

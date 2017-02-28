@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xiang.modules.crm.dao.CrmCustomerFollowDao">
+    
+	<sql id="crmCustomerFollowColumns">
+		a.id AS "id",
+		a.crm_customer_id AS "crmCustomer.id",
+		a.crm_chance_id AS "crmChance.id",
+		a.crm_contract_id AS "crmContract.id",
+		a.sys_user_id AS "sysUser.id",
+		a.content AS "content",
+		a.pitures AS "pitures",
+		a.files AS "files",
+		a.create_by AS "createBy.id",
+		a.create_date AS "createDate",
+		a.update_by AS "updateBy.id",
+		a.update_date AS "updateDate",
+		a.remarks AS "remarks",
+		a.del_flag AS "delFlag",
+		u2.name AS "crmCustomer.name",
+		u3.name AS "crmChance.name",
+		u4.name AS "crmContract.name",
+		u5.name AS "sysUser.name"
+	</sql>
+	
+	<sql id="crmCustomerFollowJoins">
+		LEFT JOIN sys_user u2 ON u2.id = a.crm_customer_id
+		LEFT JOIN sys_user u3 ON u3.id = a.crm_chance_id
+		LEFT JOIN sys_user u4 ON u4.id = a.crm_contract_id
+		LEFT JOIN sys_user u5 ON u5.id = a.sys_user_id
+	</sql>
+    
+	<select id="get" resultType="CrmCustomerFollow">
+		SELECT 
+			<include refid="crmCustomerFollowColumns"/>
+		FROM crm_customer_follow a
+		<include refid="crmCustomerFollowJoins"/>
+		WHERE a.id = #{id}
+	</select>
+	
+	<select id="findList" resultType="CrmCustomerFollow">
+		SELECT 
+			<include refid="crmCustomerFollowColumns"/>
+		FROM crm_customer_follow a
+		<include refid="crmCustomerFollowJoins"/>
+		<where>
+			a.del_flag = #{DEL_FLAG_NORMAL}
+		</where>
+		<choose>
+			<when test="page !=null and page.orderBy != null and page.orderBy != ''">
+				ORDER BY ${page.orderBy}
+			</when>
+			<otherwise>
+				ORDER BY a.update_date DESC
+			</otherwise>
+		</choose>
+	</select>
+	
+	<select id="findAllList" resultType="CrmCustomerFollow">
+		SELECT 
+			<include refid="crmCustomerFollowColumns"/>
+		FROM crm_customer_follow a
+		<include refid="crmCustomerFollowJoins"/>
+		<where>
+			a.del_flag = #{DEL_FLAG_NORMAL}
+		</where>		
+		<choose>
+			<when test="page !=null and page.orderBy != null and page.orderBy != ''">
+				ORDER BY ${page.orderBy}
+			</when>
+			<otherwise>
+				ORDER BY a.update_date DESC
+			</otherwise>
+		</choose>
+	</select>
+	
+	<insert id="insert">
+		INSERT INTO crm_customer_follow(
+			id,
+			crm_customer_id,
+			crm_chance_id,
+			crm_contract_id,
+			sys_user_id,
+			content,
+			pitures,
+			files,
+			create_by,
+			create_date,
+			update_by,
+			update_date,
+			remarks,
+			del_flag
+		) VALUES (
+			#{id},
+			#{crmCustomer.id},
+			#{crmChance.id},
+			#{crmContract.id},
+			#{sysUser.id},
+			#{content},
+			#{pitures},
+			#{files},
+			#{createBy.id},
+			#{createDate},
+			#{updateBy.id},
+			#{updateDate},
+			#{remarks},
+			#{delFlag}
+		)
+	</insert>
+	
+	<update id="update">
+		UPDATE crm_customer_follow SET 	
+			crm_customer_id = #{crmCustomer.id},
+			crm_chance_id = #{crmChance.id},
+			crm_contract_id = #{crmContract.id},
+			sys_user_id = #{sysUser.id},
+			content = #{content},
+			pitures = #{pitures},
+			files = #{files},
+			update_by = #{updateBy.id},
+			update_date = #{updateDate},
+			remarks = #{remarks}
+		WHERE id = #{id}
+	</update>
+	
+	<update id="delete">
+		UPDATE crm_customer_follow SET 
+			del_flag = #{DEL_FLAG_DELETE}
+		WHERE id = #{id}
+	</update>
+	
+</mapper>

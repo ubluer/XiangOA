@@ -1,0 +1,165 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xiang.modules.crm.dao.CrmContractApproveDao">
+    
+	<sql id="crmContractApproveColumns">
+		a.id AS "id",
+		a.crm_contract_id AS "crmContract.id",
+		a.crm_customer_id AS "crmCustomer.id",
+		a.submitter_id AS "submitter.id",
+		a.submit_date AS "submitDate",
+		a.approver_id AS "approver.id",
+		a.approve_date AS "approveDate",
+		a.status AS "status",
+		a.reason AS "reason",
+		a.pitures AS "pitures",
+		a.files AS "files",
+		a.create_by AS "createBy.id",
+		a.create_date AS "createDate",
+		a.update_by AS "updateBy.id",
+		a.update_date AS "updateDate",
+		a.remarks AS "remarks",
+		a.del_flag AS "delFlag",
+		u2.name AS "crmContract.name",
+		u3.name AS "crmCustomer.name",
+		u4.name AS "submitter.name",
+		u6.name AS "approver.name"
+	</sql>
+	
+	<sql id="crmContractApproveJoins">
+		LEFT JOIN sys_user u2 ON u2.id = a.crm_contract_id
+		LEFT JOIN sys_user u3 ON u3.id = a.crm_customer_id
+		LEFT JOIN sys_user u4 ON u4.id = a.submitter_id
+		LEFT JOIN sys_user u6 ON u6.id = a.approver_id
+	</sql>
+    
+	<select id="get" resultType="CrmContractApprove">
+		SELECT 
+			<include refid="crmContractApproveColumns"/>
+		FROM crm_contract_approve a
+		<include refid="crmContractApproveJoins"/>
+		WHERE a.id = #{id}
+	</select>
+	
+	<select id="findList" resultType="CrmContractApprove">
+		SELECT 
+			<include refid="crmContractApproveColumns"/>
+		FROM crm_contract_approve a
+		<include refid="crmContractApproveJoins"/>
+		<where>
+			a.del_flag = #{DEL_FLAG_NORMAL}
+			<if test="crmContract != null and crmContract.id != null and crmContract.id != ''">
+				AND a.crm_contract_id = #{crmContract.id}
+			</if>
+			<if test="crmCustomer != null and crmCustomer.id != null and crmCustomer.id != ''">
+				AND a.crm_customer_id = #{crmCustomer.id}
+			</if>
+			<if test="submitter != null and submitter.id != null and submitter.id != ''">
+				AND a.submitter_id = #{submitter.id}
+			</if>
+			<if test="submitDate != null and submitDate != ''">
+				AND a.submit_date = #{submitDate}
+			</if>
+			<if test="approver != null and approver.id != null and approver.id != ''">
+				AND a.approver_id = #{approver.id}
+			</if>
+			<if test="approveDate != null and approveDate != ''">
+				AND a.approve_date = #{approveDate}
+			</if>
+			<if test="status != null and status != ''">
+				AND a.status = #{status}
+			</if>
+		</where>
+		<choose>
+			<when test="page !=null and page.orderBy != null and page.orderBy != ''">
+				ORDER BY ${page.orderBy}
+			</when>
+			<otherwise>
+				ORDER BY a.update_date DESC
+			</otherwise>
+		</choose>
+	</select>
+	
+	<select id="findAllList" resultType="CrmContractApprove">
+		SELECT 
+			<include refid="crmContractApproveColumns"/>
+		FROM crm_contract_approve a
+		<include refid="crmContractApproveJoins"/>
+		<where>
+			a.del_flag = #{DEL_FLAG_NORMAL}
+		</where>		
+		<choose>
+			<when test="page !=null and page.orderBy != null and page.orderBy != ''">
+				ORDER BY ${page.orderBy}
+			</when>
+			<otherwise>
+				ORDER BY a.update_date DESC
+			</otherwise>
+		</choose>
+	</select>
+	
+	<insert id="insert">
+		INSERT INTO crm_contract_approve(
+			id,
+			crm_contract_id,
+			crm_customer_id,
+			submitter_id,
+			submit_date,
+			approver_id,
+			approve_date,
+			status,
+			reason,
+			pitures,
+			files,
+			create_by,
+			create_date,
+			update_by,
+			update_date,
+			remarks,
+			del_flag
+		) VALUES (
+			#{id},
+			#{crmContract.id},
+			#{crmCustomer.id},
+			#{submitter.id},
+			#{submitDate},
+			#{approver.id},
+			#{approveDate},
+			#{status},
+			#{reason},
+			#{pitures},
+			#{files},
+			#{createBy.id},
+			#{createDate},
+			#{updateBy.id},
+			#{updateDate},
+			#{remarks},
+			#{delFlag}
+		)
+	</insert>
+	
+	<update id="update">
+		UPDATE crm_contract_approve SET 	
+			crm_contract_id = #{crmContract.id},
+			crm_customer_id = #{crmCustomer.id},
+			submitter_id = #{submitter.id},
+			submit_date = #{submitDate},
+			approver_id = #{approver.id},
+			approve_date = #{approveDate},
+			status = #{status},
+			reason = #{reason},
+			pitures = #{pitures},
+			files = #{files},
+			update_by = #{updateBy.id},
+			update_date = #{updateDate},
+			remarks = #{remarks}
+		WHERE id = #{id}
+	</update>
+	
+	<update id="delete">
+		UPDATE crm_contract_approve SET 
+			del_flag = #{DEL_FLAG_DELETE}
+		WHERE id = #{id}
+	</update>
+	
+</mapper>

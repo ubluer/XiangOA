@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xiang.modules.crm.dao.CrmCustomerFollowerDao">
+    
+	<sql id="crmCustomerFollowerColumns">
+		a.id AS "id",
+		a.crm_customer_id AS "crmCustomer.id",
+		a.sys_user_id AS "sysUser.id",
+		a.create_by AS "createBy.id",
+		a.create_date AS "createDate",
+		a.update_by AS "updateBy.id",
+		a.update_date AS "updateDate",
+		a.remarks AS "remarks",
+		a.del_flag AS "delFlag",
+		u2.name AS "crmCustomer.name",
+		u3.name AS "sysUser.name"
+	</sql>
+	
+	<sql id="crmCustomerFollowerJoins">
+		LEFT JOIN sys_user u2 ON u2.id = a.crm_customer_id
+		LEFT JOIN sys_user u3 ON u3.id = a.sys_user_id
+	</sql>
+    
+	<select id="get" resultType="CrmCustomerFollower">
+		SELECT 
+			<include refid="crmCustomerFollowerColumns"/>
+		FROM crm_customer_follower a
+		<include refid="crmCustomerFollowerJoins"/>
+		WHERE a.id = #{id}
+	</select>
+	
+	<select id="findList" resultType="CrmCustomerFollower">
+		SELECT 
+			<include refid="crmCustomerFollowerColumns"/>
+		FROM crm_customer_follower a
+		<include refid="crmCustomerFollowerJoins"/>
+		<where>
+			a.del_flag = #{DEL_FLAG_NORMAL}
+		</where>
+		<choose>
+			<when test="page !=null and page.orderBy != null and page.orderBy != ''">
+				ORDER BY ${page.orderBy}
+			</when>
+			<otherwise>
+				ORDER BY a.update_date DESC
+			</otherwise>
+		</choose>
+	</select>
+	
+	<select id="findAllList" resultType="CrmCustomerFollower">
+		SELECT 
+			<include refid="crmCustomerFollowerColumns"/>
+		FROM crm_customer_follower a
+		<include refid="crmCustomerFollowerJoins"/>
+		<where>
+			a.del_flag = #{DEL_FLAG_NORMAL}
+		</where>		
+		<choose>
+			<when test="page !=null and page.orderBy != null and page.orderBy != ''">
+				ORDER BY ${page.orderBy}
+			</when>
+			<otherwise>
+				ORDER BY a.update_date DESC
+			</otherwise>
+		</choose>
+	</select>
+	
+	<insert id="insert">
+		INSERT INTO crm_customer_follower(
+			id,
+			crm_customer_id,
+			sys_user_id,
+			create_by,
+			create_date,
+			update_by,
+			update_date,
+			remarks,
+			del_flag
+		) VALUES (
+			#{id},
+			#{crmCustomer.id},
+			#{sysUser.id},
+			#{createBy.id},
+			#{createDate},
+			#{updateBy.id},
+			#{updateDate},
+			#{remarks},
+			#{delFlag}
+		)
+	</insert>
+	
+	<update id="update">
+		UPDATE crm_customer_follower SET 	
+			crm_customer_id = #{crmCustomer.id},
+			sys_user_id = #{sysUser.id},
+			update_by = #{updateBy.id},
+			update_date = #{updateDate},
+			remarks = #{remarks}
+		WHERE id = #{id}
+	</update>
+	
+	<update id="delete">
+		UPDATE crm_customer_follower SET 
+			del_flag = #{DEL_FLAG_DELETE}
+		WHERE id = #{id}
+	</update>
+	
+</mapper>

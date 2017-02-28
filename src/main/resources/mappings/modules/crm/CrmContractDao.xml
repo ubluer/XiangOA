@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xiang.modules.crm.dao.CrmContractDao">
+    
+	<sql id="crmContractColumns">
+		a.id AS "id",
+		a.name AS "name",
+		a.crm_customer_id AS "crmCustomer.id",
+		a.crm_chance_id AS "crmChance.id",
+		a.amount AS "amount",
+		a.discount AS "discount",
+		a.contarct_date AS "contarctDate",
+		a.payment_method AS "paymentMethod",
+		a.sys_user_id AS "sysUser.id",
+		a.parties AS "parties",
+		a.start_time AS "startTime",
+		a.end_time AS "endTime",
+		a.pitures AS "pitures",
+		a.files AS "files",
+		a.create_by AS "createBy.id",
+		a.create_date AS "createDate",
+		a.update_by AS "updateBy.id",
+		a.update_date AS "updateDate",
+		a.remarks AS "remarks",
+		a.del_flag AS "delFlag",
+		u3.name AS "crmCustomer.name",
+		u4.name AS "crmChance.name",
+		u9.name AS "sysUser.name"
+	</sql>
+	
+	<sql id="crmContractJoins">
+		LEFT JOIN sys_user u3 ON u3.id = a.crm_customer_id
+		LEFT JOIN sys_user u4 ON u4.id = a.crm_chance_id
+		LEFT JOIN sys_user u9 ON u9.id = a.sys_user_id
+	</sql>
+    
+	<select id="get" resultType="CrmContract">
+		SELECT 
+			<include refid="crmContractColumns"/>
+		FROM crm_contract a
+		<include refid="crmContractJoins"/>
+		WHERE a.id = #{id}
+	</select>
+	
+	<select id="findList" resultType="CrmContract">
+		SELECT 
+			<include refid="crmContractColumns"/>
+		FROM crm_contract a
+		<include refid="crmContractJoins"/>
+		<where>
+			a.del_flag = #{DEL_FLAG_NORMAL}
+			<if test="name != null and name != ''">
+				AND a.name LIKE 
+					<if test="dbName == 'oracle'">'%'||#{name}||'%'</if>
+					<if test="dbName == 'mssql'">'%'+#{name}+'%'</if>
+					<if test="dbName == 'mysql'">concat('%',#{name},'%')</if>
+			</if>
+			<if test="paymentMethod != null and paymentMethod != ''">
+				AND a.payment_method = #{paymentMethod}
+			</if>
+		</where>
+		<choose>
+			<when test="page !=null and page.orderBy != null and page.orderBy != ''">
+				ORDER BY ${page.orderBy}
+			</when>
+			<otherwise>
+				ORDER BY a.update_date DESC
+			</otherwise>
+		</choose>
+	</select>
+	
+	<select id="findAllList" resultType="CrmContract">
+		SELECT 
+			<include refid="crmContractColumns"/>
+		FROM crm_contract a
+		<include refid="crmContractJoins"/>
+		<where>
+			a.del_flag = #{DEL_FLAG_NORMAL}
+		</where>		
+		<choose>
+			<when test="page !=null and page.orderBy != null and page.orderBy != ''">
+				ORDER BY ${page.orderBy}
+			</when>
+			<otherwise>
+				ORDER BY a.update_date DESC
+			</otherwise>
+		</choose>
+	</select>
+	
+	<insert id="insert">
+		INSERT INTO crm_contract(
+			id,
+			name,
+			crm_customer_id,
+			crm_chance_id,
+			amount,
+			discount,
+			contarct_date,
+			payment_method,
+			sys_user_id,
+			parties,
+			start_time,
+			end_time,
+			pitures,
+			files,
+			create_by,
+			create_date,
+			update_by,
+			update_date,
+			remarks,
+			del_flag
+		) VALUES (
+			#{id},
+			#{name},
+			#{crmCustomer.id},
+			#{crmChance.id},
+			#{amount},
+			#{discount},
+			#{contarctDate},
+			#{paymentMethod},
+			#{sysUser.id},
+			#{parties},
+			#{startTime},
+			#{endTime},
+			#{pitures},
+			#{files},
+			#{createBy.id},
+			#{createDate},
+			#{updateBy.id},
+			#{updateDate},
+			#{remarks},
+			#{delFlag}
+		)
+	</insert>
+	
+	<update id="update">
+		UPDATE crm_contract SET 	
+			name = #{name},
+			crm_customer_id = #{crmCustomer.id},
+			crm_chance_id = #{crmChance.id},
+			amount = #{amount},
+			discount = #{discount},
+			contarct_date = #{contarctDate},
+			payment_method = #{paymentMethod},
+			sys_user_id = #{sysUser.id},
+			parties = #{parties},
+			start_time = #{startTime},
+			end_time = #{endTime},
+			pitures = #{pitures},
+			files = #{files},
+			update_by = #{updateBy.id},
+			update_date = #{updateDate},
+			remarks = #{remarks}
+		WHERE id = #{id}
+	</update>
+	
+	<update id="delete">
+		UPDATE crm_contract SET 
+			del_flag = #{DEL_FLAG_DELETE}
+		WHERE id = #{id}
+	</update>
+	
+</mapper>

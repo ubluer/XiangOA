@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xiang.modules.crm.dao.CrmModifiedDao">
+    
+	<sql id="crmModifiedColumns">
+		a.id AS "id",
+		a.crm_customer_id AS "crmCustomer.id",
+		a.sys_user_id AS "sysUser.id",
+		a.modified_table AS "modifiedTable",
+		a.modified_field AS "modifiedField",
+		a.before_modified AS "beforeModified",
+		a.after_modified AS "afterModified",
+		a.modified_class AS "modifiedClass",
+		a.create_by AS "createBy.id",
+		a.create_date AS "createDate",
+		a.update_by AS "updateBy.id",
+		a.update_date AS "updateDate",
+		a.remarks AS "remarks",
+		a.del_flag AS "delFlag",
+		u2.name AS "crmCustomer.name",
+		u3.name AS "sysUser.name"
+	</sql>
+	
+	<sql id="crmModifiedJoins">
+		LEFT JOIN sys_user u2 ON u2.id = a.crm_customer_id
+		LEFT JOIN sys_user u3 ON u3.id = a.sys_user_id
+	</sql>
+    
+	<select id="get" resultType="CrmModified">
+		SELECT 
+			<include refid="crmModifiedColumns"/>
+		FROM crm_modified a
+		<include refid="crmModifiedJoins"/>
+		WHERE a.id = #{id}
+	</select>
+	
+	<select id="findList" resultType="CrmModified">
+		SELECT 
+			<include refid="crmModifiedColumns"/>
+		FROM crm_modified a
+		<include refid="crmModifiedJoins"/>
+		<where>
+			a.del_flag = #{DEL_FLAG_NORMAL}
+			<if test="crmCustomer != null and crmCustomer.id != null and crmCustomer.id != ''">
+				AND a.crm_customer_id = #{crmCustomer.id}
+			</if>
+			<if test="sysUser != null and sysUser.id != null and sysUser.id != ''">
+				AND a.sys_user_id = #{sysUser.id}
+			</if>
+			<if test="modifiedTable != null and modifiedTable != ''">
+				AND a.modified_table = #{modifiedTable}
+			</if>
+			<if test="modifiedField != null and modifiedField != ''">
+				AND a.modified_field = #{modifiedField}
+			</if>
+		</where>
+		<choose>
+			<when test="page !=null and page.orderBy != null and page.orderBy != ''">
+				ORDER BY ${page.orderBy}
+			</when>
+			<otherwise>
+				ORDER BY a.update_date DESC
+			</otherwise>
+		</choose>
+	</select>
+	
+	<select id="findAllList" resultType="CrmModified">
+		SELECT 
+			<include refid="crmModifiedColumns"/>
+		FROM crm_modified a
+		<include refid="crmModifiedJoins"/>
+		<where>
+			a.del_flag = #{DEL_FLAG_NORMAL}
+		</where>		
+		<choose>
+			<when test="page !=null and page.orderBy != null and page.orderBy != ''">
+				ORDER BY ${page.orderBy}
+			</when>
+			<otherwise>
+				ORDER BY a.update_date DESC
+			</otherwise>
+		</choose>
+	</select>
+	
+	<insert id="insert">
+		INSERT INTO crm_modified(
+			id,
+			crm_customer_id,
+			sys_user_id,
+			modified_table,
+			modified_field,
+			before_modified,
+			after_modified,
+			modified_class,
+			create_by,
+			create_date,
+			update_by,
+			update_date,
+			remarks,
+			del_flag
+		) VALUES (
+			#{id},
+			#{crmCustomer.id},
+			#{sysUser.id},
+			#{modifiedTable},
+			#{modifiedField},
+			#{beforeModified},
+			#{afterModified},
+			#{modifiedClass},
+			#{createBy.id},
+			#{createDate},
+			#{updateBy.id},
+			#{updateDate},
+			#{remarks},
+			#{delFlag}
+		)
+	</insert>
+	
+	<update id="update">
+		UPDATE crm_modified SET 	
+			crm_customer_id = #{crmCustomer.id},
+			sys_user_id = #{sysUser.id},
+			modified_table = #{modifiedTable},
+			modified_field = #{modifiedField},
+			before_modified = #{beforeModified},
+			after_modified = #{afterModified},
+			modified_class = #{modifiedClass},
+			update_by = #{updateBy.id},
+			update_date = #{updateDate},
+			remarks = #{remarks}
+		WHERE id = #{id}
+	</update>
+	
+	<update id="delete">
+		UPDATE crm_modified SET 
+			del_flag = #{DEL_FLAG_DELETE}
+		WHERE id = #{id}
+	</update>
+	
+</mapper>

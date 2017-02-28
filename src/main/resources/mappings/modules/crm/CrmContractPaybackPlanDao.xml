@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xiang.modules.crm.dao.CrmContractPaybackPlanDao">
+    
+	<sql id="crmContractPaybackPlanColumns">
+		a.id AS "id",
+		a.period AS "period",
+		a.crm_contract_id AS "crmContract.id",
+		a.crm_chance_id AS "crmChance.id",
+		a.amount AS "amount",
+		a.execution_time AS "executionTime",
+		a.pitures AS "pitures",
+		a.files AS "files",
+		a.create_by AS "createBy.id",
+		a.create_date AS "createDate",
+		a.update_by AS "updateBy.id",
+		a.update_date AS "updateDate",
+		a.remarks AS "remarks",
+		a.del_flag AS "delFlag",
+		u3.name AS "crmContract.name",
+		u4.name AS "crmChance.name"
+	</sql>
+	
+	<sql id="crmContractPaybackPlanJoins">
+		LEFT JOIN sys_user u3 ON u3.id = a.crm_contract_id
+		LEFT JOIN sys_user u4 ON u4.id = a.crm_chance_id
+	</sql>
+    
+	<select id="get" resultType="CrmContractPaybackPlan">
+		SELECT 
+			<include refid="crmContractPaybackPlanColumns"/>
+		FROM crm_contract_payback_plan a
+		<include refid="crmContractPaybackPlanJoins"/>
+		WHERE a.id = #{id}
+	</select>
+	
+	<select id="findList" resultType="CrmContractPaybackPlan">
+		SELECT 
+			<include refid="crmContractPaybackPlanColumns"/>
+		FROM crm_contract_payback_plan a
+		<include refid="crmContractPaybackPlanJoins"/>
+		<where>
+			a.del_flag = #{DEL_FLAG_NORMAL}
+			<if test="period != null and period != ''">
+				AND a.period = #{period}
+			</if>
+			<if test="beginExecutionTime != null and endExecutionTime != null and beginExecutionTime != '' and endExecutionTime != ''">
+				AND a.execution_time BETWEEN #{beginExecutionTime} AND #{endExecutionTime}
+			</if>
+		</where>
+		<choose>
+			<when test="page !=null and page.orderBy != null and page.orderBy != ''">
+				ORDER BY ${page.orderBy}
+			</when>
+			<otherwise>
+				ORDER BY a.update_date DESC
+			</otherwise>
+		</choose>
+	</select>
+	
+	<select id="findAllList" resultType="CrmContractPaybackPlan">
+		SELECT 
+			<include refid="crmContractPaybackPlanColumns"/>
+		FROM crm_contract_payback_plan a
+		<include refid="crmContractPaybackPlanJoins"/>
+		<where>
+			a.del_flag = #{DEL_FLAG_NORMAL}
+		</where>		
+		<choose>
+			<when test="page !=null and page.orderBy != null and page.orderBy != ''">
+				ORDER BY ${page.orderBy}
+			</when>
+			<otherwise>
+				ORDER BY a.update_date DESC
+			</otherwise>
+		</choose>
+	</select>
+	
+	<insert id="insert">
+		INSERT INTO crm_contract_payback_plan(
+			id,
+			period,
+			crm_contract_id,
+			crm_chance_id,
+			amount,
+			execution_time,
+			pitures,
+			files,
+			create_by,
+			create_date,
+			update_by,
+			update_date,
+			remarks,
+			del_flag
+		) VALUES (
+			#{id},
+			#{period},
+			#{crmContract.id},
+			#{crmChance.id},
+			#{amount},
+			#{executionTime},
+			#{pitures},
+			#{files},
+			#{createBy.id},
+			#{createDate},
+			#{updateBy.id},
+			#{updateDate},
+			#{remarks},
+			#{delFlag}
+		)
+	</insert>
+	
+	<update id="update">
+		UPDATE crm_contract_payback_plan SET 	
+			period = #{period},
+			crm_contract_id = #{crmContract.id},
+			crm_chance_id = #{crmChance.id},
+			amount = #{amount},
+			execution_time = #{executionTime},
+			pitures = #{pitures},
+			files = #{files},
+			update_by = #{updateBy.id},
+			update_date = #{updateDate},
+			remarks = #{remarks}
+		WHERE id = #{id}
+	</update>
+	
+	<update id="delete">
+		UPDATE crm_contract_payback_plan SET 
+			del_flag = #{DEL_FLAG_DELETE}
+		WHERE id = #{id}
+	</update>
+	
+</mapper>

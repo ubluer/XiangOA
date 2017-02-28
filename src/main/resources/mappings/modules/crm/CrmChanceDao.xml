@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xiang.modules.crm.dao.CrmChanceDao">
+    
+	<sql id="crmChanceColumns">
+		a.id AS "id",
+		a.name AS "name",
+		a.crm_customer_id AS "crmCustomer.id",
+		a.amount AS "amount",
+		a.execution_time AS "executionTime",
+		a.progress AS "progress",
+		a.degree AS "degree",
+		a.pitures AS "pitures",
+		a.files AS "files",
+		a.create_by AS "createBy.id",
+		a.create_date AS "createDate",
+		a.update_by AS "updateBy.id",
+		a.update_date AS "updateDate",
+		a.remarks AS "remarks",
+		a.del_flag AS "delFlag",
+		u3.name AS "crmCustomer.name"
+	</sql>
+	
+	<sql id="crmChanceJoins">
+		LEFT JOIN sys_user u3 ON u3.id = a.crm_customer_id
+	</sql>
+    
+	<select id="get" resultType="CrmChance">
+		SELECT 
+			<include refid="crmChanceColumns"/>
+		FROM crm_chance a
+		<include refid="crmChanceJoins"/>
+		WHERE a.id = #{id}
+	</select>
+	
+	<select id="findList" resultType="CrmChance">
+		SELECT 
+			<include refid="crmChanceColumns"/>
+		FROM crm_chance a
+		<include refid="crmChanceJoins"/>
+		<where>
+			a.del_flag = #{DEL_FLAG_NORMAL}
+			<if test="name != null and name != ''">
+				AND a.name LIKE 
+					<if test="dbName == 'oracle'">'%'||#{name}||'%'</if>
+					<if test="dbName == 'mssql'">'%'+#{name}+'%'</if>
+					<if test="dbName == 'mysql'">concat('%',#{name},'%')</if>
+			</if>
+			<if test="crmCustomer != null and crmCustomer.id != null and crmCustomer.id != ''">
+				AND a.crm_customer_id = #{crmCustomer.id}
+			</if>
+			<if test="beginExecutionTime != null and endExecutionTime != null and beginExecutionTime != '' and endExecutionTime != ''">
+				AND a.execution_time BETWEEN #{beginExecutionTime} AND #{endExecutionTime}
+			</if>
+			<if test="progress != null and progress != ''">
+				AND a.progress = #{progress}
+			</if>
+			<if test="degree != null and degree != ''">
+				AND a.degree = #{degree}
+			</if>
+		</where>
+		<choose>
+			<when test="page !=null and page.orderBy != null and page.orderBy != ''">
+				ORDER BY ${page.orderBy}
+			</when>
+			<otherwise>
+				ORDER BY a.update_date DESC
+			</otherwise>
+		</choose>
+	</select>
+	
+	<select id="findAllList" resultType="CrmChance">
+		SELECT 
+			<include refid="crmChanceColumns"/>
+		FROM crm_chance a
+		<include refid="crmChanceJoins"/>
+		<where>
+			a.del_flag = #{DEL_FLAG_NORMAL}
+		</where>		
+		<choose>
+			<when test="page !=null and page.orderBy != null and page.orderBy != ''">
+				ORDER BY ${page.orderBy}
+			</when>
+			<otherwise>
+				ORDER BY a.update_date DESC
+			</otherwise>
+		</choose>
+	</select>
+	
+	<insert id="insert">
+		INSERT INTO crm_chance(
+			id,
+			name,
+			crm_customer_id,
+			amount,
+			execution_time,
+			progress,
+			degree,
+			pitures,
+			files,
+			create_by,
+			create_date,
+			update_by,
+			update_date,
+			remarks,
+			del_flag
+		) VALUES (
+			#{id},
+			#{name},
+			#{crmCustomer.id},
+			#{amount},
+			#{executionTime},
+			#{progress},
+			#{degree},
+			#{pitures},
+			#{files},
+			#{createBy.id},
+			#{createDate},
+			#{updateBy.id},
+			#{updateDate},
+			#{remarks},
+			#{delFlag}
+		)
+	</insert>
+	
+	<update id="update">
+		UPDATE crm_chance SET 	
+			name = #{name},
+			crm_customer_id = #{crmCustomer.id},
+			amount = #{amount},
+			execution_time = #{executionTime},
+			progress = #{progress},
+			degree = #{degree},
+			pitures = #{pitures},
+			files = #{files},
+			update_by = #{updateBy.id},
+			update_date = #{updateDate},
+			remarks = #{remarks}
+		WHERE id = #{id}
+	</update>
+	
+	<update id="delete">
+		UPDATE crm_chance SET 
+			del_flag = #{DEL_FLAG_DELETE}
+		WHERE id = #{id}
+	</update>
+	
+</mapper>
