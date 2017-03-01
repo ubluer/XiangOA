@@ -16,12 +16,9 @@
                 <div class="bg-purple-dark"></div>
             </el-col>
         </el-row>
-        <div>this is template body</div>
-        <div>{{msg}}</div>
     </div>
 </template>
 <script>
-    import HeaderComponent from '../common/header.vue'
     export default{
         data(){
             return {
@@ -29,7 +26,7 @@
             }
         },
         components: {
-            HeaderComponent,
+
         }
     }
 </script>

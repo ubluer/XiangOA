@@ -3,29 +3,9 @@
 <head>
     <meta charset="utf-8">
     <title>XiangOA</title>
-    <style>
-        .blur {
-            display: none;
-        }
-    </style>
 </head>
 <body>
-<div id="app">
-    <div :class="{blur:isBlur}">
-        <h1>Hello App!</h1>
-        <p>
-            <!-- 使用 router-link 组件来导航. -->
-            <!-- 通过传入 `to` 属性指定链接. -->
-            <!-- <router-link> 默认会被渲染成一个 `<a>` 标签 -->
-            <router-link to="/customer-index">Go to Index</router-link>
-            <router-link to="/foo">Go to Foo</router-link>
-            <router-link to="/bar">Go to Bar</router-link>
-        </p>
-    </div>
-    <!-- 路由出口 -->
-    <!-- 路由匹配到的组件将渲染在这里 -->
-    <router-view></router-view>
-</div>
+<div id="app"></div>
 <script src="/dist/build.js"></script>
 </body>
 </html>
