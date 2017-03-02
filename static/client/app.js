@@ -7,10 +7,13 @@ import router from './router'
 import store from './store'
 import * as filters from './filters'
 import { TOGGLE_SIDEBAR } from 'vuex-store/mutation-types'
+import MintUI from 'mint-ui'
+import 'mint-ui/lib/style.css'
 
-Vue.prototype.$http = axios
-Vue.axios = axios
-Vue.use(NProgress)
+Vue.prototype.$http = axios;
+Vue.axios = axios;
+Vue.use(NProgress);
+Vue.use(MintUI);
 
 // Enable devtools
 Vue.config.devtools = true

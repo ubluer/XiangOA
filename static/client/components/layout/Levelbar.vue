@@ -7,13 +7,7 @@
         </h3>
       </div>
       <div class="level-item" v-if="!!codelink">
-        <tooltip label="View code" placement="right" size="small" :rounded="true">
-          <span class="icon">
-            <a  :href="codelink">
-              <i class="fa fa-github"></i>
-            </a>
-          </span>
-        </tooltip>
+
       </div>
     </div>
 
@@ -44,13 +38,6 @@ export default {
   },
 
   computed: {
-    codelink () {
-      if (this.$route.meta && this.$route.meta.link) {
-        return 'https://github.com/vue-bulma/vue-admin/blob/master/client/views/' + this.$route.meta.link
-      } else {
-        return null
-      }
-    },
     name () {
       return this.$route.name
     }
