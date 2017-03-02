@@ -7,7 +7,15 @@
             <div class="tile is-parent">
                 <article class="tile is-child box">
                     <h4 class="title">客户管理</h4>
-
+                    <mt-loadmore :top-method="loadTop" @top-status-change="handleTopChange">
+                        <ul>
+                            <li v-for="item in list">{{ item }}</li>
+                        </ul>
+                        <div slot="top" class="mint-loadmore-top">
+                            <span v-show="topStatus !== 'loading'" :class="{ 'rotate': topStatus === 'drop' }">↓</span>
+                            <span v-show="topStatus === 'loading'">Loading...</span>
+                        </div>
+                    </mt-loadmore>
                 </article>
             </div>
         </div>
@@ -18,24 +26,16 @@
     export default {
         data() {
             return {
-                tableData: [{
-                    date: '2016-05-02',
-                    name: '王小虎',
-                    address: '上海市普陀区金沙江路 1518 弄'
-                }, {
-                    date: '2016-05-04',
-                    name: '王小虎',
-                    address: '上海市普陀区金沙江路 1517 弄'
-                }, {
-                    date: '2016-05-01',
-                    name: '王小虎',
-                    address: '上海市普陀区金沙江路 1519 弄'
-                }, {
-                    date: '2016-05-03',
-                    name: '王小虎',
-                    address: '上海市普陀区金沙江路 1516 弄'
-                }]
-            }
-        }
-    }
+                topStatus: '',
+                list:[1,2,3,4,5,6,7]
+            };
+        },
+        methods: {
+            handleTopChange(status) {
+                this.topStatus = status;
+            },
+            // ...
+        },
+        // ...
+    };
 </script>

@@ -6,9 +6,6 @@
           <strong>{{ name }}</strong>
         </h3>
       </div>
-      <div class="level-item" v-if="!!codelink">
-
-      </div>
     </div>
 
     <div class="level-right is-hidden-mobile">
