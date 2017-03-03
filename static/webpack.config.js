@@ -1,12 +1,26 @@
-var path = require('path')
-var webpack = require('webpack')
+var path = require('path');
+var webpack = require('webpack');
 
 module.exports = {
     entry: './src/main.js',
     output: {
         path: path.resolve(__dirname, './dist'),
-        publicPath: 'http://127.0.0.1:8080/dist/',
+        publicPath: '/dist/',
         filename: 'build.js'
+    },
+    resolve: {
+        extensions: ['.js', '.vue', '.css', '.json'],
+        alias: {
+            // https://github.com/vuejs/vue/wiki/Vue-2.0-RC-Starter-Resources
+            // vue: 'vue/dist/vue',
+            package: path.resolve(__dirname, 'package.json'),
+            src: path.resolve(__dirname, 'src'),
+            assets: path.resolve(__dirname, 'src/assets'),
+            components: path.resolve(__dirname, 'src/components'),
+            views: path.resolve(__dirname, 'src/views'),
+            'vuex-store': path.resolve(__dirname, 'src/store'),
+            'vue$': 'vue/dist/vue.esm.js'
+        }
     },
     module: {
         rules: [
@@ -42,11 +56,6 @@ module.exports = {
             }
 
         ]
-    },
-    resolve: {
-        alias: {
-            'vue$': 'vue/dist/vue.esm.js'
-        }
     },
     devServer: {
         historyApiFallback: true,
