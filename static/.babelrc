@@ -1,11 +1,5 @@
 {
   "presets": [
-    ["es2015", { "modules": false }],
-    "stage-0"
-  ],
-  "plugins": [
-    "transform-export-extensions",
-    "transform-remove-strict-mode",
-    "transform-object-assign"
+    ["latest", { "modules": false }]
   ]
 }

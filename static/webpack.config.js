@@ -5,7 +5,7 @@ module.exports = {
     entry: './src/main.js',
     output: {
         path: path.resolve(__dirname, './dist'),
-        publicPath: '/dist/',
+        publicPath: 'http://127.0.0.1:8080/dist/',
         filename: 'build.js'
     },
     module: {
@@ -33,7 +33,7 @@ module.exports = {
                 test: /\.(png|jpg|gif|svg|woff2|eot|ttf|woff)(\?[a-z0-9]+)?$/,
                 loader: 'file-loader',
                 options: {
-                    name: 'assets/[name].[ext]?[hash]'
+                    name: '[name].[ext]?[hash]'
                 }
             },
             {
