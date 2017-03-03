@@ -9,7 +9,7 @@
     </div>
 
     <div class="level-right is-hidden-mobile">
-      <breadcrumb :list="list"></breadcrumb>
+
     </div>
   </nav>
 </template>
@@ -18,8 +18,7 @@
 
 export default {
   components: {
-    Breadcrumb,
-    Tooltip
+
   },
 
   data () {

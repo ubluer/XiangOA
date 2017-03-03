@@ -15,7 +15,7 @@ module.exports = {
             // vue: 'vue/dist/vue',
             package: path.resolve(__dirname, 'package.json'),
             src: path.resolve(__dirname, 'src'),
-            assets: path.resolve(__dirname, 'src/assets'),
+            assets: path.resolve(__dirname, 'assets'),
             components: path.resolve(__dirname, 'src/components'),
             views: path.resolve(__dirname, 'src/views'),
             'vuex-store': path.resolve(__dirname, 'src/store'),
@@ -65,7 +65,7 @@ module.exports = {
         hints: false
     },
     devtool: '#eval-source-map'
-}
+};
 
 if (process.env.NODE_ENV === 'production') {
     module.exports.devtool = '#source-map'
