@@ -1,7 +1,5 @@
-export Navbar from './NavHeader'
-
-export Sidebar from './SideBar'
+export XyHeader from './XyHeader'
 
 export AppMain from './AppMain'
 
-export FooterBar from './FooterBar'
+export XyTabbar from './XyTabbar'

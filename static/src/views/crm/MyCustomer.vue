@@ -1,41 +1,57 @@
-<style lang="scss">
-
-</style>
 <template>
-    <div>
-        <div class="tile is-ancestor">
-            <div class="tile is-parent">
-                <article class="tile is-child box">
-                    <h4 class="title">客户管理</h4>
-                    <mt-loadmore :top-method="loadTop" @top-status-change="handleTopChange">
-                        <ul>
-                            <li v-for="item in list">{{ item }}</li>
-                        </ul>
-                        <div slot="top" class="mint-loadmore-top">
-                            <span v-show="topStatus !== 'loading'" :class="{ 'rotate': topStatus === 'drop' }">↓</span>
-                            <span v-show="topStatus === 'loading'">Loading...</span>
-                        </div>
-                    </mt-loadmore>
-                </article>
-            </div>
+    <div class="page-loadmore">
+        <h1 class="page-title">Pull down</h1>
+        <p class="page-loadmore-desc">在列表顶端, 按住 - 下拉 - 释放可以获取更多数据</p>
+        <p class="page-loadmore-desc">此例请使用手机查看</p>
+        <div class="page-loadmore-wrapper" ref="wrapper" :style="{ height: wrapperHeight + 'px' }">
+            <mt-loadmore :top-method="loadTop" @top-status-change="handleTopChange" ref="loadmore">
+                <ul class="page-loadmore-list">
+                    <li v-for="item in list" class="page-loadmore-listitem">{{ item }}</li>
+                </ul>
+                <div slot="top" class="mint-loadmore-top">
+                    <span v-show="topStatus !== 'loading'" :class="{ 'is-rotate': topStatus === 'drop' }">↓</span>
+                    <span v-show="topStatus === 'loading'">
+            <mt-spinner type="snake"></mt-spinner>
+          </span>
+                </div>
+            </mt-loadmore>
         </div>
-
     </div>
 </template>
-<script>
+<script type="text/babel">
     export default {
         data() {
             return {
+                list: [],
                 topStatus: '',
-                list:[1,2,3,4,5,6,7]
+                wrapperHeight: 0
             };
         },
+
         methods: {
             handleTopChange(status) {
                 this.topStatus = status;
             },
-            // ...
+
+            loadTop() {
+                setTimeout(() => {
+                    let firstValue = this.list[0];
+                    for (let i = 1; i <= 10; i++) {
+                        this.list.unshift(firstValue - i);
+                    }
+                    this.$refs.loadmore.onTopLoaded();
+                }, 1500);
+            }
         },
-        // ...
+
+        created() {
+            for (let i = 1; i <= 20; i++) {
+                this.list.push(i);
+            }
+        },
+
+        mounted() {
+            this.wrapperHeight = document.documentElement.clientHeight - this.$refs.wrapper.getBoundingClientRect().top;
+        }
     };
 </script>

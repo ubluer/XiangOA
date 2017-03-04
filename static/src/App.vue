@@ -1,26 +1,27 @@
 <template>
     <div id="app">
-        <a>ffff</a>
         <!--<nprogress-container></nprogress-container>-->
-        <NavHeader :show="true"></NavHeader>
+        <xy-header :show="true"></xy-header>
         <!--<sidebar :show="sidebar.opened && !sidebar.hidden"></sidebar>-->
-        <!--<app-main></app-main>-->
-        <!--<footer-bar></footer-bar>-->
+        <app-main></app-main>
+        <xy-tabbar></xy-tabbar>
     </div>
 </template>
 
 <script>
-//    import NprogressContainer from 'vue-nprogress/src/NprogressContainer'
-    import {NavHeader} from 'components/layout/'
-    import { mapGetters, mapActions } from 'vuex'
+    //    import NprogressContainer from 'vue-nprogress/src/NprogressContainer'
+    import {XyHeader, XyTabbar, AppMain} from 'components/layout/'
+    import {mapGetters, mapActions} from 'vuex'
 
     export default {
         components: {
-            NavHeader
+            XyHeader,
+            XyTabbar,
+            AppMain
         },
 
         beforeMount () {
-            const { body } = document;
+            const {body} = document;
             const WIDTH = 768;
             const RATIO = 3;
 
@@ -50,6 +51,5 @@
 </script>
 
 <style lang="scss">
-
 
 </style>
