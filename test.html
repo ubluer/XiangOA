@@ -1,34 +1,54 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-    <!-- 引入样式 -->
-    <link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-default/index.css">
-</head>
-<body>
-<script src="https://unpkg.com/vue/dist/vue.js"></script>
-<!-- 引入组件库 -->
-<script src="https://unpkg.com/element-ui/lib/index.js"></script>
+<template>
+    <div id="app">
+        <!--<nprogress-container></nprogress-container>-->
+        <nav-bar :show="true"></nav-bar>
+        <!--<sidebar :show="sidebar.opened && !sidebar.hidden"></sidebar>-->
+        <!--<app-main></app-main>-->
+        <!--<footer-bar></footer-bar>-->
+    </div>
+</template>
 
-<div id="app">
-    <el-checkbox v-model="checked">备选项</el-checkbox>
-    <input type="checkbox" :checked="num%2">选项2
-    <input type="button" @click="num=(num+1)%2">bt2
-    <a>e:{{num%2}}</a><a>num:{{num}}</a><a>checked:{{checked}}</a>
-</div>
 <script>
-    var vm = new Vue({
-        el:'#app',
-        data: {
-            num:1,
+    import NprogressContainer from 'vue-nprogress/src/NprogressContainer'
+    import { NavBar, SideBar, AppMain, FooterBar } from 'components/layout/'
+    import { mapGetters, mapActions } from 'vuex'
+
+    export default {
+        components: {
+            NavBar
         },
-        computed:{
-            checked(){
-                return this.num==1;
-            }
-        }
-    })
+
+        beforeMount () {
+            const { body } = document;
+            const WIDTH = 768;
+            const RATIO = 3;
+
+            const handler = () => {
+                if (!document.hidden) {
+                    let rect = body.getBoundingClientRect();
+                    let isMobile = rect.width - RATIO < WIDTH;
+                    this.toggleDevice(isMobile ? 'mobile' : 'other');
+                    this.toggleSidebar(!isMobile)
+                }
+            };
+
+            document.addEventListener('visibilitychange', handler);
+            window.addEventListener('DOMContentLoaded', handler);
+            window.addEventListener('resize', handler)
+        },
+
+        computed: mapGetters({
+            sidebar: 'sidebar'
+        }),
+
+        methods: mapActions([
+            'toggleDevice',
+            'toggleSidebar'
+        ])
+    }
 </script>
-</body>
-</html>
+
+<style lang="scss">
+
+
+</style>
