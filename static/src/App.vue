@@ -56,6 +56,6 @@
 <style lang="scss">
     body {
         margin: 0;
-        background-color: #eee;
+        background-color: #f5f5f5;
     }
 </style>

@@ -6,7 +6,7 @@
             </router-link>
             <mt-button icon="more" slot="right"></mt-button>
         </mt-header>
-        <xy-float-button :radius = "25">aaaa</xy-float-button>
+        <xy-float-button @click="addCustomer">+</xy-float-button>
         <mt-loadmore :top-method="loadTop" :bottom-method="loadBottom" :bottom-all-loaded="allLoaded" ref="loadmore">
             <ul>
                 <li v-for="item in list">{{ item }}
@@ -42,7 +42,7 @@
                 this.$refs.loadmore.onBottomLoaded();
             },
             addCustomer(){
-                alert(v);
+                this.$router.push('/crm/customer-add');
             }
 
         }

@@ -4,11 +4,10 @@
             <router-link to="/crm/my-customer" slot="left">
                 <mt-button icon="back">返回</mt-button>
             </router-link>
-            <mt-button slot="right"><i class="fa fa-edit fa-2x"></i></mt-button>
+            <mt-button slot="right">保存</mt-button>
         </mt-header>
 
         <div>
-            <div>editor</div>
             <mt-field label="客户名称" placeholder=""></mt-field>
             <div class="v-space" style="height: 5px"></div>
             <mt-field label="邮箱" placeholder="请输入邮箱" type="email"></mt-field>
