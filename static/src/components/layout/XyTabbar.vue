@@ -36,12 +36,5 @@
 <style>
     .page-tabbar {
         overflow: hidden;
-        height: 100vh;
-    }
-
-    .page-wrap {
-        overflow: auto;
-        height: 100%;
-        padding-bottom: 100px;
     }
 </style>

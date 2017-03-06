@@ -5,6 +5,9 @@ const state = {
     isMobile: false,
     isTablet: false
   },
+  header:{
+    hidden:true
+  },
   sidebar: {
     opened: false,
     hidden: false

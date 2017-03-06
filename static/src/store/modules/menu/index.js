@@ -8,16 +8,7 @@ import crm from './crm'
 
 const state = {
     items: [
-        crm,
-        {
-            name: 'Dashboard',
-            path: '/dashboard',
-            meta: {
-                icon: 'fa-tachometer',
-                link: 'crm/MyCustomer.vue'
-            },
-            component: lazyLoading('crm/MyCustomer',true)
-        }
+        crm
     ]
 };
 

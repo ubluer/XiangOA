@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div v-if="show">
         <mt-header title="标题过长会隐藏后面的内容啊哈哈哈哈" fixed>
             <router-link to="/" slot="left">
                 <mt-button icon="back">返回</mt-button>

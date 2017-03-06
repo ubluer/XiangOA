@@ -1,9 +1,11 @@
 <template>
     <div id="app">
         <!--<nprogress-container></nprogress-container>-->
-        <xy-header :show="true"></xy-header>
+        <xy-header :show="false"></xy-header>
         <!--<sidebar :show="sidebar.opened && !sidebar.hidden"></sidebar>-->
-        <app-main></app-main>
+        <div id="main-view">
+            <router-view></router-view>
+        </div>
         <xy-tabbar></xy-tabbar>
     </div>
 </template>
@@ -17,10 +19,10 @@
         components: {
             XyHeader,
             XyTabbar,
-            AppMain
+            AppMain,
         },
 
-        beforeMount () {
+        beforeMount() {
             const {body} = document;
             const WIDTH = 768;
             const RATIO = 3;
@@ -32,7 +34,7 @@
                     this.toggleDevice(isMobile ? 'mobile' : 'other');
                     this.toggleSidebar(!isMobile)
                 }
-            }
+            };
 
             document.addEventListener('visibilitychange', handler);
             window.addEventListener('DOMContentLoaded', handler);
@@ -48,8 +50,12 @@
             'toggleSidebar'
         ])
     }
+
 </script>
 
 <style lang="scss">
-
+    body {
+        margin: 0;
+        background-color: #eee;
+    }
 </style>

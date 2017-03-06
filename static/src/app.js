@@ -21,16 +21,16 @@ Vue.config.devtools = true;
 
 sync(store, router);
 
-const nprogress = new NProgress({parent: '.nprogress-container'});
+// const nprogress = new NProgress({parent: '.nprogress-container'});
 
 const {state} = store;
 
-router.beforeEach((route, redirect, next) => {
-    if (state.app.device.isMobile && state.app.sidebar.opened) {
-        store.commit(TOGGLE_SIDEBAR, false)
-    }
-    next()
-});
+// router.beforeEach((route, redirect, next) => {
+//     if (state.app.device.isMobile && state.app.sidebar.opened) {
+//         store.commit(TOGGLE_SIDEBAR, false)
+//     }
+//     next()
+// });
 
 Object.keys(filters).forEach(key => {
     Vue.filter(key, filters[key])
@@ -39,7 +39,7 @@ Object.keys(filters).forEach(key => {
 const app = new Vue({
     router,
     store,
-    nprogress,
+    // nprogress,
     ...App
 });
 

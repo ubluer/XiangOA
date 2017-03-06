@@ -1,17 +1,17 @@
 <template>
-  <nav class="level app-levelbar">
-    <div class="level-left">
-      <div class="level-item">
-        <h3 class="subtitle is-5">
-          <strong>{{ name }}</strong>
-        </h3>
-      </div>
-    </div>
+    <nav class="level app-levelbar">
+        <div class="level-left">
+            <div class="level-item">
+                <h3 class="subtitle is-5">
+                    <strong>{{ name }}</strong>
+                </h3>
+            </div>
+        </div>
 
-    <div class="level-right is-hidden-mobile">
+        <div class="level-right is-hidden-mobile">
 
-    </div>
-  </nav>
+        </div>
+    </nav>
 </template>
 
 <script>
@@ -54,4 +54,5 @@ export default {
     }
   }
 }
+
 </script>

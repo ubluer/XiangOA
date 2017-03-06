@@ -1,57 +1,50 @@
 <template>
-    <div class="page-loadmore">
-        <h1 class="page-title">Pull down</h1>
-        <p class="page-loadmore-desc">在列表顶端, 按住 - 下拉 - 释放可以获取更多数据</p>
-        <p class="page-loadmore-desc">此例请使用手机查看</p>
-        <div class="page-loadmore-wrapper" ref="wrapper" :style="{ height: wrapperHeight + 'px' }">
-            <mt-loadmore :top-method="loadTop" @top-status-change="handleTopChange" ref="loadmore">
-                <ul class="page-loadmore-list">
-                    <li v-for="item in list" class="page-loadmore-listitem">{{ item }}</li>
-                </ul>
-                <div slot="top" class="mint-loadmore-top">
-                    <span v-show="topStatus !== 'loading'" :class="{ 'is-rotate': topStatus === 'drop' }">↓</span>
-                    <span v-show="topStatus === 'loading'">
-            <mt-spinner type="snake"></mt-spinner>
-          </span>
-                </div>
-            </mt-loadmore>
-        </div>
+    <div>
+        <mt-header title="我的客户">
+            <router-link to="/crm" slot="left">
+                <mt-button icon="back">返回</mt-button>
+            </router-link>
+            <mt-button icon="more" slot="right"></mt-button>
+        </mt-header>
+        <xy-float-button :radius = "25">aaaa</xy-float-button>
+        <mt-loadmore :top-method="loadTop" :bottom-method="loadBottom" :bottom-all-loaded="allLoaded" ref="loadmore">
+            <ul>
+                <li v-for="item in list">{{ item }}
+                    <router-link :to="'/crm/customer/'+item.id">go</router-link>
+                </li>
+            </ul>
+        </mt-loadmore>
     </div>
 </template>
 <script type="text/babel">
+    import {myCustomers} from 'vuex-store/faker'
+    import {XyFloatButton} from 'components/widget'
+    import {mapGetters, mapActions} from 'vuex'
+
     export default {
-        data() {
+        components:{
+            XyFloatButton
+        },
+        data(){
             return {
-                list: [],
-                topStatus: '',
-                wrapperHeight: 0
-            };
+                n: 5,
+                list: myCustomers,
+                allLoaded: false
+            }
         },
-
         methods: {
-            handleTopChange(status) {
-                this.topStatus = status;
+            loadTop(){
+                this.list.push(++this.n);
+                this.$refs.loadmore.onTopLoaded();
             },
-
-            loadTop() {
-                setTimeout(() => {
-                    let firstValue = this.list[0];
-                    for (let i = 1; i <= 10; i++) {
-                        this.list.unshift(firstValue - i);
-                    }
-                    this.$refs.loadmore.onTopLoaded();
-                }, 1500);
+            loadBottom(){
+                this.list.push(--this.n);
+                this.$refs.loadmore.onBottomLoaded();
+            },
+            addCustomer(){
+                alert(v);
             }
-        },
 
-        created() {
-            for (let i = 1; i <= 20; i++) {
-                this.list.push(i);
-            }
-        },
-
-        mounted() {
-            this.wrapperHeight = document.documentElement.clientHeight - this.$refs.wrapper.getBoundingClientRect().top;
         }
     };
 </script>
