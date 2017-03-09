@@ -52,6 +52,15 @@ public abstract class CrudService<D extends CrudDao<T>, T extends DataEntity<T>>
 	public List<T> findList(T entity) {
 		return dao.findList(entity);
 	}
+
+	/**
+	 * 查询所有数据列表
+	 * @param entity
+	 * @return
+	 */
+	public List<T> findAllList(T entity) {
+		return dao.findList(entity);
+	}
 	
 	/**
 	 * 查询分页数据

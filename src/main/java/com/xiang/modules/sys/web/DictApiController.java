@@ -1,11 +1,15 @@
 package com.xiang.modules.sys.web;
 
+import com.thinkgem.jeesite.common.persistence.BaseEntity;
+import com.thinkgem.jeesite.modules.sys.entity.Dict;
 import com.thinkgem.jeesite.modules.sys.service.DictService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+
+import java.util.List;
 
 /**
  * @author Xiang.Yu
@@ -14,7 +18,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
  * @description DictApiController
  */
 @Controller
-@RequestMapping(value = "${adminPath}/sys/dict")
+@RequestMapping("api/dictionary")
 public class DictApiController {
     private final DictService dictService;
 
@@ -23,10 +27,9 @@ public class DictApiController {
         this.dictService = dictService;
     }
 
-    @RequestMapping("init")
     @ResponseBody
-    public String get(@RequestParam(required=false) String id) {
-
-        return "aaa";
+    @RequestMapping("init")
+    public List<Dict> init() {
+         return dictService.findAllList(new Dict());
     }
 }
