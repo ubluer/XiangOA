@@ -1,4 +1,4 @@
-package com.xiang.modules.sys.web;
+package com.xiang.modules.sys.api;
 
 import com.thinkgem.jeesite.modules.sys.entity.Dict;
 import com.thinkgem.jeesite.modules.sys.service.DictService;
