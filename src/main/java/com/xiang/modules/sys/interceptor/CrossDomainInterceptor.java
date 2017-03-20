@@ -22,7 +22,8 @@ public class CrossDomainInterceptor extends BaseService implements HandlerInterc
     @Override
     public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler,
                            ModelAndView modelAndView) throws Exception {
-        response.setHeader("Access-Control-Allow-Origin","*");
+        response.setHeader("Access-Control-Allow-Origin",request.getHeader("Origin"));
+        response.setHeader("Access-Control-Allow-Credentials","true");
     }
 
     @Override

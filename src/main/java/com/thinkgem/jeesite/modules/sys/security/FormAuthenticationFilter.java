@@ -3,10 +3,7 @@
  */
 package com.thinkgem.jeesite.modules.sys.security;
 
-import javax.servlet.ServletRequest;
-import javax.servlet.ServletResponse;
-import javax.servlet.http.HttpServletRequest;
-
+import com.thinkgem.jeesite.common.utils.StringUtils;
 import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.authc.AuthenticationToken;
 import org.apache.shiro.authc.IncorrectCredentialsException;
@@ -14,7 +11,9 @@ import org.apache.shiro.authc.UnknownAccountException;
 import org.apache.shiro.web.util.WebUtils;
 import org.springframework.stereotype.Service;
 
-import com.thinkgem.jeesite.common.utils.StringUtils;
+import javax.servlet.ServletRequest;
+import javax.servlet.ServletResponse;
+import javax.servlet.http.HttpServletRequest;
 
 /**
  * 表单验证（包含验证码）过滤类
@@ -32,7 +31,7 @@ public class FormAuthenticationFilter extends org.apache.shiro.web.filter.authc.
 	private String mobileLoginParam = DEFAULT_MOBILE_PARAM;
 	private String messageParam = DEFAULT_MESSAGE_PARAM;
 
-	protected AuthenticationToken createToken(ServletRequest request, ServletResponse response) {
+	public AuthenticationToken createToken(ServletRequest request, ServletResponse response) {
 		String username = getUsername(request);
 		String password = getPassword(request);
 		if (password==null){
