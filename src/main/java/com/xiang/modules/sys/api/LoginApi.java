@@ -1,4 +1,4 @@
-package com.xiang.modules.sys.web;
+package com.xiang.modules.sys.api;
 
 import com.thinkgem.jeesite.common.security.shiro.session.SessionDAO;
 import com.thinkgem.jeesite.modules.sys.security.FormAuthenticationFilter;
@@ -6,9 +6,9 @@ import com.thinkgem.jeesite.modules.sys.security.SystemAuthorizingRealm.Principa
 import com.thinkgem.jeesite.modules.sys.utils.UserUtils;
 import com.xiang.modules.common.api.BaseApi;
 import org.apache.shiro.SecurityUtils;
+import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.authc.AuthenticationToken;
 import org.apache.shiro.subject.Subject;
-import org.apache.shiro.web.util.WebUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -33,19 +33,24 @@ public class LoginApi extends BaseApi{
 
     @RequestMapping(value = "login")
     public String login(HttpServletRequest request, HttpServletResponse response, Model model) throws IOException {
-        Subject currentUser = SecurityUtils.getSubject();
+        //判断是否已登录
+        Principal exist = UserUtils.getPrincipal();
+        if(exist==null) {
+            Subject currentUser = SecurityUtils.getSubject();
 
-        boolean mobile = WebUtils.isTrue(request, FormAuthenticationFilter.DEFAULT_MOBILE_PARAM);
-        String username = WebUtils.getCleanParam(request, FormAuthenticationFilter.DEFAULT_USERNAME_PARAM);
-        String password = WebUtils.getCleanParam(request, FormAuthenticationFilter.DEFAULT_PASSWORD_PARAM);
-        boolean rememberMe = WebUtils.isTrue(request, FormAuthenticationFilter.DEFAULT_REMEMBER_ME_PARAM);
-        String exception = (String) request.getAttribute(FormAuthenticationFilter.DEFAULT_ERROR_KEY_ATTRIBUTE_NAME);
-        String message = (String) request.getAttribute(FormAuthenticationFilter.DEFAULT_MESSAGE_PARAM);
-
-        AuthenticationToken token = new FormAuthenticationFilter().createToken(request,response);
-        currentUser.login(token);
-        Principal principal = UserUtils.getPrincipal();
-        return renderString(response,principal);
+            AuthenticationToken token = new FormAuthenticationFilter().createToken(request, response);
+            try {
+                currentUser.login(token);
+            } catch (AuthenticationException e) {
+                request.setAttribute("message", e);
+                model.addAttribute("msg", "登录失败");
+            }
+            exist = UserUtils.getPrincipal();
+        }
+        if (exist != null) {
+            model.addAttribute("token", exist);
+        }
+        return renderString(response,model);
     }
 
 
