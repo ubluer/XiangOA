@@ -1,6 +1,8 @@
 package com.xiang.modules.sys.api;
 
 import com.thinkgem.jeesite.common.security.shiro.session.SessionDAO;
+import com.thinkgem.jeesite.common.security.shiro.session.SessionManager;
+import com.thinkgem.jeesite.common.utils.CookieUtils;
 import com.thinkgem.jeesite.modules.sys.security.FormAuthenticationFilter;
 import com.thinkgem.jeesite.modules.sys.security.SystemAuthorizingRealm.Principal;
 import com.thinkgem.jeesite.modules.sys.utils.UserUtils;
@@ -8,6 +10,7 @@ import com.xiang.modules.common.api.BaseApi;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.authc.AuthenticationToken;
+import org.apache.shiro.session.Session;
 import org.apache.shiro.subject.Subject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -17,6 +20,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.io.Serializable;
 
 /**
  * @author Xiang.Yu
@@ -26,17 +30,19 @@ import java.io.IOException;
  */
 @Controller
 @RequestMapping("${apiPath}")
-public class LoginApi extends BaseApi{
+public class LoginApi extends BaseApi {
 
     @Autowired
     private SessionDAO sessionDAO;
+    @Autowired
+    private SessionManager sessionManager;
 
     @RequestMapping(value = "login")
     public String login(HttpServletRequest request, HttpServletResponse response, Model model) throws IOException {
+        Subject currentUser = SecurityUtils.getSubject();
         //判断是否已登录
         Principal exist = UserUtils.getPrincipal();
-        if(exist==null) {
-            Subject currentUser = SecurityUtils.getSubject();
+        if (exist == null) {
 
             AuthenticationToken token = new FormAuthenticationFilter().createToken(request, response);
             try {
@@ -48,9 +54,13 @@ public class LoginApi extends BaseApi{
             exist = UserUtils.getPrincipal();
         }
         if (exist != null) {
+
             model.addAttribute("token", exist);
         }
-        return renderString(response,model);
+        Session session = currentUser.getSession();
+        Serializable id = session.getId();
+        CookieUtils.setCookie(response, "jeesite.session.id", id.toString());
+        return renderString(response, model);
     }
 
 
@@ -58,10 +68,10 @@ public class LoginApi extends BaseApi{
     public String logout(HttpServletRequest request, HttpServletResponse response, Model model) throws IOException {
         Principal principal = UserUtils.getPrincipal();
         // 如果已经登录，则跳转到管理首页
-        if(principal != null){
+        if (principal != null) {
             UserUtils.getSubject().logout();
         }
-        return "redirect:" + adminPath+"/login";
+        return "redirect:" + adminPath + "/login";
     }
 
 }
