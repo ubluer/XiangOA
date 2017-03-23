@@ -1,7 +1,5 @@
 package com.xiang.modules.sys.api;
 
-import com.thinkgem.jeesite.common.security.shiro.session.SessionDAO;
-import com.thinkgem.jeesite.common.security.shiro.session.SessionManager;
 import com.thinkgem.jeesite.common.utils.CookieUtils;
 import com.thinkgem.jeesite.modules.sys.security.FormAuthenticationFilter;
 import com.thinkgem.jeesite.modules.sys.security.SystemAuthorizingRealm.Principal;
@@ -12,10 +10,10 @@ import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.authc.AuthenticationToken;
 import org.apache.shiro.session.Session;
 import org.apache.shiro.subject.Subject;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -32,13 +30,8 @@ import java.io.Serializable;
 @RequestMapping("${apiPath}")
 public class LoginApi extends BaseApi {
 
-    @Autowired
-    private SessionDAO sessionDAO;
-    @Autowired
-    private SessionManager sessionManager;
-
     @RequestMapping(value = "login")
-    public String login(HttpServletRequest request, HttpServletResponse response, Model model) throws IOException {
+    public void login(HttpServletRequest request, HttpServletResponse response, Model model) throws IOException {
         Subject currentUser = SecurityUtils.getSubject();
         //判断是否已登录
         Principal exist = UserUtils.getPrincipal();
@@ -57,21 +50,20 @@ public class LoginApi extends BaseApi {
             model.addAttribute("token", exist);
         }
         Session session = currentUser.getSession();
-        String json = renderString(response, model);
+        renderString(response, model);
         Serializable id = session.getId();
         CookieUtils.setCookie(response, "jeesite.session.id", id.toString());
-        return json;
     }
 
-
     @RequestMapping(value = "logout")
+    @ResponseBody
     public String logout(HttpServletRequest request, HttpServletResponse response, Model model) throws IOException {
         Principal principal = UserUtils.getPrincipal();
         // 如果已经登录，则跳转到管理首页
         if (principal != null) {
             UserUtils.getSubject().logout();
         }
-        return "redirect:" + adminPath + "/login";
+        return "success";
     }
 
 }
