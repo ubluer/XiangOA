@@ -48,8 +48,7 @@ public class LoginApi extends BaseApi {
             try {
                 currentUser.login(token);
             } catch (AuthenticationException e) {
-                request.setAttribute("message", e);
-                model.addAttribute("msg", "登录失败");
+                model.addAttribute("msg", e.getMessage());
             }
             exist = UserUtils.getPrincipal();
         }
@@ -58,9 +57,10 @@ public class LoginApi extends BaseApi {
             model.addAttribute("token", exist);
         }
         Session session = currentUser.getSession();
+        String json = renderString(response, model);
         Serializable id = session.getId();
         CookieUtils.setCookie(response, "jeesite.session.id", id.toString());
-        return renderString(response, model);
+        return json;
     }
 
 
