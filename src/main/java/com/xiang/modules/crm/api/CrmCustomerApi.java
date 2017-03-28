@@ -29,7 +29,7 @@ import javax.servlet.http.HttpServletResponse;
  * @version 2017-02-28
  */
 @Controller
-@RequestMapping(value = "${apiPath}/crm/crmCustomer")
+@RequestMapping(value = "api/crm/crmCustomer")
 public class CrmCustomerApi extends BaseApi {
 
     @Autowired
@@ -47,25 +47,27 @@ public class CrmCustomerApi extends BaseApi {
         return entity;
     }
 
-    @RequiresPermissions("crm:crmCustomer:view")
+//    @RequiresPermissions("crm:crmCustomer:view")
     @RequestMapping(value = {"list", ""})
     @ResponseBody
     public String list(CrmCustomer crmCustomer, HttpServletRequest request, HttpServletResponse response, Model model) {
         Page<CrmCustomer> page = crmCustomerService.findPage(new Page<>(request, response), crmCustomer);
-        return JsonMapper.toJsonString(page);
+        return JsonMapper.toJsonString(page.getList());
     }
 
-    @RequiresPermissions("crm:crmCustomer:view")
+//    @RequiresPermissions("crm:crmCustomer:view")
     @RequestMapping(value = "form")
     @ResponseBody
     public String form(CrmCustomer crmCustomer) {
         return JsonMapper.toJsonString(crmCustomer);
     }
 
-    @RequiresPermissions("crm:crmCustomer:edit")
+//    @RequiresPermissions("crm:crmCustomer:edit")
     @RequestMapping(value = "save")
     @ResponseBody
-    public String save(CrmCustomer crmCustomer, Model model, RedirectAttributes redirectAttributes) {
+    public String save(Model model) {
+
+        CrmCustomer crmCustomer = new CrmCustomer();
         if (!beanValidator(model, crmCustomer)) {
             return "保存客户失败,验证失败";
         }
@@ -73,7 +75,7 @@ public class CrmCustomerApi extends BaseApi {
         return "";
     }
 
-    @RequiresPermissions("crm:crmCustomer:edit")
+//    @RequiresPermissions("crm:crmCustomer:edit")
     @RequestMapping(value = "delete")
     @ResponseBody
     public String delete(CrmCustomer crmCustomer, RedirectAttributes redirectAttributes) {

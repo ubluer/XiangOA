@@ -2,6 +2,7 @@ package com.xiang.modules.sys.api;
 
 import com.thinkgem.jeesite.modules.sys.entity.Dict;
 import com.thinkgem.jeesite.modules.sys.service.DictService;
+import com.xiang.modules.common.api.BaseApi;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -20,7 +21,7 @@ import java.util.Map;
  */
 @Controller
 @RequestMapping("api/dictionary")
-public class DictApiController {
+public class DictApiController extends BaseApi{
     private final DictService dictService;
 
     @Autowired
