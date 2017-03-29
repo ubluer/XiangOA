@@ -3,7 +3,7 @@ CREATE TABLE crm_customer
 (
   id          VARCHAR(64) PRIMARY KEY NOT NULL
   COMMENT '编号',
-  name        VARCHAR(200) COMMENT '名称',
+  name        VARCHAR(200) NOT NULL COMMENT '名称',
   sys_user_id VARCHAR(64) COMMENT '负责人编号',
   vip         VARCHAR(20) COMMENT '客户级别[无，小型客户,中型客户,大型客户,VIP客户]',
   source      VARCHAR(20) COMMENT '客户来源[无,自己开发,客户介绍,展会,其他]',

@@ -20,7 +20,7 @@ import java.util.Map;
  * @description DictApiController
  */
 @Controller
-@RequestMapping("api/dictionary")
+@RequestMapping("${apiPath}/dictionary")
 public class DictApiController extends BaseApi{
     private final DictService dictService;
 
