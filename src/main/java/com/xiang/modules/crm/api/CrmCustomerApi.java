@@ -9,7 +9,6 @@ import com.thinkgem.jeesite.common.utils.StringUtils;
 import com.xiang.modules.common.api.BaseApi;
 import com.xiang.modules.crm.entity.CrmCustomer;
 import com.xiang.modules.crm.service.CrmCustomerService;
-import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -36,18 +35,16 @@ public class CrmCustomerApi extends BaseApi {
     private CrmCustomerService crmCustomerService;
 
     @ModelAttribute
-    public CrmCustomer get(@RequestParam(required = false) String entity) {
-        CrmCustomer obj = null;
-        if (StringUtils.isNotBlank(entity)) {
-//            obj = (CrmCustomer) JsonMapper.fromJsonString(entity, CrmCustomer.class);
-            if (obj != null && obj.getId() != null) {
-                obj = crmCustomerService.get(obj.getId());
-            }
+    public CrmCustomer get(@RequestParam(required = false) String id) {
+//        String id1 = request.getParameter("id");
+        CrmCustomer entity = null;
+        if (StringUtils.isNotBlank(id)){
+            entity = crmCustomerService.get(id);
         }
-        if (obj == null) {
-            obj = new CrmCustomer();
+        if (entity == null){
+            entity = new CrmCustomer();
         }
-        return obj;
+        return entity;
     }
 
     //    @RequiresPermissions("crm:crmCustomer:view")
@@ -71,11 +68,12 @@ public class CrmCustomerApi extends BaseApi {
     public String save(CrmCustomer crmCustomer, Model model, HttpServletRequest request) {
 
         String entity = request.getParameter("entity");
+        CrmCustomer obj = (CrmCustomer) JsonMapper.fromJsonString(entity, CrmCustomer.class);
 //        CrmCustomer crmCustomer = new CrmCustomer();
-        if (!beanValidator(model, crmCustomer)) {
+        if (!beanValidator(model, obj)) {
             return "保存客户失败,验证失败";
         }
-        crmCustomerService.save(crmCustomer);
+        crmCustomerService.save(obj);
         return "";
     }
 
