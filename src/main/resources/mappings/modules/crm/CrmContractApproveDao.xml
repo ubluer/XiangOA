@@ -27,8 +27,8 @@
 	</sql>
 	
 	<sql id="crmContractApproveJoins">
-		LEFT JOIN sys_user u2 ON u2.id = a.crm_contract_id
-		LEFT JOIN sys_user u3 ON u3.id = a.crm_customer_id
+		LEFT JOIN crm_contract u2 ON u2.id = a.crm_contract_id
+		LEFT JOIN crm_customer u3 ON u3.id = a.crm_customer_id
 		LEFT JOIN sys_user u4 ON u4.id = a.submitter_id
 		LEFT JOIN sys_user u6 ON u6.id = a.approver_id
 	</sql>

@@ -24,9 +24,9 @@
 	</sql>
 	
 	<sql id="crmCustomerFollowJoins">
-		LEFT JOIN sys_user u2 ON u2.id = a.crm_customer_id
-		LEFT JOIN sys_user u3 ON u3.id = a.crm_chance_id
-		LEFT JOIN sys_user u4 ON u4.id = a.crm_contract_id
+		LEFT JOIN crm_customer u2 ON u2.id = a.crm_customer_id
+		LEFT JOIN crm_chance u3 ON u3.id = a.crm_chance_id
+		LEFT JOIN crm_contract u4 ON u4.id = a.crm_contract_id
 		LEFT JOIN sys_user u5 ON u5.id = a.sys_user_id
 	</sql>
     

@@ -32,10 +32,10 @@
 				<sys:treeselect id="crmCustomer" name="crmCustomer.id" value="${crmChance.crmCustomer.id}" labelName="crmCustomer.name" labelValue="${crmChance.crmCustomer.name}"
 					title="用户" url="/sys/office/treeData?type=3" cssClass="input-small" allowClear="true" notAllowSelectParent="true"/>
 			</li>
-			<li><label>预计成交金额：</label>
+			<li><label>预计金额：</label>
 				<form:input path="amount" htmlEscape="false" class="input-medium"/>
 			</li>
-			<li><label>预计成交时间：</label>
+			<li><label>预计时间：</label>
 				<input name="beginExecutionTime" type="text" readonly="readonly" maxlength="20" class="input-medium Wdate"
 					value="<fmt:formatDate value="${crmChance.beginExecutionTime}" pattern="yyyy-MM-dd HH:mm:ss"/>"
 					onclick="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss',isShowClear:false});"/> - 

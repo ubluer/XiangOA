@@ -22,8 +22,8 @@
 	</sql>
 	
 	<sql id="crmContractPaybackPlanJoins">
-		LEFT JOIN sys_user u3 ON u3.id = a.crm_contract_id
-		LEFT JOIN sys_user u4 ON u4.id = a.crm_chance_id
+		LEFT JOIN crm_contract u3 ON u3.id = a.crm_contract_id
+		LEFT JOIN crm_chance u4 ON u4.id = a.crm_chance_id
 	</sql>
     
 	<select id="get" resultType="CrmContractPaybackPlan">

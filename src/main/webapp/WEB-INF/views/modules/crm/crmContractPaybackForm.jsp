@@ -40,14 +40,13 @@
 			</div>
 		</div>
 		<div class="control-group">
-			<label class="control-label">合同id：</label>
+			<label class="control-label">合同：</label>
 			<div class="controls">
-				<sys:treeselect id="crmContract" name="crmContract.id" value="${crmContractPayback.crmContract.id}" labelName="crmContract.name" labelValue="${crmContractPayback.crmContract.name}"
-					title="用户" url="/sys/office/treeData?type=3" cssClass="" allowClear="true" notAllowSelectParent="true"/>
+				<form:input path="crmContract.id" htmlEscape="false" maxlength="200" class="input-xlarge "/>
 			</div>
 		</div>
 		<div class="control-group">
-			<label class="control-label">负责人id：</label>
+			<label class="control-label">负责人：</label>
 			<div class="controls">
 				<sys:treeselect id="crmChance" name="crmChance.id" value="${crmContractPayback.crmChance.id}" labelName="crmChance.name" labelValue="${crmContractPayback.crmChance.name}"
 					title="用户" url="/sys/office/treeData?type=3" cssClass="" allowClear="true" notAllowSelectParent="true"/>

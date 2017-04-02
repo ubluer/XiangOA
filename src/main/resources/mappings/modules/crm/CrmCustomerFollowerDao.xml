@@ -17,7 +17,7 @@
 	</sql>
 	
 	<sql id="crmCustomerFollowerJoins">
-		LEFT JOIN sys_user u2 ON u2.id = a.crm_customer_id
+		LEFT JOIN crm_customer u2 ON u2.id = a.crm_customer_id
 		LEFT JOIN sys_user u3 ON u3.id = a.sys_user_id
 	</sql>
     

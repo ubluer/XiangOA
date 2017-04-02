@@ -71,7 +71,7 @@
 			</div>
 		</div>
 		<div class="control-group">
-			<label class="control-label">负责人编号：</label>
+			<label class="control-label">负责人：</label>
 			<div class="controls">
 				<sys:treeselect id="sysUser" name="sysUser.id" value="${crmContact.sysUser.id}" labelName="sysUser.name" labelValue="${crmContact.sysUser.name}"
 					title="用户" url="/sys/office/treeData?type=3" cssClass="" allowClear="true" notAllowSelectParent="true"/>
@@ -80,8 +80,7 @@
 		<div class="control-group">
 			<label class="control-label">客户：</label>
 			<div class="controls">
-				<sys:treeselect id="crmCustomer" name="crmCustomer.id" value="${crmContact.crmCustomer.id}" labelName="crmCustomer.name" labelValue="${crmContact.crmCustomer.name}"
-					title="用户" url="/sys/office/treeData?type=3" cssClass="" allowClear="true" notAllowSelectParent="true"/>
+				<form:input path="crmCustomer.id" htmlEscape="false" maxlength="200" class="input-xlarge "/>
 			</div>
 		</div>
 		<div class="control-group">

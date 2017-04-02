@@ -40,10 +40,9 @@
 			</div>
 		</div>
 		<div class="control-group">
-			<label class="control-label">合同id：</label>
+			<label class="control-label">合同：</label>
 			<div class="controls">
-				<sys:treeselect id="crmContract" name="crmContract.id" value="${crmContractPaybackPlan.crmContract.id}" labelName="crmContract.name" labelValue="${crmContractPaybackPlan.crmContract.name}"
-					title="用户" url="/sys/office/treeData?type=3" cssClass="" allowClear="true" notAllowSelectParent="true"/>
+				<form:input path="crmContract.id" htmlEscape="false" maxlength="200" class="input-xlarge "/>
 			</div>
 		</div>
 		<div class="control-group">

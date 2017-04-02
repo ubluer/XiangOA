@@ -29,8 +29,8 @@
 	</sql>
 	
 	<sql id="crmContractJoins">
-		LEFT JOIN sys_user u3 ON u3.id = a.crm_customer_id
-		LEFT JOIN sys_user u4 ON u4.id = a.crm_chance_id
+		LEFT JOIN crm_customer u3 ON u3.id = a.crm_customer_id
+		LEFT JOIN crm_chance u4 ON u4.id = a.crm_chance_id
 		LEFT JOIN sys_user u9 ON u9.id = a.sys_user_id
 	</sql>
     

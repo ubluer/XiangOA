@@ -3,12 +3,12 @@
  */
 package com.xiang.modules.crm.entity;
 
-import org.hibernate.validator.constraints.Length;
-import com.thinkgem.jeesite.modules.sys.entity.User;
-import java.util.List;
 import com.google.common.collect.Lists;
-
 import com.thinkgem.jeesite.common.persistence.DataEntity;
+import com.thinkgem.jeesite.modules.sys.entity.User;
+import org.hibernate.validator.constraints.Length;
+
+import java.util.List;
 
 /**
  * 联系人管理Entity
@@ -20,7 +20,7 @@ public class CrmContact extends DataEntity<CrmContact> {
 	private static final long serialVersionUID = 1L;
 	private String name;		// 姓名
 	private User sysUser;		// 负责人编号
-	private String crmCustomer;		// 客户
+	private CrmCustomer crmCustomer;		// 客户
 	private String department;		// 部门
 	private String position;		// 职位
 	private String email;		// 邮箱
@@ -54,12 +54,11 @@ public class CrmContact extends DataEntity<CrmContact> {
 		this.sysUser = sysUser;
 	}
 	
-	@Length(min=0, max=64, message="客户长度必须介于 0 和 64 之间")
-	public String getCrmCustomer() {
+	public CrmCustomer getCrmCustomer() {
 		return crmCustomer;
 	}
 
-	public void setCrmCustomer(String crmCustomer) {
+	public void setCrmCustomer(CrmCustomer crmCustomer) {
 		this.crmCustomer = crmCustomer;
 	}
 	

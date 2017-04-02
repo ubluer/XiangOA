@@ -36,8 +36,7 @@
 		<div class="control-group">
 			<label class="control-label">客户id：</label>
 			<div class="controls">
-				<sys:treeselect id="crmCustomer" name="crmCustomer.id" value="${crmCustomerFollower.crmCustomer.id}" labelName="crmCustomer.name" labelValue="${crmCustomerFollower.crmCustomer.name}"
-					title="用户" url="/sys/office/treeData?type=3" cssClass="" allowClear="true" notAllowSelectParent="true"/>
+				<form:input path="crmCustomer.id" htmlEscape="false" maxlength="200" class="input-xlarge "/>
 			</div>
 		</div>
 		<div class="control-group">

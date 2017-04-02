@@ -3,9 +3,13 @@
  */
 package com.xiang.modules.crm.web;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-
+import com.thinkgem.jeesite.common.config.Global;
+import com.thinkgem.jeesite.common.mapper.JsonMapper;
+import com.thinkgem.jeesite.common.persistence.Page;
+import com.thinkgem.jeesite.common.utils.StringUtils;
+import com.thinkgem.jeesite.common.web.BaseController;
+import com.xiang.modules.crm.entity.CrmCustomer;
+import com.xiang.modules.crm.service.CrmCustomerService;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -13,14 +17,11 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import com.thinkgem.jeesite.common.config.Global;
-import com.thinkgem.jeesite.common.persistence.Page;
-import com.thinkgem.jeesite.common.web.BaseController;
-import com.thinkgem.jeesite.common.utils.StringUtils;
-import com.xiang.modules.crm.entity.CrmCustomer;
-import com.xiang.modules.crm.service.CrmCustomerService;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 /**
  * 客户管理Controller
@@ -78,6 +79,22 @@ public class CrmCustomerController extends BaseController {
 		crmCustomerService.delete(crmCustomer);
 		addMessage(redirectAttributes, "删除客户成功");
 		return "redirect:"+Global.getAdminPath()+"/crm/crmCustomer/?repage";
+	}
+
+	@RequiresPermissions("crm:crmCustomer:view")
+	@RequestMapping(value = {"select"})
+	public String select(CrmCustomer crmCustomer, HttpServletRequest request, HttpServletResponse response, Model model) {
+		return "modules/crm/crmCustomerSelect";
+	}
+
+	/**
+	 * 通过编号获取文章标题
+	 */
+	@RequiresPermissions("cms:article:view")
+	@ResponseBody
+	@RequestMapping(value = "findById")
+	public String findById(String id) {
+		return JsonMapper.toJsonString(crmCustomerService.get(id));
 	}
 
 }
