@@ -81,7 +81,7 @@ public class CrmContract extends DataEntity<CrmContract> {
 		this.discount = discount;
 	}
 	
-	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+	@JsonFormat(pattern = "yyyy-MM-dd")
 	public Date getContractDate() {
 		return contractDate;
 	}
@@ -116,7 +116,7 @@ public class CrmContract extends DataEntity<CrmContract> {
 		this.parties = parties;
 	}
 	
-	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+	@JsonFormat(pattern = "yyyy-MM-dd")
 	public Date getStartTime() {
 		return startTime;
 	}
@@ -125,7 +125,7 @@ public class CrmContract extends DataEntity<CrmContract> {
 		this.startTime = startTime;
 	}
 	
-	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+	@JsonFormat(pattern = "yyyy-MM-dd")
 	public Date getEndTime() {
 		return endTime;
 	}

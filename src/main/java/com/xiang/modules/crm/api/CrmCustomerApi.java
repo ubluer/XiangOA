@@ -31,8 +31,12 @@ import javax.servlet.http.HttpServletResponse;
 @RequestMapping(value = "${apiPath}/crm/crmCustomer")
 public class CrmCustomerApi extends BaseApi {
 
+    private final CrmCustomerService crmCustomerService;
+
     @Autowired
-    private CrmCustomerService crmCustomerService;
+    public CrmCustomerApi(CrmCustomerService crmCustomerService) {
+        this.crmCustomerService = crmCustomerService;
+    }
 
     @ModelAttribute
     public CrmCustomer get(@RequestParam(required = false) String id) {
