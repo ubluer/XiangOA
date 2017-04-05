@@ -1,0 +1,2 @@
+INSERT INTO xiangoa.oa_notify_record (id, oa_notify_id, user_id, read_flag, read_date) VALUES ('134ea273531c4cbba891d2a9fb75aae9', 'cf67705a7eaf49ff94b02cccf9e0638c', '3', '1', '2017-02-07');
+INSERT INTO xiangoa.oa_notify_record (id, oa_notify_id, user_id, read_flag, read_date) VALUES ('51d3ca97628444db93eb973708aaac52', 'cf67705a7eaf49ff94b02cccf9e0638c', '6', '0', null);

@@ -1,0 +1,17 @@
+INSERT INTO xiangoa.sys_user_role (user_id, role_id) VALUES ('1', '1');
+INSERT INTO xiangoa.sys_user_role (user_id, role_id) VALUES ('1', '2');
+INSERT INTO xiangoa.sys_user_role (user_id, role_id) VALUES ('10', '2');
+INSERT INTO xiangoa.sys_user_role (user_id, role_id) VALUES ('11', '3');
+INSERT INTO xiangoa.sys_user_role (user_id, role_id) VALUES ('12', '4');
+INSERT INTO xiangoa.sys_user_role (user_id, role_id) VALUES ('13', '5');
+INSERT INTO xiangoa.sys_user_role (user_id, role_id) VALUES ('14', '6');
+INSERT INTO xiangoa.sys_user_role (user_id, role_id) VALUES ('2', '1');
+INSERT INTO xiangoa.sys_user_role (user_id, role_id) VALUES ('3', '2');
+INSERT INTO xiangoa.sys_user_role (user_id, role_id) VALUES ('4', '3');
+INSERT INTO xiangoa.sys_user_role (user_id, role_id) VALUES ('5', '4');
+INSERT INTO xiangoa.sys_user_role (user_id, role_id) VALUES ('5', '6');
+INSERT INTO xiangoa.sys_user_role (user_id, role_id) VALUES ('6', '5');
+INSERT INTO xiangoa.sys_user_role (user_id, role_id) VALUES ('7', '2');
+INSERT INTO xiangoa.sys_user_role (user_id, role_id) VALUES ('7', '7');
+INSERT INTO xiangoa.sys_user_role (user_id, role_id) VALUES ('8', '2');
+INSERT INTO xiangoa.sys_user_role (user_id, role_id) VALUES ('9', '1');
