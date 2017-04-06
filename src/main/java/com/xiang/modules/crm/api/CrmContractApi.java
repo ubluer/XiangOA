@@ -6,7 +6,7 @@ package com.xiang.modules.crm.api;
 import com.thinkgem.jeesite.common.mapper.JsonMapper;
 import com.thinkgem.jeesite.common.persistence.Page;
 import com.thinkgem.jeesite.common.utils.StringUtils;
-import com.xiang.modules.common.api.BaseApi;
+import com.thinkgem.jeesite.common.web.BaseController;
 import com.xiang.modules.crm.entity.CrmContract;
 import com.xiang.modules.crm.service.CrmContractService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,7 +29,7 @@ import javax.servlet.http.HttpServletResponse;
  */
 @Controller
 @RequestMapping(value = "${apiPath}/crm/crmContract")
-public class CrmContractApi extends BaseApi {
+public class CrmContractApi extends BaseController {
 
     private final CrmContractService crmContractService;
 

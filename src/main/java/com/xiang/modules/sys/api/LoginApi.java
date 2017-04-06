@@ -1,10 +1,10 @@
 package com.xiang.modules.sys.api;
 
 import com.thinkgem.jeesite.common.utils.CookieUtils;
+import com.thinkgem.jeesite.common.web.BaseController;
 import com.thinkgem.jeesite.modules.sys.security.FormAuthenticationFilter;
 import com.thinkgem.jeesite.modules.sys.security.SystemAuthorizingRealm.Principal;
 import com.thinkgem.jeesite.modules.sys.utils.UserUtils;
-import com.xiang.modules.common.api.BaseApi;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.authc.AuthenticationToken;
@@ -28,7 +28,7 @@ import java.io.Serializable;
  */
 @Controller
 @RequestMapping("${apiPath}")
-public class LoginApi extends BaseApi {
+public class LoginApi extends BaseController {
 
     @RequestMapping(value = "login")
     public void login(HttpServletRequest request, HttpServletResponse response, Model model) throws IOException {
