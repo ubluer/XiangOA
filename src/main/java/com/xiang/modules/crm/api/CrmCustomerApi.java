@@ -77,7 +77,11 @@ public class CrmCustomerApi extends BaseController {
         if (!beanValidator(model, obj)) {
             return "保存客户失败,验证失败";
         }
-        crmCustomerService.save(obj);
+        try {
+            crmCustomerService.save(obj);
+        }catch (Exception e){
+            return "保存客户失败,数据不完整";
+        }
         return "";
     }
 
