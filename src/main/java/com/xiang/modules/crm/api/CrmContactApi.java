@@ -53,7 +53,9 @@ public class CrmContactApi extends BaseController {
     @RequestMapping(value = {"list",""})
     @ResponseBody
     public String list(CrmContact crmContact, HttpServletRequest request, HttpServletResponse response, Model model) {
-        Page<CrmContact> page = crmContactService.findPage(new Page<>(request, response), crmContact);
+        String entity = request.getParameter("query");
+        CrmContact obj = (CrmContact) JsonMapper.fromJsonString(entity, CrmContact.class);
+        Page<CrmContact> page = crmContactService.findPage(new Page<>(request, response), obj);
         return JsonMapper.toJsonString(page.getList());
     }
 
