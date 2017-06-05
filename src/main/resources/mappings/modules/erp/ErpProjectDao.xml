@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xiang.modules.erp.dao.ErpProjectDao">
+    
+	<sql id="erpProjectColumns">
+		a.id AS "id",
+		a.name AS "name",
+		a.sys_user_id AS "sysUser.id",
+		a.crm_contract_id AS "crmContract.id",
+		a.vip AS "vip",
+		a.source AS "source",
+		a.status AS "status",
+		a.place AS "place",
+		a.longitude AS "longitude",
+		a.latitude AS "latitude",
+		a.pictures AS "pictures",
+		a.files AS "files",
+		a.create_by AS "createBy.id",
+		a.create_date AS "createDate",
+		a.update_by AS "updateBy.id",
+		a.update_date AS "updateDate",
+		a.remarks AS "remarks",
+		a.del_flag AS "delFlag"
+	</sql>
+	
+	<sql id="erpProjectJoins">
+	</sql>
+    
+	<select id="get" resultType="ErpProject">
+		SELECT 
+			<include refid="erpProjectColumns"/>
+		FROM erp_project a
+		<include refid="erpProjectJoins"/>
+		WHERE a.id = #{id}
+	</select>
+	
+	<select id="findList" resultType="ErpProject">
+		SELECT 
+			<include refid="erpProjectColumns"/>
+		FROM erp_project a
+		<include refid="erpProjectJoins"/>
+		<where>
+			a.del_flag = #{DEL_FLAG_NORMAL}
+			<if test="name != null and name != ''">
+				AND a.name LIKE 
+					<if test="dbName == 'oracle'">'%'||#{name}||'%'</if>
+					<if test="dbName == 'mssql'">'%'+#{name}+'%'</if>
+					<if test="dbName == 'mysql'">concat('%',#{name},'%')</if>
+			</if>
+			<if test="vip != null and vip != ''">
+				AND a.vip = #{vip}
+			</if>
+			<if test="source != null and source != ''">
+				AND a.source = #{source}
+			</if>
+			<if test="status != null and status != ''">
+				AND a.status = #{status}
+			</if>
+		</where>
+		<choose>
+			<when test="page !=null and page.orderBy != null and page.orderBy != ''">
+				ORDER BY ${page.orderBy}
+			</when>
+			<otherwise>
+				ORDER BY a.update_date DESC
+			</otherwise>
+		</choose>
+	</select>
+	
+	<select id="findAllList" resultType="ErpProject">
+		SELECT 
+			<include refid="erpProjectColumns"/>
+		FROM erp_project a
+		<include refid="erpProjectJoins"/>
+		<where>
+			a.del_flag = #{DEL_FLAG_NORMAL}
+		</where>		
+		<choose>
+			<when test="page !=null and page.orderBy != null and page.orderBy != ''">
+				ORDER BY ${page.orderBy}
+			</when>
+			<otherwise>
+				ORDER BY a.update_date DESC
+			</otherwise>
+		</choose>
+	</select>
+	
+	<insert id="insert">
+		INSERT INTO erp_project(
+			id,
+			name,
+			sys_user_id,
+			crm_contract_id,
+			vip,
+			source,
+			status,
+			place,
+			longitude,
+			latitude,
+			pictures,
+			files,
+			create_by,
+			create_date,
+			update_by,
+			update_date,
+			remarks,
+			del_flag
+		) VALUES (
+			#{id},
+			#{name},
+			#{sysUser.id},
+			#{crmContract.id},
+			#{vip},
+			#{source},
+			#{status},
+			#{place},
+			#{longitude},
+			#{latitude},
+			#{pictures},
+			#{files},
+			#{createBy.id},
+			#{createDate},
+			#{updateBy.id},
+			#{updateDate},
+			#{remarks},
+			#{delFlag}
+		)
+	</insert>
+	
+	<update id="update">
+		UPDATE erp_project SET 	
+			name = #{name},
+			sys_user_id = #{sysUser.id},
+			crm_contract_id = #{crmContract.id},
+			vip = #{vip},
+			source = #{source},
+			status = #{status},
+			place = #{place},
+			longitude = #{longitude},
+			latitude = #{latitude},
+			pictures = #{pictures},
+			files = #{files},
+			update_by = #{updateBy.id},
+			update_date = #{updateDate},
+			remarks = #{remarks}
+		WHERE id = #{id}
+	</update>
+	
+	<update id="delete">
+		UPDATE erp_project SET 
+			del_flag = #{DEL_FLAG_DELETE}
+		WHERE id = #{id}
+	</update>
+	
+</mapper>

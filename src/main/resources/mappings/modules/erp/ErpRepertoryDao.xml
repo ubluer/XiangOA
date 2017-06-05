@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xiang.modules.erp.dao.ErpRepertoryDao">
+    
+	<sql id="erpRepertoryColumns">
+		a.id AS "id",
+		a.erp_project_id AS "erpProject.id",
+		a.sys_user_id AS "sysUser.id",
+		a.name AS "name",
+		a.type AS "type",
+		a.edition AS "edition",
+		a.detail AS "detail",
+		a.count AS "count",
+		a.unit AS "unit",
+		a.cost AS "cost",
+		a.create_by AS "createBy.id",
+		a.create_date AS "createDate",
+		a.update_by AS "updateBy.id",
+		a.update_date AS "updateDate",
+		a.remarks AS "remarks",
+		a.del_flag AS "delFlag"
+	</sql>
+	
+	<sql id="erpRepertoryJoins">
+	</sql>
+    
+	<select id="get" resultType="ErpRepertory">
+		SELECT 
+			<include refid="erpRepertoryColumns"/>
+		FROM erp_repertory a
+		<include refid="erpRepertoryJoins"/>
+		WHERE a.id = #{id}
+	</select>
+	
+	<select id="findList" resultType="ErpRepertory">
+		SELECT 
+			<include refid="erpRepertoryColumns"/>
+		FROM erp_repertory a
+		<include refid="erpRepertoryJoins"/>
+		<where>
+			a.del_flag = #{DEL_FLAG_NORMAL}
+			<if test="name != null and name != ''">
+				AND a.name LIKE 
+					<if test="dbName == 'oracle'">'%'||#{name}||'%'</if>
+					<if test="dbName == 'mssql'">'%'+#{name}+'%'</if>
+					<if test="dbName == 'mysql'">concat('%',#{name},'%')</if>
+			</if>
+			<if test="type != null and type != ''">
+				AND a.type = #{type}
+			</if>
+		</where>
+		<choose>
+			<when test="page !=null and page.orderBy != null and page.orderBy != ''">
+				ORDER BY ${page.orderBy}
+			</when>
+			<otherwise>
+				ORDER BY a.update_date DESC
+			</otherwise>
+		</choose>
+	</select>
+	
+	<select id="findAllList" resultType="ErpRepertory">
+		SELECT 
+			<include refid="erpRepertoryColumns"/>
+		FROM erp_repertory a
+		<include refid="erpRepertoryJoins"/>
+		<where>
+			a.del_flag = #{DEL_FLAG_NORMAL}
+		</where>		
+		<choose>
+			<when test="page !=null and page.orderBy != null and page.orderBy != ''">
+				ORDER BY ${page.orderBy}
+			</when>
+			<otherwise>
+				ORDER BY a.update_date DESC
+			</otherwise>
+		</choose>
+	</select>
+	
+	<insert id="insert">
+		INSERT INTO erp_repertory(
+			id,
+			erp_project_id,
+			sys_user_id,
+			name,
+			type,
+			edition,
+			detail,
+			count,
+			unit,
+			cost,
+			create_by,
+			create_date,
+			update_by,
+			update_date,
+			remarks,
+			del_flag
+		) VALUES (
+			#{id},
+			#{erpProject.id},
+			#{sysUser.id},
+			#{name},
+			#{type},
+			#{edition},
+			#{detail},
+			#{count},
+			#{unit},
+			#{cost},
+			#{createBy.id},
+			#{createDate},
+			#{updateBy.id},
+			#{updateDate},
+			#{remarks},
+			#{delFlag}
+		)
+	</insert>
+	
+	<update id="update">
+		UPDATE erp_repertory SET 	
+			erp_project_id = #{erpProject.id},
+			sys_user_id = #{sysUser.id},
+			name = #{name},
+			type = #{type},
+			edition = #{edition},
+			detail = #{detail},
+			count = #{count},
+			unit = #{unit},
+			cost = #{cost},
+			update_by = #{updateBy.id},
+			update_date = #{updateDate},
+			remarks = #{remarks}
+		WHERE id = #{id}
+	</update>
+	
+	<update id="delete">
+		UPDATE erp_repertory SET 
+			del_flag = #{DEL_FLAG_DELETE}
+		WHERE id = #{id}
+	</update>
+	
+</mapper>
