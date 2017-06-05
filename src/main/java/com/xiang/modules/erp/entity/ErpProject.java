@@ -24,8 +24,8 @@ public class ErpProject extends DataEntity<ErpProject> {
 	private String source;		// 来源
 	private String status;		// 状态
 	private String place;		// 地址
-	private String longitude;		// 标记位置经度
-	private String latitude;		// 标记位置纬度
+	private Double longitude;		// 标记位置经度
+	private Double latitude;		// 标记位置纬度
 	private String pictures;		// 图片
 	private String files;		// 附件
 	
@@ -98,19 +98,19 @@ public class ErpProject extends DataEntity<ErpProject> {
 		this.place = place;
 	}
 	
-	public String getLongitude() {
+	public Double getLongitude() {
 		return longitude;
 	}
 
-	public void setLongitude(String longitude) {
+	public void setLongitude(Double longitude) {
 		this.longitude = longitude;
 	}
 	
-	public String getLatitude() {
+	public Double getLatitude() {
 		return latitude;
 	}
 
-	public void setLatitude(String latitude) {
+	public void setLatitude(Double latitude) {
 		this.latitude = latitude;
 	}
 	
