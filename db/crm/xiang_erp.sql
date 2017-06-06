@@ -1,3 +1,4 @@
+USE xiangoa;
 # 工程项目表
 CREATE TABLE erp_project
 (
