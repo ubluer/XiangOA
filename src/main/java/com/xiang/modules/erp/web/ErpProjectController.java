@@ -25,7 +25,7 @@ import com.xiang.modules.erp.service.ErpProjectService;
 /**
  * 工程项目Controller
  * @author xiang
- * @version 2017-06-05
+ * @version 2017-06-06
  */
 @Controller
 @RequestMapping(value = "${adminPath}/erp/erpProject")

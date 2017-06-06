@@ -5,7 +5,7 @@ package com.xiang.modules.erp.dao;
 
 import com.thinkgem.jeesite.common.persistence.CrudDao;
 import com.thinkgem.jeesite.common.persistence.annotation.MyBatisDao;
-import com.xiang.modules.erp.entity.ErpProject;
+import com.xiang.modules.erp.entity.ErpProjectFollower;
 
 /**
  * 工程项目DAO接口
@@ -13,6 +13,6 @@ import com.xiang.modules.erp.entity.ErpProject;
  * @version 2017-06-06
  */
 @MyBatisDao
-public interface ErpProjectDao extends CrudDao<ErpProject> {
+public interface ErpProjectFollowerDao extends CrudDao<ErpProjectFollower> {
 	
 }

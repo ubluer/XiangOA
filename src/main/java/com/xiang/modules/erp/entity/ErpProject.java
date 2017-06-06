@@ -6,13 +6,15 @@ package com.xiang.modules.erp.entity;
 import com.xiang.modules.crm.entity.CrmContract;
 import org.hibernate.validator.constraints.Length;
 import com.thinkgem.jeesite.modules.sys.entity.User;
+import java.util.List;
+import com.google.common.collect.Lists;
 
 import com.thinkgem.jeesite.common.persistence.DataEntity;
 
 /**
  * 工程项目Entity
  * @author xiang
- * @version 2017-06-05
+ * @version 2017-06-06
  */
 public class ErpProject extends DataEntity<ErpProject> {
 	
@@ -24,10 +26,11 @@ public class ErpProject extends DataEntity<ErpProject> {
 	private String source;		// 来源
 	private String status;		// 状态
 	private String place;		// 地址
-	private Double longitude;		// 标记位置经度
-	private Double latitude;		// 标记位置纬度
+	private String longitude;		// 标记位置经度
+	private String latitude;		// 标记位置纬度
 	private String pictures;		// 图片
 	private String files;		// 附件
+	private List<ErpProjectFollower> erpProjectFollowerList = Lists.newArrayList();		// 子表列表
 	
 	public ErpProject() {
 		super();
@@ -98,19 +101,19 @@ public class ErpProject extends DataEntity<ErpProject> {
 		this.place = place;
 	}
 	
-	public Double getLongitude() {
+	public String getLongitude() {
 		return longitude;
 	}
 
-	public void setLongitude(Double longitude) {
+	public void setLongitude(String longitude) {
 		this.longitude = longitude;
 	}
 	
-	public Double getLatitude() {
+	public String getLatitude() {
 		return latitude;
 	}
 
-	public void setLatitude(Double latitude) {
+	public void setLatitude(String latitude) {
 		this.latitude = latitude;
 	}
 	
@@ -132,4 +135,11 @@ public class ErpProject extends DataEntity<ErpProject> {
 		this.files = files;
 	}
 	
+	public List<ErpProjectFollower> getErpProjectFollowerList() {
+		return erpProjectFollowerList;
+	}
+
+	public void setErpProjectFollowerList(List<ErpProjectFollower> erpProjectFollowerList) {
+		this.erpProjectFollowerList = erpProjectFollowerList;
+	}
 }
