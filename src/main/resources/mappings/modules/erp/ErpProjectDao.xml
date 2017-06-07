@@ -20,10 +20,14 @@
 		a.update_by AS "updateBy.id",
 		a.update_date AS "updateDate",
 		a.remarks AS "remarks",
-		a.del_flag AS "delFlag"
+		a.del_flag AS "delFlag",
+		u3.name AS "crmContract.name",
+		u4.name AS "sysUser.name"
 	</sql>
 	
 	<sql id="erpProjectJoins">
+		LEFT JOIN crm_contract u3 ON u3.id = a.crm_contract_id
+		LEFT JOIN sys_user u4 ON u4.id = a.sys_user_id
 	</sql>
     
 	<select id="get" resultType="ErpProject">

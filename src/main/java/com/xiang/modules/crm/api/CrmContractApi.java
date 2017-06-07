@@ -5,9 +5,14 @@ package com.xiang.modules.crm.api;
 
 import com.thinkgem.jeesite.common.mapper.JsonMapper;
 import com.thinkgem.jeesite.common.persistence.Page;
+import com.thinkgem.jeesite.common.service.CrudService;
 import com.thinkgem.jeesite.common.utils.StringUtils;
 import com.thinkgem.jeesite.common.web.BaseController;
+import com.xiang.modules.common.api.BaseApi;
+import com.xiang.modules.common.api.vo.ResponseJson;
+import com.xiang.modules.crm.dao.CrmContractDao;
 import com.xiang.modules.crm.entity.CrmContract;
+import com.xiang.modules.crm.entity.CrmCustomer;
 import com.xiang.modules.crm.service.CrmContractService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -29,7 +34,7 @@ import javax.servlet.http.HttpServletResponse;
  */
 @Controller
 @RequestMapping(value = "${apiPath}/crm/crmContract")
-public class CrmContractApi extends BaseController {
+public class CrmContractApi extends BaseApi<CrmContractDao,CrmContract> {
 
     private final CrmContractService crmContractService;
 
@@ -38,48 +43,15 @@ public class CrmContractApi extends BaseController {
         this.crmContractService = crmContractService;
     }
 
-    @ModelAttribute
-    public CrmContract get(@RequestParam(required = false) String id) {
-        CrmContract entity = null;
-        if (StringUtils.isNotBlank(id)) {
-            entity = crmContractService.get(id);
-        }
-        if (entity == null) {
-            entity = new CrmContract();
-        }
-        return entity;
+    @Override
+    protected CrudService getCrudService() {
+        return crmContractService;
     }
 
-    @RequestMapping(value = {"list", ""})
-    @ResponseBody
-    public String list(CrmContract crmContract, HttpServletRequest request, HttpServletResponse response, Model model) {
-        Page<CrmContract> page = crmContractService.findPage(new Page<CrmContract>(request, response), crmContract);
-        return JsonMapper.toJsonString(page.getList());
+    @Override
+    protected Class getEntityClass() {
+        return CrmContract.class;
     }
 
-    @RequestMapping(value = "form")
-    @ResponseBody
-    public String form(CrmContract crmContract, Model model) {
-        return JsonMapper.toJsonString(crmContract);
-    }
-
-    @RequestMapping(value = "save")
-    @ResponseBody
-    public String save(CrmContract crmContract, Model model, HttpServletRequest request) {
-        String entity = request.getParameter("entity");
-        crmContract = (CrmContract) JsonMapper.fromJsonString(entity,CrmContract.class);
-        if (!beanValidator(model, crmContract)) {
-            return form(crmContract, model);
-        }
-        crmContractService.save(crmContract);
-        return "";
-    }
-
-    @RequestMapping(value = "delete")
-    @ResponseBody
-    public String delete(CrmContract crmContract, RedirectAttributes redirectAttributes) {
-        crmContractService.delete(crmContract);
-        return "";
-    }
 
 }

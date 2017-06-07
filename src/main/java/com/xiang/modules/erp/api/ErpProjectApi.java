@@ -6,9 +6,12 @@ package com.xiang.modules.erp.api;
 import com.thinkgem.jeesite.common.config.Global;
 import com.thinkgem.jeesite.common.mapper.JsonMapper;
 import com.thinkgem.jeesite.common.persistence.Page;
+import com.thinkgem.jeesite.common.service.CrudService;
 import com.thinkgem.jeesite.common.utils.StringUtils;
 import com.thinkgem.jeesite.common.web.BaseController;
+import com.xiang.modules.common.api.BaseApi;
 import com.xiang.modules.common.api.vo.ResponseJson;
+import com.xiang.modules.erp.dao.ErpProjectDao;
 import com.xiang.modules.erp.entity.ErpProject;
 import com.xiang.modules.erp.service.ErpProjectService;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
@@ -26,58 +29,28 @@ import javax.servlet.http.HttpServletResponse;
 
 /**
  * 工程项目Controller
+ *
  * @author xiang
  * @version 2017-06-06
  */
 @Controller
 @RequestMapping(value = "${apiPath}/erp/erpProject")
-public class ErpProjectApi extends BaseController {
+public class ErpProjectApi extends BaseApi<ErpProjectDao,ErpProject> {
 
-	@Autowired
-	private ErpProjectService erpProjectService;
-	
-	@ModelAttribute
-	public ErpProject get(@RequestParam(required=false) String id) {
-		ErpProject entity = null;
-		if (StringUtils.isNotBlank(id)){
-			entity = erpProjectService.get(id);
-		}
-		if (entity == null){
-			entity = new ErpProject();
-		}
-		return entity;
-	}
-	
-	@RequestMapping(value = {"list", ""})
-    @ResponseBody
-	public String list(ErpProject erpProject, HttpServletRequest request, HttpServletResponse response, Model model) {
-		Page<ErpProject> page = erpProjectService.findPage(new Page<>(request, response), erpProject);
-		return JsonMapper.toJsonString(new ResponseJson(page));
-	}
+    private final ErpProjectService erpProjectService;
 
-	@ResponseBody
-	@RequestMapping(value = "form")
-	public String form(ErpProject erpProject, Model model) {
-	    return JsonMapper.toJsonString(new ResponseJson(erpProject));
-	}
+    @Autowired
+    public ErpProjectApi(ErpProjectService erpProjectService) {
+        this.erpProjectService = erpProjectService;
+    }
 
-	@RequestMapping(value = "save")
-    @ResponseBody
-	public String save(ErpProject erpProject, Model model, HttpServletRequest request) {
-		String entity = request.getParameter("entity");
-		erpProject = (ErpProject) JsonMapper.fromJsonString(entity,ErpProject.class);
-	    if (!beanValidator(model, erpProject)){
-			return form(erpProject, model);
-		}
-		erpProjectService.save(erpProject);
-		return JsonMapper.toJsonString(new ResponseJson(""));
-	}
-	
-	@RequestMapping(value = "delete")
-    @ResponseBody
-	public String delete(ErpProject erpProject) {
-		erpProjectService.delete(erpProject);
-		return JsonMapper.toJsonString(new ResponseJson(""));
-	}
+    @Override
+    protected CrudService<ErpProjectDao, ErpProject> getCrudService() {
+        return erpProjectService;
+    }
 
+    @Override
+    protected Class<ErpProject> getEntityClass() {
+        return ErpProject.class;
+    }
 }

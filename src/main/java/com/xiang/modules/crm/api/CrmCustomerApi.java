@@ -7,6 +7,7 @@ import com.thinkgem.jeesite.common.mapper.JsonMapper;
 import com.thinkgem.jeesite.common.persistence.Page;
 import com.thinkgem.jeesite.common.utils.StringUtils;
 import com.thinkgem.jeesite.common.web.BaseController;
+import com.xiang.modules.common.api.vo.ResponseJson;
 import com.xiang.modules.crm.entity.CrmCustomer;
 import com.xiang.modules.crm.service.CrmCustomerService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -57,8 +58,11 @@ public class CrmCustomerApi extends BaseController {
     public String list(CrmCustomer crmCustomer, HttpServletRequest request, HttpServletResponse response, Model model) {
         String entity = request.getParameter("query");
         CrmCustomer obj = (CrmCustomer) JsonMapper.fromJsonString(entity, CrmCustomer.class);
+        if(obj==null){
+            obj=new CrmCustomer();
+        }
         Page<CrmCustomer> page = crmCustomerService.findPage(new Page<>(request, response), obj);
-        return JsonMapper.toJsonString(page.getList());
+        return JsonMapper.toJsonString(new ResponseJson(page.getList()));
     }
 
     //    @RequiresPermissions("crm:crmCustomer:view")
