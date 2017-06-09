@@ -16,7 +16,7 @@ import com.thinkgem.jeesite.common.persistence.DataEntity;
 public class ErpDaily extends DataEntity<ErpDaily> {
 	
 	private static final long serialVersionUID = 1L;
-	private String erpProject;		// 工程id
+	private ErpProject erpProject;		// 工程id
 	private User sysUser;		// 记录人编号
 	private String content;		// 日报
 	private String type;		// 类型
@@ -37,11 +37,11 @@ public class ErpDaily extends DataEntity<ErpDaily> {
 	}
 
 	@Length(min=0, max=64, message="工程id长度必须介于 0 和 64 之间")
-	public String getErpProject() {
+	public ErpProject getErpProject() {
 		return erpProject;
 	}
 
-	public void setErpProject(String erpProject) {
+	public void setErpProject(ErpProject erpProject) {
 		this.erpProject = erpProject;
 	}
 	

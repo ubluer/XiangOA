@@ -1,1 +1,0 @@
-INSERT INTO xiangoa.crm_contact_phone (id, crm_contact_id, phone, create_by, create_date, update_by, update_date, remarks, del_flag) VALUES ('a75adb816127452db4827863209b69d8', '42b6524db6ea45a88f7a1db8dc7509d3', '188888888888', '1', '2017-04-02 11:28:38', '1', '2017-04-02 11:29:03', '', '0');
