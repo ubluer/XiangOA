@@ -34,6 +34,12 @@
 		<form:hidden path="id"/>
 		<sys:message content="${message}"/>		
 		<div class="control-group">
+			<label class="control-label">标题：</label>
+			<div class="controls">
+				<form:input path="name" htmlEscape="false" maxlength="100" class="input-xlarge "/>
+			</div>
+		</div>
+		<div class="control-group">
 			<label class="control-label">工程id：</label>
 			<div class="controls">
 				<form:input path="erpProject.id" htmlEscape="false" maxlength="64" class="input-xlarge "/>

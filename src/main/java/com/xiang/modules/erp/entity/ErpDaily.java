@@ -11,11 +11,12 @@ import com.thinkgem.jeesite.common.persistence.DataEntity;
 /**
  * 项目日报管理Entity
  * @author xiang
- * @version 2017-06-08
+ * @version 2017-06-09
  */
 public class ErpDaily extends DataEntity<ErpDaily> {
 	
 	private static final long serialVersionUID = 1L;
+	private String name;		// 标题
 	private ErpProject erpProject;		// 工程id
 	private User sysUser;		// 记录人编号
 	private String content;		// 日报
@@ -36,7 +37,15 @@ public class ErpDaily extends DataEntity<ErpDaily> {
 		super(id);
 	}
 
-	@Length(min=0, max=64, message="工程id长度必须介于 0 和 64 之间")
+	@Length(min=0, max=100, message="标题长度必须介于 0 和 100 之间")
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+	
 	public ErpProject getErpProject() {
 		return erpProject;
 	}

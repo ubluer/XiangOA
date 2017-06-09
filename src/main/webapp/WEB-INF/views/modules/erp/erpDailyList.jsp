@@ -25,6 +25,9 @@
 		<input id="pageNo" name="pageNo" type="hidden" value="${page.pageNo}"/>
 		<input id="pageSize" name="pageSize" type="hidden" value="${page.pageSize}"/>
 		<ul class="ul-form">
+			<li><label>标题：</label>
+				<form:input path="name" htmlEscape="false" maxlength="100" class="input-medium"/>
+			</li>
 			<li><label>工程id：</label>
 				<form:input path="erpProject.id" htmlEscape="false" maxlength="64" class="input-medium"/>
 			</li>
@@ -45,6 +48,7 @@
 	<table id="contentTable" class="table table-striped table-bordered table-condensed">
 		<thead>
 			<tr>
+				<th>标题</th>
 				<th>工程id</th>
 				<th>记录人编号</th>
 				<th>类型</th>
@@ -59,8 +63,11 @@
 		<c:forEach items="${page.list}" var="erpDaily">
 			<tr>
 				<td><a href="${ctx}/erp/erpDaily/form?id=${erpDaily.id}">
-					${erpDaily.erpProject.id}
+					${erpDaily.name}
 				</a></td>
+				<td>
+					${erpDaily.erpProject.id}
+				</td>
 				<td>
 					${erpDaily.sysUser.id}
 				</td>

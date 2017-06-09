@@ -25,7 +25,7 @@ import com.xiang.modules.erp.service.ErpDailyService;
 /**
  * 项目日报管理Controller
  * @author xiang
- * @version 2017-06-08
+ * @version 2017-06-09
  */
 @Controller
 @RequestMapping(value = "${adminPath}/erp/erpDaily")

@@ -16,7 +16,7 @@ import com.xiang.modules.erp.dao.ErpDailyDao;
 /**
  * 项目日报管理Service
  * @author xiang
- * @version 2017-06-08
+ * @version 2017-06-09
  */
 @Service
 @Transactional(readOnly = true)
