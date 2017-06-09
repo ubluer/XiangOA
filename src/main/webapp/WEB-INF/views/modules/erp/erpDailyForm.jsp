@@ -52,6 +52,15 @@
 			</div>
 		</div>
 		<div class="control-group">
+			<label class="control-label">类型：</label>
+			<div class="controls">
+				<form:select path="type" class="input-xlarge ">
+					<form:option value="" label=""/>
+					<form:options items="${fns:getDictList('erp_daily_type')}" itemLabel="label" itemValue="value" htmlEscape="false"/>
+				</form:select>
+			</div>
+		</div>
+		<div class="control-group">
 			<label class="control-label">天气：</label>
 			<div class="controls">
 				<form:select path="weather" class="input-xlarge ">
@@ -67,9 +76,41 @@
 			</div>
 		</div>
 		<div class="control-group">
+			<label class="control-label">地址：</label>
+			<div class="controls">
+				<form:input path="place" htmlEscape="false" maxlength="200" class="input-xlarge "/>
+			</div>
+		</div>
+		<div class="control-group">
+			<label class="control-label">标记位置经度：</label>
+			<div class="controls">
+				<form:input path="longitude" htmlEscape="false" class="input-xlarge  number"/>
+			</div>
+		</div>
+		<div class="control-group">
+			<label class="control-label">标记位置纬度：</label>
+			<div class="controls">
+				<form:input path="latitude" htmlEscape="false" class="input-xlarge  number"/>
+			</div>
+		</div>
+		<div class="control-group">
 			<label class="control-label">备注信息：</label>
 			<div class="controls">
 				<form:textarea path="remarks" htmlEscape="false" rows="4" maxlength="255" class="input-xxlarge "/>
+			</div>
+		</div>
+		<div class="control-group">
+			<label class="control-label">图片：</label>
+			<div class="controls">
+				<form:hidden id="pictures" path="pictures" htmlEscape="false" maxlength="200" class="input-xlarge"/>
+				<sys:ckfinder input="pictures" type="files" uploadPath="/erp/erpDaily" selectMultiple="true"/>
+			</div>
+		</div>
+		<div class="control-group">
+			<label class="control-label">附件：</label>
+			<div class="controls">
+				<form:hidden id="files" path="files" htmlEscape="false" maxlength="200" class="input-xlarge"/>
+				<sys:ckfinder input="files" type="files" uploadPath="/erp/erpDaily" selectMultiple="true"/>
 			</div>
 		</div>
 		<div class="form-actions">

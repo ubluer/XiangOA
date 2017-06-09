@@ -1,116 +1,155 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.xiang.modules.erp.dao.ErpDailyDao">
-    
-	<sql id="erpDailyColumns">
-		a.id AS "id",
-		a.erp_project_id AS "erpProject.id",
-		a.sys_user_id AS "sysUser.id",
-		a.content AS "content",
-		a.weather AS "weather",
-		a.cost AS "cost",
-		a.create_by AS "createBy.id",
-		a.create_date AS "createDate",
-		a.update_by AS "updateBy.id",
-		a.update_date AS "updateDate",
-		a.remarks AS "remarks",
-		a.del_flag AS "delFlag"
-	</sql>
-	
-	<sql id="erpDailyJoins">
-	</sql>
-    
-	<select id="get" resultType="ErpDaily">
-		SELECT 
-			<include refid="erpDailyColumns"/>
-		FROM erp_daily a
-		<include refid="erpDailyJoins"/>
-		WHERE a.id = #{id}
-	</select>
-	
-	<select id="findList" resultType="ErpDaily">
-		SELECT 
-			<include refid="erpDailyColumns"/>
-		FROM erp_daily a
-		<include refid="erpDailyJoins"/>
-		<where>
-			a.del_flag = #{DEL_FLAG_NORMAL}
-		</where>
-		<choose>
-			<when test="page !=null and page.orderBy != null and page.orderBy != ''">
-				ORDER BY ${page.orderBy}
-			</when>
-			<otherwise>
-				ORDER BY a.update_date DESC
-			</otherwise>
-		</choose>
-	</select>
-	
-	<select id="findAllList" resultType="ErpDaily">
-		SELECT 
-			<include refid="erpDailyColumns"/>
-		FROM erp_daily a
-		<include refid="erpDailyJoins"/>
-		<where>
-			a.del_flag = #{DEL_FLAG_NORMAL}
-		</where>		
-		<choose>
-			<when test="page !=null and page.orderBy != null and page.orderBy != ''">
-				ORDER BY ${page.orderBy}
-			</when>
-			<otherwise>
-				ORDER BY a.update_date DESC
-			</otherwise>
-		</choose>
-	</select>
-	
-	<insert id="insert">
-		INSERT INTO erp_daily(
-			id,
-			erp_project_id,
-			sys_user_id,
-			content,
-			weather,
-			cost,
-			create_by,
-			create_date,
-			update_by,
-			update_date,
-			remarks,
-			del_flag
-		) VALUES (
-			#{id},
-			#{erpProject.id},
-			#{sysUser.id},
-			#{content},
-			#{weather},
-			#{cost},
-			#{createBy.id},
-			#{createDate},
-			#{updateBy.id},
-			#{updateDate},
-			#{remarks},
-			#{delFlag}
-		)
-	</insert>
-	
-	<update id="update">
-		UPDATE erp_daily SET 	
-			erp_project_id = #{erpProject.id},
-			sys_user_id = #{sysUser.id},
-			content = #{content},
-			weather = #{weather},
-			cost = #{cost},
-			update_by = #{updateBy.id},
-			update_date = #{updateDate},
-			remarks = #{remarks}
-		WHERE id = #{id}
-	</update>
-	
-	<update id="delete">
-		UPDATE erp_daily SET 
-			del_flag = #{DEL_FLAG_DELETE}
-		WHERE id = #{id}
-	</update>
-	
+
+    <sql id="erpDailyColumns">
+        a.id AS "id",
+        a.erp_project_id AS "erpProject.id",
+        a.sys_user_id AS "sysUser.id",
+        a.content AS "content",
+        a.type AS "type",
+        a.weather AS "weather",
+        a.cost AS "cost",
+        a.create_by AS "createBy.id",
+        a.place AS "place",
+        a.create_date AS "createDate",
+        a.update_by AS "updateBy.id",
+        a.longitude AS "longitude",
+        a.update_date AS "updateDate",
+        a.latitude AS "latitude",
+        a.remarks AS "remarks",
+        a.pictures AS "pictures",
+        a.files AS "files",
+        a.del_flag AS "delFlag",
+        u3.name AS "erpProject.name",
+        u4.name AS "sysUser.name"
+    </sql>
+
+    <sql id="erpDailyJoins">
+        LEFT JOIN erp_project u3 ON u3.id = a.erp_project_id
+        LEFT JOIN sys_user u4 ON u4.id = a.sys_user_id
+    </sql>
+
+    <select id="get" resultType="ErpDaily">
+        SELECT
+        <include refid="erpDailyColumns"/>
+        FROM erp_daily a
+        <include refid="erpDailyJoins"/>
+        WHERE a.id = #{id}
+    </select>
+
+    <select id="findList" resultType="ErpDaily">
+        SELECT
+        <include refid="erpDailyColumns"/>
+        FROM erp_daily a
+        <include refid="erpDailyJoins"/>
+        <where>
+            a.del_flag = #{DEL_FLAG_NORMAL}
+            <if test="erpProject != null and erpProject.id != null and erpProject.id != ''">
+                AND a.erp_project_id = #{erpProject.id}
+            </if>
+            <if test="sysUser != null and sysUser.id != null and sysUser.id != ''">
+                AND a.sys_user_id = #{sysUser.id}
+            </if>
+            <if test="type != null and type != ''">
+                AND a.type = #{type}
+            </if>
+        </where>
+        <choose>
+            <when test="page !=null and page.orderBy != null and page.orderBy != ''">
+                ORDER BY ${page.orderBy}
+            </when>
+            <otherwise>
+                ORDER BY a.update_date DESC
+            </otherwise>
+        </choose>
+    </select>
+
+    <select id="findAllList" resultType="ErpDaily">
+        SELECT
+        <include refid="erpDailyColumns"/>
+        FROM erp_daily a
+        <include refid="erpDailyJoins"/>
+        <where>
+            a.del_flag = #{DEL_FLAG_NORMAL}
+        </where>
+        <choose>
+            <when test="page !=null and page.orderBy != null and page.orderBy != ''">
+                ORDER BY ${page.orderBy}
+            </when>
+            <otherwise>
+                ORDER BY a.update_date DESC
+            </otherwise>
+        </choose>
+    </select>
+
+    <insert id="insert">
+        INSERT INTO erp_daily (
+            id,
+            erp_project_id,
+            sys_user_id,
+            content,
+            type,
+            weather,
+            cost,
+            create_by,
+            place,
+            create_date,
+            update_by,
+            longitude,
+            update_date,
+            latitude,
+            remarks,
+            pictures,
+            files,
+            del_flag
+        ) VALUES (
+            #{id},
+            #{erpProject.id},
+            #{sysUser.id},
+            #{content},
+            #{type},
+            #{weather},
+            #{cost},
+            #{createBy.id},
+            #{place},
+            #{createDate},
+            #{updateBy.id},
+            #{longitude},
+            #{updateDate},
+            #{latitude},
+            #{remarks},
+            #{pictures},
+            #{files},
+            #{delFlag}
+        )
+    </insert>
+
+    <update id="update">
+        UPDATE erp_daily
+        SET
+            erp_project_id = #{erpProject.id},
+            sys_user_id    = #{sysUser.id},
+            content        = #{content},
+            type           = #{type},
+            weather        = #{weather},
+            cost           = #{cost},
+            place          = #{place},
+            update_by      = #{updateBy.id},
+            longitude      = #{longitude},
+            update_date    = #{updateDate},
+            latitude       = #{latitude},
+            remarks        = #{remarks},
+            pictures       = #{pictures},
+            files          = #{files}
+        WHERE id = #{id}
+    </update>
+
+    <update id="delete">
+        UPDATE erp_daily
+        SET
+            del_flag = #{DEL_FLAG_DELETE}
+        WHERE id = #{id}
+    </update>
+
 </mapper>

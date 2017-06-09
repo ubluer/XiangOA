@@ -10,7 +10,7 @@ import com.xiang.modules.erp.entity.ErpDaily;
 /**
  * 项目日报管理DAO接口
  * @author xiang
- * @version 2017-06-05
+ * @version 2017-06-08
  */
 @MyBatisDao
 public interface ErpDailyDao extends CrudDao<ErpDaily> {

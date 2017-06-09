@@ -25,6 +25,18 @@
 		<input id="pageNo" name="pageNo" type="hidden" value="${page.pageNo}"/>
 		<input id="pageSize" name="pageSize" type="hidden" value="${page.pageSize}"/>
 		<ul class="ul-form">
+			<li><label>工程id：</label>
+				<form:input path="erpProject.id" htmlEscape="false" maxlength="64" class="input-medium"/>
+			</li>
+			<li><label>记录人编号：</label>
+				<form:input path="sysUser.id" htmlEscape="false" maxlength="64" class="input-medium"/>
+			</li>
+			<li><label>类型：</label>
+				<form:select path="type" class="input-medium">
+					<form:option value="" label=""/>
+					<form:options items="${fns:getDictList('erp_daily_type')}" itemLabel="label" itemValue="value" htmlEscape="false"/>
+				</form:select>
+			</li>
 			<li class="btns"><input id="btnSubmit" class="btn btn-primary" type="submit" value="查询"/></li>
 			<li class="clearfix"></li>
 		</ul>
@@ -35,6 +47,7 @@
 			<tr>
 				<th>工程id</th>
 				<th>记录人编号</th>
+				<th>类型</th>
 				<th>天气</th>
 				<th>花费</th>
 				<th>更新时间</th>
@@ -50,6 +63,9 @@
 				</a></td>
 				<td>
 					${erpDaily.sysUser.id}
+				</td>
+				<td>
+					${fns:getDictLabel(erpDaily.type, 'erp_daily_type', '')}
 				</td>
 				<td>
 					${fns:getDictLabel(erpDaily.weather, 'weather', '')}

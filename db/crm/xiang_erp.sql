@@ -68,6 +68,12 @@ CREATE TABLE erp_daily
   content         VARCHAR(500) COMMENT '日报',
   weather         VARCHAR(50) COMMENT '天气',
   cost            DOUBLE  COMMENT '花费',
+  type           VARCHAR(20) COMMENT '类型[工作，项目，售后]',
+  place            VARCHAR(200) COMMENT '地址',
+  longitude   DOUBLE COMMENT '标记位置经度',
+  latitude    DOUBLE COMMENT '标记位置纬度',
+  pictures     VARCHAR(200) COMMENT '图片',
+  files       VARCHAR(200) COMMENT '附件',
   create_by       VARCHAR(64)             NOT NULL
   COMMENT '创建者',
   create_date     DATETIME                NOT NULL

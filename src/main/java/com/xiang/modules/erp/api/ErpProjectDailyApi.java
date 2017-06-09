@@ -5,8 +5,11 @@ package com.xiang.modules.erp.api;
 
 import com.thinkgem.jeesite.common.service.CrudService;
 import com.xiang.modules.common.api.BaseApi;
+import com.xiang.modules.erp.dao.ErpDailyDao;
 import com.xiang.modules.erp.dao.ErpProjectDao;
+import com.xiang.modules.erp.entity.ErpDaily;
 import com.xiang.modules.erp.entity.ErpProject;
+import com.xiang.modules.erp.service.ErpDailyService;
 import com.xiang.modules.erp.service.ErpProjectService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -19,23 +22,23 @@ import org.springframework.web.bind.annotation.RequestMapping;
  * @version 2017-06-06
  */
 @Controller
-@RequestMapping(value = "${apiPath}/erp/erpProject")
-public class ErpProjectApi extends BaseApi<ErpProjectDao,ErpProject> {
+@RequestMapping(value = "${apiPath}/erp/erpDaily")
+public class ErpProjectDailyApi extends BaseApi<ErpDailyDao,ErpDaily> {
 
-    private final ErpProjectService erpProjectService;
+    private final ErpDailyService erpDailyService;
 
     @Autowired
-    public ErpProjectApi(ErpProjectService erpProjectService) {
-        this.erpProjectService = erpProjectService;
+    public ErpProjectDailyApi(ErpDailyService erpDailyService) {
+        this.erpDailyService = erpDailyService;
     }
 
     @Override
-    protected CrudService<ErpProjectDao, ErpProject> getCrudService() {
-        return erpProjectService;
+    protected CrudService<ErpDailyDao, ErpDaily> getCrudService() {
+        return erpDailyService;
     }
 
     @Override
-    protected Class<ErpProject> getEntityClass() {
-        return ErpProject.class;
+    protected Class<ErpDaily> getEntityClass() {
+        return ErpDaily.class;
     }
 }
