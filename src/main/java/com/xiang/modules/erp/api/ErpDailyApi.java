@@ -6,11 +6,8 @@ package com.xiang.modules.erp.api;
 import com.thinkgem.jeesite.common.service.CrudService;
 import com.xiang.modules.common.api.BaseApi;
 import com.xiang.modules.erp.dao.ErpDailyDao;
-import com.xiang.modules.erp.dao.ErpProjectDao;
 import com.xiang.modules.erp.entity.ErpDaily;
-import com.xiang.modules.erp.entity.ErpProject;
 import com.xiang.modules.erp.service.ErpDailyService;
-import com.xiang.modules.erp.service.ErpProjectService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -23,12 +20,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
  */
 @Controller
 @RequestMapping(value = "${apiPath}/erp/erpDaily")
-public class ErpProjectDailyApi extends BaseApi<ErpDailyDao,ErpDaily> {
+public class ErpDailyApi extends BaseApi<ErpDailyDao,ErpDaily> {
 
     private final ErpDailyService erpDailyService;
 
     @Autowired
-    public ErpProjectDailyApi(ErpDailyService erpDailyService) {
+    public ErpDailyApi(ErpDailyService erpDailyService) {
         this.erpDailyService = erpDailyService;
     }
 

@@ -7,7 +7,6 @@ import com.thinkgem.jeesite.common.persistence.Page;
 import com.thinkgem.jeesite.common.service.CrudService;
 import com.thinkgem.jeesite.common.web.BaseController;
 import com.xiang.modules.common.api.vo.ResponseJson;
-import com.xiang.modules.crm.entity.CrmContract;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -28,13 +27,13 @@ public abstract class BaseApi<D extends CrudDao<T>, T extends DataEntity<T>> ext
 
     @RequestMapping(value = {"list", ""})
     @ResponseBody
-    public String list(T entity, HttpServletRequest request, HttpServletResponse response) throws IllegalAccessException, InstantiationException {
+    public String list(HttpServletRequest request, HttpServletResponse response) throws IllegalAccessException, InstantiationException {
         String query = request.getParameter("query");
         T queryObj = (T) JsonMapper.fromJsonString(query, getEntityClass());
         if(queryObj==null){
             queryObj=getEntityClass().newInstance();
         }
-        Page<T> page = getCrudService().findPage(new Page<T>(request, response), queryObj);
+        Page<T> page = getCrudService().findPage(new Page<>(request, response), queryObj);
         return success(page.getList());
     }
 
