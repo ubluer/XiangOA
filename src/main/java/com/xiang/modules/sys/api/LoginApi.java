@@ -1,10 +1,12 @@
 package com.xiang.modules.sys.api;
 
+import com.thinkgem.jeesite.common.mapper.JsonMapper;
 import com.thinkgem.jeesite.common.utils.CookieUtils;
 import com.thinkgem.jeesite.common.web.BaseController;
 import com.thinkgem.jeesite.modules.sys.security.FormAuthenticationFilter;
 import com.thinkgem.jeesite.modules.sys.security.SystemAuthorizingRealm.Principal;
 import com.thinkgem.jeesite.modules.sys.utils.UserUtils;
+import com.xiang.modules.common.api.vo.ResponseJson;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.authc.AuthenticationToken;
@@ -31,7 +33,9 @@ import java.io.Serializable;
 public class LoginApi extends BaseController {
 
     @RequestMapping(value = "login")
-    public void login(HttpServletRequest request, HttpServletResponse response, Model model) throws IOException {
+    @ResponseBody
+    public String login(HttpServletRequest request, HttpServletResponse response, Model model) throws IOException {
+        ResponseJson json = new ResponseJson("");
         Subject currentUser = SecurityUtils.getSubject();
         //判断是否已登录
         Principal exist = UserUtils.getPrincipal();
@@ -41,18 +45,17 @@ public class LoginApi extends BaseController {
             try {
                 currentUser.login(token);
             } catch (AuthenticationException e) {
-                model.addAttribute("msg", e.getMessage());
+                json.setSuccess(false);
             }
             exist = UserUtils.getPrincipal();
         }
         if (exist != null) {
-
-            model.addAttribute("token", exist);
+            json.setObj(exist);
+        }else {
+            json.setSuccess(false);
+            json.setMsg("登录失败，用户名密码有误");
         }
-        Session session = currentUser.getSession();
-        renderString(response, model);
-        Serializable id = session.getId();
-        CookieUtils.setCookie(response, "jeesite.session.id", id.toString());
+        return JsonMapper.toJsonString(json);
     }
 
     @RequestMapping(value = "logout")
@@ -63,7 +66,7 @@ public class LoginApi extends BaseController {
         if (principal != null) {
             UserUtils.getSubject().logout();
         }
-        return "success";
+        return JsonMapper.toJsonString(new ResponseJson("注销成功"));
     }
 
 }
