@@ -38,7 +38,6 @@ public class ErpProjectFollower extends DataEntity<ErpProjectFollower> {
 		this.erpProject = erpProject;
 	}
 
-	@Length(min=0, max=64, message="项目长度必须介于 0 和 64 之间")
 	public ErpProject getErpProject() {
 		return erpProject;
 	}
