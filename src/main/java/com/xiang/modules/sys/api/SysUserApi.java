@@ -10,10 +10,8 @@ import com.thinkgem.jeesite.modules.sys.dao.UserDao;
 import com.thinkgem.jeesite.modules.sys.entity.User;
 import com.thinkgem.jeesite.modules.sys.service.SystemService;
 import com.xiang.modules.common.api.BaseApi;
-import org.apache.poi.ss.formula.functions.T;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -59,4 +57,12 @@ public class SysUserApi extends BaseApi<UserDao,User> {
         Page<User> page = systemService.findUser(new Page<>(request, response), queryObj);
         return success(page.getList());
     }
+
+    @RequestMapping(value = "form")
+    @ResponseBody
+    @Override
+    public String form(String id) {
+        return success(systemService.getUser(id));
+    }
+
 }

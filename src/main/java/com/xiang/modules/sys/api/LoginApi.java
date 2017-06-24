@@ -1,7 +1,6 @@
 package com.xiang.modules.sys.api;
 
 import com.thinkgem.jeesite.common.mapper.JsonMapper;
-import com.thinkgem.jeesite.common.utils.CookieUtils;
 import com.thinkgem.jeesite.common.web.BaseController;
 import com.thinkgem.jeesite.modules.sys.security.FormAuthenticationFilter;
 import com.thinkgem.jeesite.modules.sys.security.SystemAuthorizingRealm.Principal;
@@ -10,7 +9,6 @@ import com.xiang.modules.common.api.vo.ResponseJson;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.authc.AuthenticationToken;
-import org.apache.shiro.session.Session;
 import org.apache.shiro.subject.Subject;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -20,7 +18,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.io.Serializable;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * @author Xiang.Yu
@@ -50,7 +49,10 @@ public class LoginApi extends BaseController {
             exist = UserUtils.getPrincipal();
         }
         if (exist != null) {
-            json.setObj(exist);
+            Map<String,Object> map = new HashMap<>();
+            map.put("loginToken",exist);
+            map.put("user",UserUtils.get(exist.getId()));
+            json.setObj(map);
         }else {
             json.setSuccess(false);
             json.setMsg("登录失败，用户名密码有误");
